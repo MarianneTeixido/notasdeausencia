@@ -30,4 +30,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
         source: "secrets.py"
-        target: "/root/bots/secrets.py"
+        target: "/root/bots/"
