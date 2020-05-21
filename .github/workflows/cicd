@@ -1,0 +1,33 @@
+name: Flask, 
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: create secret file for twitter API
+      -run: |
+        touch secrets.py
+        echo consumer_key = $ACCESS_TOKEN >> secrets.py
+        echo consumer_secret = $ACCESS_TOKEN_SECRET >> secrets.py
+        echo access_token = $API_KEY >> secrets.py
+        echo access_token_secret = $API_SECRET >> secrets.py
+      shell: bash
+      env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+          API_KEY: ${{ secrets.API_KEY }}
+          API_SECRET: ${{ secrets.API_SECRET }}
+          
+    - name: send secret file to host
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}        
+        source: "secrets.py"
+        target: "/root/bots/secrets.py"
