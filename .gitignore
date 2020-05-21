@@ -1,0 +1,11 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+bots/env
+bots/logs
+bots/secrets.py
+bots/__pycache__/
+bots/*.py[cod]
+bots/*$py.class
