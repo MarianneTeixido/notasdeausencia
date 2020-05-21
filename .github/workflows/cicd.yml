@@ -11,7 +11,7 @@ jobs:
     steps:
     - name: create secret file for twitter bot
       uses: actions/checkout@v2
-      - run: |
+      run: |
         touch secrets.py
         echo consumer_key = $ACCESS_TOKEN >> secrets.py
         echo consumer_secret = $ACCESS_TOKEN_SECRET >> secrets.py
