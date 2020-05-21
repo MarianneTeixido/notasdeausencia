@@ -1,0 +1,57 @@
+name: webserver data
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+
+  deploy:
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: move textos to server
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}        
+        source: "textos/*"
+        target: "/root/bots/"
+
+    - name: move static files to server
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}        
+        source: "webserver/static/*"
+        target: "/root/webserver/static"
+
+    - name: move escena1 html files to server
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}        
+        source: "webserver/escena1/*"
+        target: "/root/webserver/escena1/"
+
+    - name: move escena2 html files to server
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}        
+        source: "webserver/escena2/*"
+        target: "/root/webserver/escena2/"
+
+    - name: move escena3 html files to server
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}        
+        source: "webserver/escena3/*"
+        target: "/root/webserver/escena3/"
+

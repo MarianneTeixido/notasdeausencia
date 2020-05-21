@@ -1,4 +1,4 @@
-name: Flask, 
+name: bots data
 
 on:
   push:
@@ -31,3 +31,4 @@ jobs:
         password: ${{ secrets.PASSWORD }}        
         source: "secrets.py"
         target: "/root/bots/"
+
