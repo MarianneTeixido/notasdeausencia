@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  twitter_bot:
 
     runs-on: ubuntu-latest
     steps:
@@ -32,3 +32,29 @@ jobs:
         local: "/home/runner/work/NotasDeLaAusencia/NotasDeLaAusencia/secrets.py"
         remote: "/root/bots/"
 
+  markov_bot:
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: pwd
+      run: pwd
+    - name: move textos to server
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        local: " /home/runner/work/NotasDeLaAusencia/NotasDeLaAusencia/textos"
+        remote: "/root/textos/"
+
+    - name: train markov chain 
+      uses: garygrossgarten/github-action-ssh@release
+      with:
+        command: |
+          cd /root/bots/scripts
+          ./train_markov_bot.sh
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
