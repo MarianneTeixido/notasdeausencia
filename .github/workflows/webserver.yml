@@ -16,7 +16,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
-        source: "textos/*"
+        source: "textos"
         target: "/root/textos/"
 
     - name: move static files to server
