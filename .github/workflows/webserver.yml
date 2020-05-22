@@ -26,7 +26,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
         local: "webserver/static"
-        target: "/root/webserver/static"
+        remote: "/root/webserver/static"
 
     - name: move escena1 html files to server
       uses: garygrossgarten/github-action-scp@release
@@ -35,7 +35,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
         local: "webserver/escena1"
-        target: "/root/webserver/escena1/"
+        remote: "/root/webserver/escena1/"
 
     - name: move escena2 html files to server
       uses: garygrossgarten/github-action-scp@release
@@ -44,7 +44,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
         local: "webserver/escena2"
-        target: "/root/webserver/escena2/"
+        remote: "/root/webserver/escena2/"
 
     - name: move escena3 html files to server
       uses: garygrossgarten/github-action-scp@release
@@ -53,5 +53,5 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
         local: "webserver/escena3"
-        target: "/root/webserver/escena3/"
+        remote: "/root/webserver/escena3/"
 
