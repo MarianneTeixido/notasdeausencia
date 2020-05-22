@@ -10,17 +10,16 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-    - name: move textos to server
+    - name: checkout to folder
       uses : actions/checkout@v2
+    - name: move textos to server
       run: |
-       echo $()
-       ls 
+        ls *
+      shell: bash
       env:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
-        source: "textos/*.*"
-        target: "/root/bots/"
 
     - name: move static files to server
       uses: appleboy/scp-action@master
