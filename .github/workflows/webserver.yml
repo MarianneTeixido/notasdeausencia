@@ -11,8 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: move textos to server
-      uses: appleboy/scp-action@master
-      with:
+      uses : actions/checkout@v2
+      run: |
+       echo $()
+       ls 
+      env:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
