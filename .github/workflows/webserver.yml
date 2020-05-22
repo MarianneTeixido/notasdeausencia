@@ -13,13 +13,13 @@ jobs:
     - name: checkout to folder
       uses : actions/checkout@v2
     - name: move textos to server
-      run: |
-        sshpass -p "$PASSWORD" scp -r textos/* "$USERNAME@$HOST:/$USERNAME/textos/"
-      shell: bash
-      env:
-        HOST: ${{ secrets.HOST }}
-        USERNAME: ${{ secrets.USERNAME }}
-        PASSWORD: ${{ secrets.PASSWORD }}        
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}        
+        source: "textos/*"
+        target: "/root/textos/"
 
     - name: move static files to server
       uses: appleboy/scp-action@master
