@@ -16,7 +16,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
-        source: "textos/*"
+        source: "textos"
         target: "/root/bots/"
 
     - name: move static files to server
@@ -25,7 +25,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
-        source: "webserver/static/*"
+        source: "webserver/static"
         target: "/root/webserver/static"
 
     - name: move escena1 html files to server
@@ -34,7 +34,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
-        source: "webserver/escena1/*"
+        source: "webserver/escena1"
         target: "/root/webserver/escena1/"
 
     - name: move escena2 html files to server
@@ -43,7 +43,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
-        source: "webserver/escena2/*"
+        source: "webserver/escena2"
         target: "/root/webserver/escena2/"
 
     - name: move escena3 html files to server
@@ -52,6 +52,6 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
-        source: "webserver/escena3/*"
+        source: "webserver/escena3"
         target: "/root/webserver/escena3/"
 
