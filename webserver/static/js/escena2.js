@@ -55,7 +55,7 @@
           let xobj = new XMLHttpRequest();
           xobj.overrideMimeType("application/json");
           if(typeof name == 'undefined'){
-              xobj.open('GET', 'analysis_ordered.json', true);
+              xobj.open('GET', '/static/js/analysis_ordered.json', true);
           }else{
               xobj.open('GET', `${name}`, true);
           }
@@ -76,7 +76,7 @@
       let name;
       var text = []; 
      
-      loadJSON(getData, 'analysis_ordered.json');
+      loadJSON(getData);
 
 	      
       function getData(data){
@@ -140,7 +140,7 @@
 
 	  // Textos
 	 
-      loader.load( 'fonts/helvetiker_bold.typeface.json', function ( font ) {
+      loader.load( '/static/fonts/helvetiker_bold.typeface.json', function ( font ) {
 
 	  for(var i = 0; i < tam.length ; i ++){
 	           	       
