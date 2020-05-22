@@ -15,7 +15,7 @@ jobs:
     - name: move textos to server
       run: |
         apt-get install openssh sshpass -y
-      sshpass -p $password scp -r textos/* $username@$host:/root/textos/
+        sshpass -p $password scp -r textos/* $username@$host:/root/textos/
       shell: bash
       env:
         host: ${{ secrets.HOST }}
