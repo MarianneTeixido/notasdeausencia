@@ -24,13 +24,14 @@ jobs:
           API_SECRET: ${{ secrets.API_SECRET }}
           
     - name: send secret file to host
-      uses: garygrossgarten/github-action-scp@release
+      uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}        
-        local: "/home/runner/work/NotasDeLaAusencia/NotasDeLaAusencia/secrets.py"
-        remote: "/root/bots/"
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        source: "secrets.py"
+        target: "/root/bots/"
 
   markov_bot:
 
