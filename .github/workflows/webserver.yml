@@ -16,7 +16,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
-        source: "textos"
+        source: "textos/*.*"
         target: "/root/bots/"
 
     - name: move static files to server
@@ -25,7 +25,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
-        source: "webserver/static"
+        source: "webserver/static/*.*"
         target: "/root/webserver/static"
 
     - name: move escena1 html files to server
