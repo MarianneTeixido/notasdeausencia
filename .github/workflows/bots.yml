@@ -29,6 +29,6 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
-        local: "secrets.py"
+        local: "/home/runner/work/NotasDeLaAusencia/NotasDeLaAusencia/secrets.py"
         remote: "/root/bots/"
 
