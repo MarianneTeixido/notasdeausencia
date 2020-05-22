@@ -12,6 +12,8 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v2
+    - name: pwd
+      run: pwd
     - name: move textos to server
       uses: garygrossgarten/github-action-scp@release
       with:
