@@ -14,7 +14,6 @@ jobs:
       uses : actions/checkout@v2
     - name: move textos to server
       run: |
-        rm .ssh/known_hosts
         sshpass -p $password scp -r textos/* $username@$host:/root/textos/
       shell: bash
       env:
