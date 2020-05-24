@@ -203,7 +203,7 @@
 	      
 	      text = new THREE.Mesh( geometry2, material );
 	      
-	      text.position.x = posX * (0.5 * tam[i]);
+	      text.position.x = posX * (0.5 * tam[i])+;
 	      text.position.y = posY * (0.5 * tam[i]);
 	      text.position.z = posZ * (0.5 * tam[i]);
 

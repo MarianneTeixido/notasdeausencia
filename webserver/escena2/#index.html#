@@ -26,6 +26,7 @@
       Reescritura<br/>
       Clic en pantalla y desplazamiento con el ratón para navegar<br/>
       Scroll para acercar o alejar<br/>
+      
     </div>
     
     <script src="https://threejs.org/build/three.min.js"></script>
