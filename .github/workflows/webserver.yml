@@ -6,6 +6,8 @@ on:
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
+    steps:
     - name: move static files to server
       uses: garygrossgarten/github-action-scp@release
       with:
