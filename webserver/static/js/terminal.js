@@ -110,6 +110,7 @@ const Terminal = {
 					Terminal.processText(data.full_text)
 				})
 			})
+		}).then(()=>{
 			Terminal.generateTexture()
 		})
 	},
