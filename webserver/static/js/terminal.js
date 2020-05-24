@@ -99,6 +99,7 @@ const Terminal = {
 		}).then(async (response) => {
 			let data = await response.json();
 			data.tweets.forEach( (tweet_url)=>{
+				console.log("aaaa",tweet_url)
 				fetch(tweet_url,{
 					method: 'GET',
 					headers : {
@@ -106,8 +107,9 @@ const Terminal = {
 						'Accept': 'application/json'
 					}
 				}).then(async (tweet_data) => {
-
-					Terminal.processText(await tweet_data.full_text)
+					let data = await tweet_data.json()
+					console.log("aaaa", data)
+					Terminal.processText(data.full_text)
 					Terminal.generateTexture()
 				})
 			})
