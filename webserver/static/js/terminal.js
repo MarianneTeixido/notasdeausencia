@@ -108,9 +108,9 @@ const Terminal = {
 				}).then(async (tweet_data) => {
 					let data = await tweet_data.json()
 					Terminal.processText(data.full_text)
-					Terminal.generateTexture()
 				})
 			})
+			Terminal.generateTexture()
 		})
 	},
 	fullContent:[],
