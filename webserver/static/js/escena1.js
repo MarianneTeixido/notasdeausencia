@@ -16,7 +16,6 @@ const escena1 = {
 		this.scene = new THREE.Scene();
 	
 		let loader = new THREE.TextureLoader();
-		const texture = loader.load('imagen.png')
 /*		this.scene.background = new THREE.CubeTextureLoader()
 			.setPath( '/' )
 			.load([
@@ -33,7 +32,7 @@ const escena1 = {
 
 
 		this.renderer = new THREE.WebGLRenderer({antialias: true});
-		//this.renderer = new THREE.CSS3DRenderer({antialias:true})
+		// this.renderer = new THREE.CSS3DRenderer({antialias:true})
 
 		this.renderer.setSize( window.innerWidth, window.innerHeight );
 		this.camera.position.set(0, 1, 0)
@@ -58,6 +57,7 @@ const escena1 = {
 
 		window.document.addEventListener( 'mousemove', this.handleMouseMove);
 	},
+
 	addFloor: function(){
 
 		// draw floor
@@ -80,7 +80,7 @@ const escena1 = {
 			position.needsUpdate = true;
 		}, 100)
 
-		var texture = new THREE.TextureLoader().load( 'water.jpg' );
+		var texture = new THREE.TextureLoader().load( '/static/images/water.jpg' );
 		texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 		texture.repeat.set( 5, 5 );
 
@@ -97,6 +97,7 @@ const escena1 = {
 		this.scene.add(plane);
 		
 	},
+
 	addLight: function(){
 		var AmbientLight = new THREE.AmbientLight( 0x404040 ); // soft white light
 		this.scene.add( AmbientLight );
@@ -131,6 +132,7 @@ const escena1 = {
 				refractionRatio: 1,
 				clearcoat:1
 			});
+
 		mat.opacity = 0.5
 		mat.transparent = true
 
@@ -140,10 +142,8 @@ const escena1 = {
 		screen.position.y = 10.1
 		screen.position.z = 10
 
-
 		screen.receiveShadow = false
 		screen.castShadow = true
-
 
 		this.parts.screen = screen;
 		this.scene.add(screen);
@@ -185,9 +185,6 @@ const escena1 = {
 	addMarkovText: function(){
 		let markovText = document.querySelector('#markovText');
 		if(!markovText){
-			/*
-			markovCanvas = document.createElement('canvas')
-			*/
 			markovText = document.createElement('div')
 
 			markovText.id = 'markovText';
@@ -202,26 +199,28 @@ const escena1 = {
 			document.body.appendChild(markovText);
 		}
 
-		/*
-		const ctx = markovCanvas.getContext('2d')
-		ctx.font = 'bold 200px Arial';
-		ctx.fillStyle = 'red';
-		ctx.scale(0.125/2, 0.125/2)
-		*/
-		const markovExample = "plantaba una semilla tal como se planta en la tierra, en el marco de una apropiación. Pero la violación pública y la esfera paraestatal que en la trata y en los hombres, el mandato de masculinidad, es decir, desmontando el pacto de complicidad en el poder soberano que sea solamente físico. Sin la subordinación psicológica y moral del pacto del poder. Será por eso, posiblemente, que no se puede abolir ese comercio, material y simbólico, a la función de la violencia sexual, tiene también como anexo a ese cuerpo femenino, por la pérdida de la mujer lo único que existe es poder de la responsabilidad y simbólico, a pesar de todos los esfuerzos. la crueldad se especializa como es la constitución de una fratría mafiosa. El cuerpo del otro sin una paz de significación propio de la soberanía: control no solamente físico sino también moral del pueblo, tribu, comunidad, vecindario, localidad, familia, barriada o modernas, que el continente no es soberanía. En condiciones sociopolíticas «normales» del orden bélico mafioso y de la materialidad del cuerpo del otro como parte del país conquistado. La violación, está el secreto. La violencia sexual se sustenta en los tribunales sino también en las mujeres, somos las guerras contemporáneas es la pedagogía de la mujer se domina y comercia, sino su funcionalidad en el sostenimiento del pacto del cuerpo de la mujer lo que fingen no saber nada. Violar a la mujer, sea generalizada en el sentido estricto de muerte, y el desecho del proceso, una pieza descartable, y de que puede resultar atrayente. Lo digo como víctimas sacrificiales, se trata de la comunidad se sumerge más y más de las veces por una madre triste. Así como rasgo conjugar el patriarcado, pues es universal, sin mayores diferencias, justificando, bajo esta bandera de la posición de un paradigma del agresor. La víctima cuyo sacrificio y triple victimización de Ciudad Juárez se especializa como mensaje Es por eso que en ellos, los receptores y beneficiarios. Y la legalizan, a saber: la actualización permanente de la violencia epistémica. La violencia sexual, y la ley tiene la destrucción del enemigo en el cuerpo y el agenciamiento del mismo por la desigualdad que le es propio campo de batalla en el que torna la Esfera Pública englobante, totalizante, por encima de la guerra tienen lugar. Pero estoy convencida de que este participe con intención o voluntad, la violación se sostiene también sobre el comportamiento de sentencias, presumo precisamente el carácter binario de la estructura está compuesta, como demandantes, en ellos; y por hacer valer, no solo no parece estar mal, sino que también nos revictimiza tan fuertemente que el problema de hombres y mujeres hasta la muerte de las guerras contemporáneas es una ley de estatus. No discuto que no puede ser absorbidos y natura- lizados por la complicidad de hombres y no la comunidad. Es parte de este proceso de digestión la responsabilidad y la guerra, referida al aniquilamiento de la víctima, cuya reducción es justamente significada por".split(' ');
+		let markovExample = ""
+		let markovData = "asdfasdfsdf"
+
+		const getMarkov = function(){
+			return fetch('/markov/16',{
+				method: 'GET',
+			}).then(async (response)=>{
+				return response.text()
+			}).then((e)=>{console.log("E",e)})
+
+		}
+
+		getMarkov()
 		const move = setInterval(function(){
 			const x = Math.random() * window.innerHeight % 10 * 50 ; 
 			const y = Math.random() * window.innerWidth  % 30 * 50;
 			const div = document.createElement('div')
 			i = Math.ceil(Math.random() * markovExample.length/2)
 
-			div.textContent = markovExample.slice(i, i+4).join(' ');
-			div.style.position = 'fixed'
-			
-			div.style.color = 'white'
-			div.style['font-size'] = '50px'
+			div.textContent = markovData.slice(i, i+4).join(' ');
+			div.classList.add('markov');
 
-			div.style.opacity = 0
 			const fadeIn = function(){
 				const opacity = parseFloat(div.style.opacity);
 				if(opacity < 1){
@@ -253,7 +252,7 @@ const escena1 = {
 	},
 
 	parts: {},
-	mouse: new THREE.Vector2()
+	mouse: new THREE.Vector2(),
 }
 
 
