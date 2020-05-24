@@ -8,13 +8,16 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+    - name: pwd check 
+      run: |
+        echo $(pwd)
     - name: move static files to server
       uses: garygrossgarten/github-action-scp@release
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
-        local: " /home/runner/work/NotasDeLaAusencia/NotasDeLaAusencia/webserver/static"
+        local: "/home/runner/work/NotasDeLaAusencia/NotasDeLaAusencia/webserver/static"
         remote: "/root/webserver/static"
 
     - name: move escena1 html files to server
@@ -23,7 +26,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
-        local: " /home/runner/work/NotasDeLaAusencia/NotasDeLaAusencia/webserver/escena1"
+        local: "/home/runner/work/NotasDeLaAusencia/NotasDeLaAusencia/webserver/escena1"
         remote: "/root/webserver/escena1/"
 
     - name: move escena2 html files to server
@@ -32,7 +35,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
-        local: " /home/runner/work/NotasDeLaAusencia/NotasDeLaAusencia/webserver/escena2"
+        local: "/home/runner/work/NotasDeLaAusencia/NotasDeLaAusencia/webserver/escena2"
         remote: "/root/webserver/escena2/"
 
     - name: move escena3 html files to server
@@ -41,6 +44,6 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}        
-        local: " /home/runner/work/NotasDeLaAusencia/NotasDeLaAusencia/webserver/escena3"
+        local: "/home/runner/work/NotasDeLaAusencia/NotasDeLaAusencia/webserver/escena3"
         remote: "/root/webserver/escena3/"
 
