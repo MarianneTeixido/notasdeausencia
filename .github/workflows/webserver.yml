@@ -5,9 +5,7 @@ on:
     branches: [ master ]
 
 jobs:
-
   deploy:
-
     - name: move static files to server
       uses: garygrossgarten/github-action-scp@release
       with:
