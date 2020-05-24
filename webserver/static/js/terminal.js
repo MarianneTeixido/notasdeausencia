@@ -25,7 +25,7 @@ const Terminal = {
 			escena1.scene.remove(escena1.parts.screenText)
 			escena1.renderer.renderLists.dispose()
 		}
-		const canvas = document.createElement('canvas');
+		const canvas =  document.createElement('canvas');
 		const ctx = canvas.getContext('2d');
 
 		canvas.width = 1000
@@ -69,33 +69,22 @@ const Terminal = {
 
 		escena1.scene.add(plane)
 		escena1.parts.screenText = plane
-		
-
 
 	},
 	generate: function(){
 
 		Terminal.getTweets()
 
-		/*const resultText = Terminal.processText(`Amor, tranquilo, no te voy a molestar
-		Amor, tranquilo, no te voy a molestar
-		Mi suerte estaba echada, ya lo sé
-		Y maullaré por ti`)
-		Terminal.processText(`Amor, tranquilo, no te voy a molestar
-		Amor, tranquilo, no te voy a molestar
-		Mi suerte estaba echada, ya lo sé
-		Y maullaré por ti`)
-		*/
 	},
 	getTweets(){
 
+		Terminal.generateTexture();
 		fetch("/tweets/", {
 			method: "GET",
 			headers : {
 				'Content-Type': 'application/json',
 				'Accept': 'application/json'
 			},
-			mode: 'no-cors'
 		}).then(async (response) => {
 			let data = await response.json();
 			const fetching_tweets =  data.tweets.map( (tweet_url)=>{
@@ -106,23 +95,21 @@ const Terminal = {
 						'Accept': 'application/json'
 					}
 				}).then(async (tweet_data) => {
-					console.log("getting data")
 					let data = await tweet_data.json()
 					Terminal.processText(data.full_text)
 				})
 			})
 			
 			Promise.all(fetching_tweets).then(()=>{
-				console.log("fininshed fetching")
+				Terminal.fullContent.shift()
 				Terminal.generateTexture()
 			})
 		})
-//		
 
 	},
-	fullContent:[],
+	fullContent:['Loading tweets'],
 	section: [],
-	lengthLimit: 38,
+	lengthLimit: 36,
 	offset: 0
 }
 

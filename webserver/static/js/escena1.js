@@ -217,8 +217,10 @@ const escena1 = {
 						div.textContent = markovData
 						
 						div.classList.add('markov');
+						div.style.opacity = 0
 						const fadeIn = function(){
 							const opacity = parseFloat(div.style.opacity);
+							console.log("aaasdfsdf", opacity)
 							if(opacity < 1){
 								div.style.opacity = opacity+0.1
 								setTimeout(fadeIn, 100)
