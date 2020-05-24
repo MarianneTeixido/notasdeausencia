@@ -199,51 +199,51 @@ const escena1 = {
 			document.body.appendChild(markovText);
 		}
 
-		let markovExample = ""
-		let markovData = "asdfasdfsdf"
-
-		const getMarkov = function(){
+		const getMarkov = function(callback){
 			return fetch('/markov/16',{
 				method: 'GET',
 			}).then(async (response)=>{
 				return response.text()
-			}).then((e)=>{console.log("E",e)})
-
+			}).then(callback)
 		}
 
-		getMarkov()
-		const move = setInterval(function(){
-			const x = Math.random() * window.innerHeight % 10 * 50 ; 
-			const y = Math.random() * window.innerWidth  % 30 * 50;
-			const div = document.createElement('div')
-			i = Math.ceil(Math.random() * markovExample.length/2)
+		const move = setInterval(
+			function(){
+				getMarkov(
+					function(MarkovData){
+						const x = Math.random() * window.innerHeight % 10 * 50 ; 
+						const y = Math.random() * window.innerWidth  % 30 * 50;
+						const div = document.createElement('div')
+						div.textContent = markovData
+						
+						div.classList.add('markov');
+						const fadeIn = function(){
+							const opacity = parseFloat(div.style.opacity);
+							if(opacity < 1){
+								div.style.opacity = opacity+0.1
+								setTimeout(fadeIn, 100)
+							}else{
+								setTimeout(fadeOut, 5000)
+							}
+						}
+						
+						const fadeOut = function(){
+							const opacity = parseFloat(div.style.opacity);
+							if(opacity > 0){
+								div.style.opacity = opacity - 0.1;
+								setTimeout(fadeOut, 100)
+							}
+						}
+						
+						setTimeout(fadeIn, 100)
+						
+						div.style.top = x
+						div.style.left = y
+						
+						markovText.appendChild(div)
+					})
 
-			div.textContent = markovData.slice(i, i+4).join(' ');
-			div.classList.add('markov');
-
-			const fadeIn = function(){
-				const opacity = parseFloat(div.style.opacity);
-				if(opacity < 1){
-					div.style.opacity = opacity+0.1
-					setTimeout(fadeIn, 100)
-				}else{
-					setTimeout(fadeOut, 5000)
-				}
-			}
-
-			const fadeOut = function(){
-				const opacity = parseFloat(div.style.opacity);
-				if(opacity > 0){
-					div.style.opacity = opacity - 0.1;
-					setTimeout(fadeOut, 100)
-				}
-			}
-			setTimeout(fadeIn, 100)
-
-			div.style.top = x
-			div.style.left = y
-			markovText.appendChild(div)
-		}, 2000)
+			}, 2000)
 	},
 
 	animate: function(){
