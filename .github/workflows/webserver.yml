@@ -11,6 +11,8 @@ jobs:
     - name: pwd check 
       run: |
         echo $(pwd)
+    - name: checkout
+      uses: actions/checkout@v2
     - name: move static files to server
       uses: garygrossgarten/github-action-scp@release
       with:
