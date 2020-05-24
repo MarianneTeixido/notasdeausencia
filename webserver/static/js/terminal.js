@@ -99,7 +99,7 @@ const Terminal = {
 		}).then(async (response) => {
 			let data = await response.json();
 			const fetching_tweets =  data.tweets.map( (tweet_url)=>{
-				 fetch(`/tweets/${tweet_url}`,{
+				 return fetch(`/tweets/${tweet_url}`,{
 					method: 'GET',
 					headers : {
 						'Content-Type': 'application/json',
