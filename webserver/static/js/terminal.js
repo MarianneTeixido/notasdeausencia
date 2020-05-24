@@ -13,54 +13,6 @@ const Terminal = {
 			}
 			res.push(line)
 		})
-/*
-		const splitText = function(text){
-			let splitted = text.split('\n')
-
-			let words = splitted.map((line)=>{
-				return  line.split(' ').filter((x) => x!='')
-			})
-			return words
-		}
-
-		const truncText = function(words){
-
-                        const limit = Terminal.lengthLimit;
-
-			words = words.map((word)=>{
-				let cut = []
-				while(word.length>limit){
-					let substr = word.substr(0, limit-1)
-					cut.push(substr)
-					word = word.substr(limit-1)
-				}
-				cut.push(word)
-				return cut
-			})
-			words = words.filter((word)=> word!='')
-
-                        let resline = []
-			words.forEach((word)=>{
-				cut = ""
-
-				while(word.length > 0){
-					if(cut.length + word[0].length + 1 < limit){
-						cut += word[0] + " "
-					}else{
-						resline.push(cut)
-						cut = ""
-					}
-					word.shift()
-				}
-				resline.push(cut)
-			})
-                        return resline.join('')
-                }
-		let lines = splitText(text)
-		let res = lines.map((line)=>{
-			return truncText(line)
-		})
-		*/
 		this.fullContent.push(res)
 
 		return res
@@ -122,16 +74,8 @@ const Terminal = {
 
 	},
 	generate: function(){
-		Terminal.getTweets("tweets/1259516018537435142.json")
-		Terminal.getTweets("tweets/1259515255379689472.json")
-		Terminal.getTweets("tweets/1259966178174341127.json")
-		Terminal.getTweets("tweets/1261318959401447427.json")
-		Terminal.getTweets("tweets/1261209289378725888.json")
-		Terminal.getTweets("tweets/1259609200755445763.json")
-		Terminal.getTweets("tweets/1259606868579753984.json")
-		Terminal.getTweets("tweets/1259700922499977216.json")
-		Terminal.getTweets("tweets/1261287656211783681.json")
-		Terminal.getTweets("tweets/1259701002976051200.json")
+
+		Terminal.getTweets()
 
 		/*const resultText = Terminal.processText(`Amor, tranquilo, no te voy a molestar
 		Amor, tranquilo, no te voy a molestar
@@ -143,9 +87,9 @@ const Terminal = {
 		Y maullaré por ti`)
 		*/
 	},
-	getTweets(url){
+	getTweets(){
 
-		return fetch(url,{
+		return fetch("/tweets/", {
 			method: "GET",
 			headers : {
 				'Content-Type': 'application/json',
@@ -154,8 +98,19 @@ const Terminal = {
 			mode: 'no-cors'
 		}).then(async (response) => {
 			let data = await response.json();
-			Terminal.processText(await data.full_text)
-			Terminal.generateTexture()
+			data.tweets.forEach( (tweet_url)=>{
+				fetch(tweet_url,{
+					method: 'GET',
+					headers : {
+						'Content-Type': 'application/json',
+						'Accept': 'application/json'
+					}
+				}).then(async (tweet_data) => {
+
+					Terminal.processText(await tweet_data.full_text)
+					Terminal.generateTexture()
+				})
+			})
 		})
 	},
 	fullContent:[],
