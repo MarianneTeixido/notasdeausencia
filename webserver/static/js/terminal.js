@@ -98,21 +98,24 @@ const Terminal = {
 			mode: 'no-cors'
 		}).then(async (response) => {
 			let data = await response.json();
-			data.tweets.forEach( (tweet_url)=>{
-				fetch(`/tweets/${tweet_url}`,{
+			data.tweets.forEach( (tweet_url, i)=>{
+				await fetch(`/tweets/${tweet_url}`,{
 					method: 'GET',
 					headers : {
 						'Content-Type': 'application/json',
 						'Accept': 'application/json'
 					}
 				}).then(async (tweet_data) => {
+					console.log("getting data")
 					let data = await tweet_data.json()
 					Terminal.processText(data.full_text)
 				})
 			})
 		}).then(()=>{
+			console.log("generating texture")
 			Terminal.generateTexture()
 		})
+
 	},
 	fullContent:[],
 	section: [],
