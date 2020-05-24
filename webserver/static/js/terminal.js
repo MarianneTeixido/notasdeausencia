@@ -107,7 +107,7 @@ const Terminal = {
 		})
 
 	},
-	fullContent:['Loading tweets'],
+	fullContent:[['Loading tweets']],
 	section: [],
 	lengthLimit: 36,
 	offset: 0
