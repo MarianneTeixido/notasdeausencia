@@ -210,7 +210,7 @@ const escena1 = {
 		const move = setInterval(
 			function(){
 				getMarkov(
-					function(MarkovData){
+					function(markovData){
 						const x = Math.random() * window.innerHeight % 10 * 50 ; 
 						const y = Math.random() * window.innerWidth  % 30 * 50;
 						const div = document.createElement('div')
