@@ -21,9 +21,10 @@
 #menu ul{
 	list-style-type: none;
 	padding:0px;
+}
 body {
 	margin: 0;
-	background-color: #fff
+	background-color: #fff;
 	color: #fff;
 	font-family: Monospace;
 	font-size: 13px;
@@ -107,4 +108,8 @@ a, button, input, select {
 #overlay > div > p {
 	color: #ffffff;
 	font-size: 12px;
+<<<<<<< Updated upstream
+=======
+>>>>>>> 25aee0dff7c318277e237b81474bf9e380be9633
+>>>>>>> Stashed changes
 }

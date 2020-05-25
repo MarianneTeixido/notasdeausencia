@@ -1,3 +1,8 @@
+// Memorial
+// reescritura
+// Espejos
+// Creditos
+
 const Terminal = {
 
 	processText: function(text){
@@ -17,6 +22,50 @@ const Terminal = {
 
 		return res
 	},
+	generateScroll: function(){
+		const geom = new THREE.Geometry()
+		const geom2 = new THREE.Geometry()
+		const mat = new THREE.MeshBasicMaterial( { color: 0xff0000, side:THREE.DoubleSide, transparent: true } );
+		let p1 = new THREE.Vector3(0,0,0)
+		let p2 = new THREE.Vector3(4, 0,0)
+		let p3 = new THREE.Vector3(2, 1,0)
+		geom.vertices.push(p1)
+		geom.vertices.push(p2)
+		geom.vertices.push(p3)
+
+		geom.faces.push(new THREE.Face3(0,1,2))
+		geom.computeFaceNormals();
+
+		let arrow_up = new THREE.Mesh(geom, mat);
+		
+		arrow_up.rotateX(Math.PI * 1/8)
+		arrow_up.position.x = escena1.parts.screenText.position.x -= 2
+		arrow_up.position.y = escena1.parts.screenText.position.y * 1.7
+		arrow_up.position.z = 11.5;
+		
+		let p4 = new THREE.Vector3(0, 0, 0)
+		let p5 = new THREE.Vector3(4, 0, 0)
+		let p6 = new THREE.Vector3(2, -1, 0)
+
+		geom2.vertices.push(p4)
+		geom2.vertices.push(p5)
+		geom2.vertices.push(p6)
+		
+		geom2.faces.push(new THREE.Face3(0,1,2))
+		geom2.computeFaceNormals();
+		
+		let arrow_down = new THREE.Mesh(geom2, mat);
+		arrow_down.rotateX(Math.PI * -1/8)
+		arrow_down.position.x = 8
+		arrow_down.position.y = 1.5
+		arrow_down.position.z = 5.1
+		
+		escena1.scene.add(arrow_up)
+		escena1.scene.add(arrow_down)
+	
+		escena1.parts.arrowUp = arrow_up
+		escena1.parts.arrowDown = arrow_down
+	},
 	generateTexture: function(){
 
 		if (escena1.parts.screenText){
@@ -29,7 +78,7 @@ const Terminal = {
 		const ctx = canvas.getContext('2d');
 
 		canvas.width = 1000
-		canvas.height = 2100;
+		canvas.height = 2050;
 
 		ctx.font = "40px Courier New";
 		ctx.fillStyle = "white";
@@ -43,21 +92,19 @@ const Terminal = {
 		})
 		n = canvas.height - n
 		this.fullContent.forEach(function(content, i){
-			//const starty = canvas.height - (content.length*50 * (i+1)) + Terminal.offset ;
 			let starty = n
 			content.forEach((line, j)=>{
 				 ctx.fillText(line, 40, starty + (j*40) + Terminal.offset);
 				n +=40
 			})
 			n+=40
-
 		})
 		
 
 		const texture = new THREE.Texture(canvas)
 
 		    texture.needsUpdate = true;
-		let geom = new THREE.PlaneBufferGeometry(10, 21, 80);
+		let geom = new THREE.PlaneBufferGeometry(10, 20, 80);
 		let mat = new THREE.MeshBasicMaterial( { map:texture, side:THREE.DoubleSide, transparent: true } );
 
 		let plane = new THREE.Mesh(geom, mat);
@@ -107,7 +154,7 @@ const Terminal = {
 		})
 
 	},
-	fullContent:[['Loading tweets']],
+	fullContent:[['Loading tweets...']],
 	section: [],
 	lengthLimit: 36,
 	offset: 0
@@ -115,3 +162,4 @@ const Terminal = {
 
 
 Terminal.generate()
+Terminal.generateScroll()

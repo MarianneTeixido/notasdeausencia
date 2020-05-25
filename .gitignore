@@ -9,3 +9,5 @@ bots/secrets.py
 bots/__pycache__/
 bots/*.py[cod]
 bots/*$py.class
+
+*.swp

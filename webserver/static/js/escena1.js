@@ -149,6 +149,18 @@ const escena1 = {
 		this.scene.add(screen);
 		
 	},
+	showMenu: function(){
+		const menu = document.querySelector("#menu");
+
+		if(menu.style.display == 'block'){
+			menu.style.display = 'none';
+			return
+		}
+
+		menu.style.display = 'block';
+		menu.style.top = escena1.mouse.clientY
+		menu.style.left = escena1.mouse.clientX
+	},
 	handleResize: function(event){
 		escena1.camera.aspect = window.innerWidth / window.innerHeight;
 		escena1.camera.updateProjectionMatrix();
@@ -158,7 +170,6 @@ const escena1 = {
 
 	handleKeyup: function(event){
 		switch(event.keyCode){
-
 			case 38:
 				escena1.controls.moveForward(1)
 				break;
@@ -171,9 +182,14 @@ const escena1 = {
 			case 39:
 				escena1.controls.moveRight(1)
 				break;
+			case 77:
+				escena1.showMenu()
 		}
 	},
 	handleMouseMove: function(event){
+
+		escena1.mouse.clientX = event.clientX
+		escena1.mouse.clientY = event.clientY
 		escena1.mouse.x = (event.clientX / window.innerWidth) * 2 -1;
 		escena1.mouse.y = -(event.clientY / window.innerHeight) * 2 +1;
 
@@ -181,6 +197,17 @@ const escena1 = {
 		let intersects = escena1.raycaster.intersectObjects( escena1.scene.children );
 		
 		let uuid = intersects.map((inter)=>inter.object.uuid)
+
+		if (uuid.includes(escena1.parts.arrowDown.uuid)){
+			escena1.parts.arrowUp.material.color = new THREE.Color(0, 0, 0)
+			escena1.parts.arrowDown.material.color = new THREE.Color(0, 0.5, 0.5)
+		}else if(uuid.includes(escena1.parts.arrowUp.uuid)){
+			escena1.parts.arrowUp.material.color = new THREE.Color(0, 0.5, 0.5)
+			escena1.parts.arrowDown.material.color = new THREE.Color(0, 0, 0)
+		}else{
+			escena1.parts.arrowUp.material.color = new THREE.Color(0, 0, 0)
+			escena1.parts.arrowDown.material.color = new THREE.Color(0, 0, 0)
+		}
 	},
 	addMarkovText: function(){
 		let markovText = document.querySelector('#markovText');
@@ -220,7 +247,6 @@ const escena1 = {
 						div.style.opacity = 0
 						const fadeIn = function(){
 							const opacity = parseFloat(div.style.opacity);
-							console.log("aaasdfsdf", opacity)
 							if(opacity < 1){
 								div.style.opacity = opacity+0.1
 								setTimeout(fadeIn, 100)
@@ -234,6 +260,8 @@ const escena1 = {
 							if(opacity > 0){
 								div.style.opacity = opacity - 0.1;
 								setTimeout(fadeOut, 100)
+							}else{
+								div.remove()
 							}
 						}
 						
