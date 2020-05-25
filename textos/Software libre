@@ -1,0 +1,79 @@
+La idea de que el sistema social en torno al software propietario
+—un sistema que te impide compartir o modificar el software— es
+antisocial, poco ético, sencillamente equivocado, puede sorprender a
+algunos lectores. Pero ¿qué podemos decir acerca de un sistema que
+siembra la división entre el público y abandona a los usuarios a la
+indefensión más absoluta? Estos lectores probablemente hayan asumido el sistema social asociado con el software propietario como algo
+inevitable o habrán considerado la cuestión de la misma forma que se
+plantea por parte de las empresas de software propietario. Los editores de software se han esforzado mucho en convencernos de que sólo
+hay una forma de abordar esta cuestión.
+
+
+El desarrollo de un sistema operativo de principio a fin es un proyecto colosal. Como primera medida, decidí adaptar y utilizar algunas
+piezas existentes de software libre siempre que me fuera posible.
+Desde el inicio, decidí usar TEX como principal procesador de texto, y unos años más tarde me pasé al X Window System en vez de escri-
+bir otro sistema de ventanas para GNU.
+Debido a esta decisión, el sistema GNU no consiste en una colección completa de software GNU. El sistema incluye programas de-
+sarrollados por otros individuos y para proyectos con sus propios propósitos que empleamos por su condición de software libre.
+
+La idea fundamental del copyleft es que se autoriza la ejecución del programa, su copia, modificación y distribución de versiones
+modificadas, siempre que no se añada ninguna clase de restricción a posteriori. De este modo, las libertades cruciales que definen el «software libre» quedan garantizadas para cualquiera que posea una copia; estas libertades se convierten en derechos inalienables.
+Para que el copyleft sea efectivo, las versiones modificadas deberán ser libres también. Esto garantiza que cualquier tarea basada en nues-
+tro trabajo se pondrá a disposición de la comunidad si llegara a publicarse. Cuando los programadores que tienen empleo se ofrecen volun-
+tariamente a mejorar el software GNU, sólo el copyleft impide que sus jefes les digan: «No podéis compartir esos cambios, porque vamos a
+utilizarlos para crear nuestra versión propietaria del programa».
+
+Al combinar un programa libre con un código no libre se plantea un problema similar. Esta combinación acabaría siendo inevitable-
+mente no libre; las libertades suprimidas en la parte no libre del programa afectarán a éste en su totalidad. Autorizar este tipo de combi-
+naciones abriría un boquete lo bastante grande para hundir el barco entero. Por lo tanto, un objetivo crucial del copyleft es tapar este boque-
+te: cualquier cosa añadida o combinada con un programa copyleft, para formar una versión modificada deberá, preservar su condición
+de software libre y su copyleft.
+
+
+La filosofía del software libre rechaza una práctica empresarial concreta y muy generalizada, pero no rechaza el negocio en general. Cuando una
+empresa respeta la libertad de los usuarios, le deseamos mucho éxito.
+La venta de copias de Emacs ilustra una clase de empresa relacionada con el software libre. Cuando la FSF se hizo con el negocio, me
+vi obligado a buscarme nuevamente la vida. Así fue como empecé a vender servicios relacionados con el software libre que acababa de
+desarrollar. Esto incluía la enseñanza de cuestiones como la programación de GNU Emacs, la modificación del GCC a la medida del usua-
+rio o el desarrollo de software, normalmente para instalar el en nuevas plataformas.
+
+ Los desarrolladores de software propietario cuentan con la ventaja que proporciona el dinero; los de software libre deben idear sus
+propias ventajas. Espero que un día contemos con una amplia colección de bibliotecas con GPL sin paralelo en el mundo del software
+propietario, una colección que proporcione módulos útiles que sirvan de base para el futuro software libre y entrañen una ventaja decisiva para fomentar su desarrollo.
+
+
+  Quienes valoramos el software libre por la libertad que éste entraña seguiremos en la misma línea. Lograremos sacar adelante el trabajo sin funciones patentadas. Pero quienes valoran el software libre porque esperan que sea técnicamente superior se inclinarán por calificarlo de fracaso cuando este software se vea restringido por una
+patente. De modo que, a pesar de que resulta muy útil discutir la efectividad práctica del modelo de desarrollo de tipo «catedral»8 y la fiabilidad y potencia de ciertos programas de software libre, debemos ir más allá. Debemos hablar de libertad y de principios.
+
+La mayor deficiencia de nuestros sistemas operativos no reside en el software, sino en la ausencia de buenos manuales libres para nuestros sistemas. La documentación es una parte esencial de cualquier paquete de software; un paquete importante de software libre sin un buen manual libre que lo acompañe constituye un lastre considerable. Tenemos muchos ejemplos de ello en la actualidad.
+
+
+Actualmente, se calcula que existen diez millones de usuarios de sistemas GNU/Linux como Debian GNU/Linux y Red Hat Linux. El
+software libre ha desarrollado tales ventajas prácticas que está ganando adeptos por razones puramente prácticas.
+   Las consecuencias positivas de esto son evidentes: un mayor interés por desarrollar software libre, más clientes para las empresas de
+software libre y una mayor capacidad para alentar a las empresas a desarrollar software libre comercial en lugar de productos de software propietario.
+    Pero el interés en el software crece a un ritmo superior que la conciencia de la filosofía en que se fundamenta, y esto plantea ciertas
+dificultades. Nuestra capacidad para hacer frente a los desafíos y las amenazas anteriormente descritos dependerá de nuestra voluntad de
+mantenernos firmes en nombre de la libertad. Para convencer de ello a nuestra comunidad, habremos de difundir la idea entre los nuevos
+usuarios que pasen a formar parte de ella. Pero estamos fracasando: nuestros esfuerzos por atraer a nuevos usuarios a nuestra comunidad superan con creces nuestras iniciativas a la hora de enseñarles los principios de la misma. Debemos dedicarnos a ambos objetivos y compensar nuestros esfuerzos en ambas direcciones.
+
+
+Los códigos completos del sistema estarán disponibles para todo el mundo. Como resultado, un usuario que necesite modificar el sistema será siempre libre de hacerlo por sí mismo, o de contratar a cualquier programadora disponible para hacerlo por ella. Los usuarios no estarán ya a merced de un programador o una empresa que sea dueña del código fuente y que sea la única en posición de realizar modificaciones.
+
+ La libertad para utilizar un programa significa que cualquier individuo u organización podrán ejecutarlo desde cualquier sistema informático, con cualquier fin y sin la obligación de comunicárselo subsiguientemente ni al desarrollador ni a ninguna entidad en concreto.
+
+
+El movimiento del software libre y el movimiento open source son como
+dos campos políticos dentro de la comunidad del software libre.
+
+Esto es cierto: hablar sobre libertad, sobre asuntos éticos, sobre responsabilidades así como sobre conveniencia, es pedirle a la gente que piense
+sobre cosas que preferiría ignorar. Esto puede causar malestar y algunas
+personas pueden rechazar la idea por eso. De esto no se debe deducir
+que la sociedad estaría mejor si dejamos de hablar de este tipo de cosas.
+
+
+
+
+
+
+
