@@ -118,7 +118,12 @@ const Terminal = {
 
 		    texture.needsUpdate = true;
 		let geom = new THREE.PlaneBufferGeometry(10, 20, 80);
-		let mat = new THREE.MeshBasicMaterial( { map:texture, side:THREE.DoubleSide, transparent: true } );
+		let mat = new THREE.MeshBasicMaterial(
+			{
+				map:texture,
+				side:THREE.DoubleSide,
+				transparent:true
+			});
 
 		let plane = new THREE.Mesh(geom, mat);
 		plane.position.x = escena1.parts.screen.position.x
@@ -169,7 +174,7 @@ const Terminal = {
 	},
 	fullContent:[['Loading tweets...']],
 	section: [],
-	lengthLimit: 40,
+	lengthLimit: 50,
 	offset: 0,
 	scroll: 0
 }
