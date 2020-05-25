@@ -233,7 +233,7 @@ const escena2 = {
 		
 		escena2.text[i].lookAt(0, 0, 0); 
 		
-		escena2.scene.add(escena2.text[i]);
+		// escena2.scene.add(escena2.text[i]);
 		
 	    }
 	    
