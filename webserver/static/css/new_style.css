@@ -17,13 +17,16 @@
 	position: fixed;
 	padding: 10px;
 	display:none;
-	background-color: black;
+	background-color: grey;
 	color: white;
+	opacity: 50%;
+	border: 2px black solid;
 }
 
 #menu ul{
 	list-style-type: none;
 	padding:0px;
+	margin:0px;
 }
 
 body {

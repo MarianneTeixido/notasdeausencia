@@ -25,7 +25,13 @@ const Terminal = {
 	generateScroll: function(){
 		const geom = new THREE.Geometry()
 		const geom2 = new THREE.Geometry()
-		const mat = new THREE.MeshBasicMaterial( { color: 0xff0000, side:THREE.DoubleSide, transparent: true } );
+		const mat = new THREE.MeshBasicMaterial( 
+			{
+				color: 0x000000,
+				side:THREE.DoubleSide,
+				transparent: true,
+				opacity: 0.5
+			});
 		let p1 = new THREE.Vector3(0,0,0)
 		let p2 = new THREE.Vector3(4, 0,0)
 		let p3 = new THREE.Vector3(2, 1,0)
@@ -40,7 +46,7 @@ const Terminal = {
 		
 		arrow_up.rotateX(Math.PI * 1/8)
 		arrow_up.position.x = escena1.parts.screenText.position.x -= 2
-		arrow_up.position.y = escena1.parts.screenText.position.y * 1.7
+		arrow_up.position.y = escena1.parts.screenText.position.y * 1.5
 		arrow_up.position.z = 11.5;
 		
 		let p4 = new THREE.Vector3(0, 0, 0)
@@ -109,7 +115,7 @@ const Terminal = {
 
 		let plane = new THREE.Mesh(geom, mat);
 		plane.position.x = escena1.parts.screen.position.x
-		plane.position.y = escena1.parts.screen.position.y
+		plane.position.y = escena1.parts.screen.position.y + 0.7 
 		plane.position.z = escena1.parts.screen.position.z - 0.8
 		plane.rotateY(Math.PI)
 		plane.rotateX(Math.PI * -1/8)

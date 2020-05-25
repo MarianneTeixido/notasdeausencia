@@ -50,7 +50,7 @@ const escena1 = {
 		document.body.addEventListener( 'click', ()=>{
 			escena1.controls.moveForward(0.1);
 			escena1.controls.lock()});
-		document.body.addEventListener( 'keyup', this.handleKeyup);
+		document.body.addEventListener( 'keydown', this.handleKeydown);
 	},
 	initRaycaster: function(){
 		this.raycaster = new THREE.Raycaster();
@@ -152,14 +152,17 @@ const escena1 = {
 	showMenu: function(){
 		const menu = document.querySelector("#menu");
 
+		if (escena1.controls.isLocked){
+			escena1.controls.unlock();
+		}
 		if(menu.style.display == 'block'){
 			menu.style.display = 'none';
 			return
 		}
 
 		menu.style.display = 'block';
-		menu.style.top = escena1.mouse.clientY
-		menu.style.left = escena1.mouse.clientX
+		menu.style.top = escena1.mouse.clientY + 'px'
+		menu.style.left = escena1.mouse.clientX + 'px'
 	},
 	handleResize: function(event){
 		escena1.camera.aspect = window.innerWidth / window.innerHeight;
@@ -168,21 +171,21 @@ const escena1 = {
 	
 	},
 
-	handleKeyup: function(event){
-		switch(event.keyCode){
-			case 38:
-				escena1.controls.moveForward(1)
+	handleKeydown: function(event){
+		switch(event.key){
+			case 'w':
+				escena1.controls.moveForward(0.5)
 				break;
-			case 40:
-				escena1.controls.moveForward(-1);
+			case 's':
+				escena1.controls.moveForward(-0.5);
 				break;
-			case 37:
-				escena1.controls.moveRight(-1)
+			case 'a':
+				escena1.controls.moveRight(-0.5)
 				break;
-			case 39:
-				escena1.controls.moveRight(1)
+			case 'd':
+				escena1.controls.moveRight(0.5)
 				break;
-			case 77:
+			case 'm':
 				escena1.showMenu()
 		}
 	},
@@ -199,14 +202,10 @@ const escena1 = {
 		let uuid = intersects.map((inter)=>inter.object.uuid)
 
 		if (uuid.includes(escena1.parts.arrowDown.uuid)){
-			escena1.parts.arrowUp.material.color = new THREE.Color(0, 0, 0)
-			escena1.parts.arrowDown.material.color = new THREE.Color(0, 0.5, 0.5)
-		}else if(uuid.includes(escena1.parts.arrowUp.uuid)){
-			escena1.parts.arrowUp.material.color = new THREE.Color(0, 0.5, 0.5)
-			escena1.parts.arrowDown.material.color = new THREE.Color(0, 0, 0)
-		}else{
-			escena1.parts.arrowUp.material.color = new THREE.Color(0, 0, 0)
-			escena1.parts.arrowDown.material.color = new THREE.Color(0, 0, 0)
+			console.log("aaaa ")
+		}
+		if(uuid.includes(escena1.parts.arrowUp.uuid)){
+			console.log("eeeeee ")
 		}
 	},
 	addMarkovText: function(){
