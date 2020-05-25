@@ -32,6 +32,13 @@ const Terminal = {
 				transparent: true,
 				opacity: 0.5
 			});
+		const mat2 = new THREE.MeshBasicMaterial( 
+			{
+				color: 0x000000,
+				side:THREE.DoubleSide,
+				transparent: true,
+				opacity: 0.5
+			});
 		let p1 = new THREE.Vector3(0,0,0)
 		let p2 = new THREE.Vector3(4, 0,0)
 		let p3 = new THREE.Vector3(2, 1,0)
@@ -60,7 +67,7 @@ const Terminal = {
 		geom2.faces.push(new THREE.Face3(0,1,2))
 		geom2.computeFaceNormals();
 		
-		let arrow_down = new THREE.Mesh(geom2, mat);
+		let arrow_down = new THREE.Mesh(geom2, mat2);
 		arrow_down.rotateX(Math.PI * -1/8)
 		arrow_down.position.x = 8
 		arrow_down.position.y = 1.5
@@ -162,8 +169,9 @@ const Terminal = {
 	},
 	fullContent:[['Loading tweets...']],
 	section: [],
-	lengthLimit: 36,
-	offset: 0
+	lengthLimit: 40,
+	offset: 0,
+	scroll: 0
 }
 
 

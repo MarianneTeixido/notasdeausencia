@@ -16,17 +16,6 @@ const escena1 = {
 		this.scene = new THREE.Scene();
 	
 		let loader = new THREE.TextureLoader();
-/*		this.scene.background = new THREE.CubeTextureLoader()
-			.setPath( '/' )
-			.load([
-				'sky.png', 
-				'sky.png', 
-				'sky.png', 
-				'sky.png', 
-				'sky.png', 
-				'sky.png', 
-			])
-*/
 		this.scene.background = new THREE.Color(0x7a04eb)
 		this.camera = new THREE.PerspectiveCamera(45,  window.innerWidth / window.innerHeight, 0.1, 1000);
 
@@ -47,10 +36,43 @@ const escena1 = {
 	},
 	initControls: function(){
 		this.controls = new THREE.PointerLockControls( this.camera, document.body );
-		document.body.addEventListener( 'click', ()=>{
+		document.body.addEventListener( 'click', (event)=>{
 			escena1.controls.moveForward(0.1);
-			escena1.controls.lock()});
+			escena1.controls.moveRight(0.01);
+			escena1.controls.lock()
+			escena1.mouse.clientX = event.clientX
+			escena1.mouse.clientY = event.clientY
+
+			Terminal.offset += Terminal.scroll * 20;
+			Terminal.generateTexture()
+		});
 		document.body.addEventListener( 'keydown', this.handleKeydown);
+
+		this.controls.addEventListener( 'lock', function () {
+
+			if(!document.querySelector('#cursordiv')){
+				const cursordiv = document.createElement('div')
+
+				cursordiv.id = 'cursordiv';
+				cursordiv.style.width = "5px"
+				cursordiv.style.height = "5px"
+				cursordiv.style.background = "red"
+				cursordiv.style.position = "absolute"
+				cursordiv.style.top = escena1.mouse.clientY + 'px'
+				cursordiv.style.left = escena1.mouse.clientX + 'px'
+				cursordiv.style.right = "0"
+				cursordiv.style.bottom = "0"
+				cursordiv.style.zIndex= "99"
+				document.body.appendChild(cursordiv)
+			}
+		});
+		
+		this.controls.addEventListener( 'unlock', function () {
+			const cursordiv = document.querySelector('#cursordiv')
+			cursordiv.remove()
+
+		})
+
 	},
 	initRaycaster: function(){
 		this.raycaster = new THREE.Raycaster();
@@ -122,7 +144,7 @@ const escena1 = {
 	addScreen: function(){
 		// draw floor
 		
-		let geom = new THREE.BoxBufferGeometry(10, 21, 1);
+		let geom = new THREE.BoxBufferGeometry(20, 21, 1);
 		
 		let mat = new THREE.MeshPhysicalMaterial( 
 			{
@@ -197,15 +219,18 @@ const escena1 = {
 		escena1.mouse.y = -(event.clientY / window.innerHeight) * 2 +1;
 
 		escena1.raycaster.setFromCamera( escena1.mouse, escena1.camera );
-		let intersects = escena1.raycaster.intersectObjects( escena1.scene.children );
-		
-		let uuid = intersects.map((inter)=>inter.object.uuid)
+		let intersects = escena1.raycaster.intersectObjects( [escena1.parts.arrowUp, escena1.parts.arrowDown] );
 
-		if (uuid.includes(escena1.parts.arrowDown.uuid)){
-			console.log("aaaa ")
-		}
-		if(uuid.includes(escena1.parts.arrowUp.uuid)){
-			console.log("eeeeee ")
+		if(intersects.length == 0){
+			escena1.parts.arrowDown.material.color = new THREE.Color(0,0,0)
+			escena1.parts.arrowUp.material.color = new THREE.Color(0,0,0)
+			Terminal.scroll = 0;
+		}else if(intersects[0].object.uuid == escena1.parts.arrowUp.uuid){
+			escena1.parts.arrowUp.material.color = new THREE.Color(0.5, 0,0)
+			Terminal.scroll = -1;
+		}else if(intersects[0].object.uuid == escena1.parts.arrowDown.uuid){
+			escena1.parts.arrowDown.material.color = new THREE.Color(0.5, 0,0)	
+			Terminal.scroll = 1;
 		}
 	},
 	addMarkovText: function(){
@@ -284,6 +309,7 @@ const escena1 = {
 
 	parts: {},
 	mouse: new THREE.Vector2(),
+	cursor: {}
 }
 
 
