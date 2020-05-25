@@ -16,11 +16,15 @@ const escena1 = {
 		this.scene = new THREE.Scene();
 	
 		let loader = new THREE.TextureLoader();
-		this.scene.background = new THREE.Color(0x7a04eb)
+		//this.scene.background = new THREE.Color(0x7a04eb)
 		this.camera = new THREE.PerspectiveCamera(45,  window.innerWidth / window.innerHeight, 0.1, 1000);
 
 
-		this.renderer = new THREE.WebGLRenderer({antialias: true});
+		this.renderer = new THREE.WebGLRenderer(
+			{
+				antialias: true,
+				alpha: true
+			});
 		// this.renderer = new THREE.CSS3DRenderer({antialias:true})
 
 		this.renderer.setSize( window.innerWidth, window.innerHeight );
