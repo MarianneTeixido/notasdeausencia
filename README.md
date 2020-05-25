@@ -1,8 +1,6 @@
 # NotasDeLaAusencia
 
-======
-
-##Narraciones ciberfeministas como forma de denuncia.  
+## Narraciones ciberfeministas como forma de denuncia.  
 
 Este ensayo algorítmico intersecta en lo artístico y lo
 periodístico para crear un texto generativo . Esta pieza utilizará unidades de texto como los datos que compondrán el ensayo, mediante la intervención de la computadora como agente resignificante de las estructuras textuales. 
@@ -18,7 +16,9 @@ Estas fuentes son recopiladas de notas periodísticas, detectadas con RSS y publ
 
 
 Proyecto de [Marianne Teixido](https://marianneteixido.github.io/)
+
 Programación de la bot: [Dorian Velázquz](https://github.com/rexmalebka). 
+
 Diseño y programación web por: Marianne Teixido, Dorian Velázquez, [Emilio Ocelotl](https://emilioocelotl.github.io). 
 
 
