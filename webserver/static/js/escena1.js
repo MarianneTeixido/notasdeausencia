@@ -244,6 +244,8 @@ const escena1 = {
 						
 						div.classList.add('markov');
 						div.style.opacity = 0
+						div.style.top = x + 'px¿
+						div.style.left = y + 'px¿
 						const fadeIn = function(){
 							const opacity = parseFloat(div.style.opacity);
 							if(opacity < 1){
@@ -266,8 +268,6 @@ const escena1 = {
 						
 						setTimeout(fadeIn, 100)
 						
-						div.style.top = x
-						div.style.left = y
 						
 						markovText.appendChild(div)
 					})
