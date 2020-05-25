@@ -8,6 +8,7 @@ const escena2 = {
 	this.addJsonText();
 	this.animate();
 	this.initControls();
+	this.initRaycaster(); 
 
 	// this.clock = new THREE.Clock();
 	window.addEventListener('resize', this.handleResize); 
@@ -21,15 +22,22 @@ const escena2 = {
     cube: [],
     text: [],
 
+
     initScene: function(){
 	
 	this.scene = new THREE.Scene();
 	this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
-	this.camera.position.z = 10; 
+	this.camera.position.z = 10;
+
+	this.mouse = new THREE.Vector2(),
 
 	this.renderer = new THREE.WebGLRenderer({antialias: true});
 	this.renderer.setSize( window.innerWidth, window.innerHeight );
-	document.body.appendChild( this.renderer.domElement );	
+	
+	document.body.appendChild( this.renderer.domElement );
+	
+	document.body.addEventListener("keyup", this.handleKeyUp);
+	//document.body.addEventListener( 'mousemove', this.onDocumentMouseMove, false );
 
     },
 
@@ -41,10 +49,19 @@ const escena2 = {
 	this.controls.screenSpacePanning = false;
 
 	//document.body.addEventListener( 'keyup', this.handleKeyup);
-	document.body.addEventListener("keyup", this.handleKeyUp);
 
 
     },
+
+   
+    initRaycaster: function(){
+
+	this.raycaster = new THREE.Raycaster();
+
+	window.document.addEventListener( 'mousemove', this.handleMouseMove);
+
+    },
+
 
     addLight: function(){
 	
@@ -76,6 +93,15 @@ const escena2 = {
 
 	// escena2.addTextSpheres();
 
+    },
+
+    onDocumentMouseMove: function( event ) {
+	
+	event.preventDefault();
+	
+	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+	
     },
 
     addJsonText: function(){
@@ -254,6 +280,8 @@ const escena2 = {
 	//escena2.controls.update(); 
 	requestAnimationFrame( escena2.animate );
 
+	// raycaster.setFromCamera( mouse, camera );
+
 	// escena2.controls.update(); 
 
 	//escena2.camera.rotateX(0.0002);
@@ -261,7 +289,6 @@ const escena2 = {
 
 	var time = Date.now() * 0.0005;
 
-	
 	
 	//escena2.camera.position.z += 0.05;
 	escena2.light1.position.x = Math.sin( time * 0.7 ) * 30;
@@ -281,7 +308,7 @@ const escena2 = {
 	escena2.light4.position.z = Math.sin( time * 0.5 ) * 30;
 
 	escena2.camera.updateProjectionMatrix();
-	
+
 	escena2.renderer.render( escena2.scene, escena2.camera );
 	
     },
