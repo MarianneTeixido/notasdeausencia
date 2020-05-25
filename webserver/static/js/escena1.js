@@ -237,8 +237,8 @@ const escena1 = {
 			function(){
 				getMarkov(
 					function(markovData){
-						const x = Math.random() * window.innerHeight % 10 * 50 ; 
-						const y = Math.random() * window.innerWidth  % 30 * 50;
+						const x = Math.ceil(Math.random() * window.innerHeight % 10 * 50 ); 
+						const y = Math.ceil(Math.random() * window.innerWidth  % 30 * 50 );
 						const div = document.createElement('div')
 						div.textContent = markovData
 						
@@ -246,7 +246,8 @@ const escena1 = {
 						div.style.opacity = 0
 						div.style.top = x + 'px'
 						div.style.left = y + 'px'
-						console.log("AAAAXY", x, y)
+						div.style['line-height'] = '50px'
+						
 						const fadeIn = function(){
 							const opacity = parseFloat(div.style.opacity);
 							if(opacity < 1){
