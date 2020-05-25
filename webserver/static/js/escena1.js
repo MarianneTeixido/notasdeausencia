@@ -244,8 +244,9 @@ const escena1 = {
 						
 						div.classList.add('markov');
 						div.style.opacity = 0
-						div.style.top = x + 'px¿
-						div.style.left = y + 'px¿
+						div.style.top = x + 'px'
+						div.style.left = y + 'px'
+						console.log("AAAAXY", x, y)
 						const fadeIn = function(){
 							const opacity = parseFloat(div.style.opacity);
 							if(opacity < 1){
