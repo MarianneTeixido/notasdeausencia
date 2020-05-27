@@ -14,12 +14,17 @@ El metaespacio programado, crea un remix lógico sintáctico que propicia la res
 La máquina, al leer, genera nodos que articulan las palabras que con mayor frecuencia están presentes en la narrativa que documenta las desapariciones. 
 Estas fuentes son recopiladas de notas periodísticas, detectadas con RSS y publicaciones de Twitter, que contienen la palabra, etiqueta o hashtag #desaparecidas, más una serie de coorelaciones linguísticas. Cuando la máquina escribe toma una base de datos de textos que van desde la teória feminsta, del software libre y ciencia ficción. Estas se atomizan y reformulan con la intervención de la computadora. Esta base está citada dentro de este repositorio como la bibliografía que articula el ensayo. 
 
+[Robota Markov](http://167.172.217.175/markov/16)
+
+Próximamente link del proyecto. 
 
 Proyecto de [Marianne Teixido](https://marianneteixido.github.io/)
 
-Programación de la bot: [Dorian Velázquz](https://github.com/rexmalebka). 
+Selección de poemas y textos académicos: Marianne. 
 
-Diseño y programación web por: Marianne Teixido, Dorian Velázquez, [Emilio Ocelotl](https://emilioocelotl.github.io). 
+Programación de la bot de Twitter y Markov: [Dorian Velázquez](https://github.com/rexmalebka). 
+
+Diseño, lectura de datos y programación web por: Marianne Teixido, Dorian Velázquez, [Emilio Ocelotl](https://emilioocelotl.github.io). 
 
 
 
