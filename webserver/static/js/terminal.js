@@ -99,9 +99,9 @@ const Terminal = {
 		let n = 0;
 		this.fullContent.forEach((content)=>{
 			content.forEach((linw)=>{
-				n+ = 50;
+				n += 50;
 			})
-				n+ = 50;
+				n += 50;
 		})
 		n = canvas.height - n
 		this.fullContent.forEach(function(content, i){
@@ -174,7 +174,7 @@ const Terminal = {
 	},
 	fullContent:[['Loading tweets...']],
 	section: [],
-	lengthLimit: 50,
+	lengthLimit: 55,
 	offset: 0,
 	scroll: 0
 }
