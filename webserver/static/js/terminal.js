@@ -1,4 +1,4 @@
-// Memorial
+/// Memorial
 // reescritura
 // Espejos
 // Creditos
@@ -126,7 +126,7 @@ const Terminal = {
 
 		let plane = new THREE.Mesh(geom, mat);
 		plane.position.x = 10 
-		plane.position.y = 10
+		plane.position.y = 13
 		plane.position.z = escena1.parts.screen.position.z - 0.8;
 		plane.rotateY(Math.PI)
 		plane.rotateX(Math.PI * -1/8)
