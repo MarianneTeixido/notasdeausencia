@@ -31,6 +31,39 @@
 	margin:0px;
 }
 
+#help{
+	position: fixed;
+	display:block;
+	padding:2em;
+	font-size:1em;
+	color:white;
+	float:left;
+	margin:1em;
+	opacity:70%;
+	padding:1em;
+	bottom:0;
+}
+
+#help #icon{
+	width:40%;
+	font-size:2em;
+	border: 2px black solid;
+	border-radius: 50%;
+	text-align:center;
+	width:1em;
+	height:1em;
+	background-color:black;
+	float:left;
+}
+
+#help ul{
+	list-style-type:none;
+}
+
+#description{
+	display:none;
+}
+
 body {
 	margin: 0;
 	background-color: #fff

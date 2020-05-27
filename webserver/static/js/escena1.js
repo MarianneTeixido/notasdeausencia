@@ -10,6 +10,9 @@ const escena1 = {
 
 		this.clock = new THREE.Clock();
 		window.addEventListener( 'resize', this.handleResize);
+		document.querySelector("#help").addEventListener( 'click', this.handleHelp);
+		document.querySelector("#help").addEventListener( 'mouseover', ()=> escena1.overHelp = true);
+		document.querySelector("#help").addEventListener( 'mouseout', ()=> escena1.overHelp = false);
 	},
 	initScene: function(){
 		// create scene, camera and renderer
@@ -79,6 +82,7 @@ const escena1 = {
 
 		this.controls.addEventListener( 'lock', function () {
 
+
 			if(!document.querySelector('#cursordiv')){
 				const cursordiv = document.createElement('div')
 
@@ -94,6 +98,10 @@ const escena1 = {
 				cursordiv.style.zIndex= "99"
 				document.body.appendChild(cursordiv)
 			}
+			if(escena1.overHelp){
+				escena1.controls.unlock()
+			}
+		
 		});
 		
 		this.controls.addEventListener( 'unlock', function () {
@@ -215,6 +223,24 @@ const escena1 = {
 		menu.style.top = escena1.mouse.clientY + 'px'
 		menu.style.left = escena1.mouse.clientX + 'px'
 	},
+	handleHelp: function(){
+
+		
+		const description = document.querySelector("#description");
+		const help = document.querySelector("#help");
+		
+		if(description.style.display == "none"){
+			help.style['background-color'] = "grey";
+			help.style.border = "2px black solid";
+			description.style.display = "block"
+		}else{
+			help.style['background-color'] = "";
+			help.style.border = "";
+			description.style.display = "none"
+		
+		}
+
+	},
 	handleResize: function(event){
 		escena1.camera.aspect = window.innerWidth / window.innerHeight;
 		escena1.camera.updateProjectionMatrix();
@@ -261,6 +287,8 @@ const escena1 = {
 			escena1.parts.arrowDown.material.color = new THREE.Color(0.5, 0,0)	
 			Terminal.scroll = 1;
 		}
+
+
 	},
 	addMarkovText: function(){
 		let markovText = document.querySelector('#markovText');
@@ -338,9 +366,13 @@ const escena1 = {
 
 	parts: {},
 	mouse: new THREE.Vector2(),
-	cursor: {}
+	cursor: {},
+	overHelp: false
 }
 
 
 escena1.init()
 escena1.addMarkovText()
+
+
+
