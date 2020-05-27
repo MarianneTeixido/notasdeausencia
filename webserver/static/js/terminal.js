@@ -90,7 +90,7 @@ const Terminal = {
 		const canvas =  document.createElement('canvas');
 		const ctx = canvas.getContext('2d');
 
-		canvas.width = 1500
+		canvas.width = 2500
 		canvas.height = 1700;
 
 		ctx.font = "50px Courier New";
