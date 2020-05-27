@@ -89,9 +89,8 @@ const Terminal = {
 		}
 		const canvas =  document.createElement('canvas');
 		const ctx = canvas.getContext('2d');
-
 		canvas.width = 2500
-		canvas.height = 1700;
+		canvas.height = 3200;
 
 		ctx.font = "50px Courier New";
 		ctx.fillStyle = "white";
@@ -117,18 +116,18 @@ const Terminal = {
 		const texture = new THREE.Texture(canvas)
 
 		    texture.needsUpdate = true;
-		let geom = new THREE.PlaneBufferGeometry(20, 23, 80);
+		let geom = new THREE.PlaneBufferGeometry(17, 25);
 		let mat = new THREE.MeshBasicMaterial(
 			{
 				map:texture,
 				side:THREE.DoubleSide,
-				transparent:true
+				transparent: true
 			});
 
 		let plane = new THREE.Mesh(geom, mat);
-		plane.position.x = escena1.parts.screen.position.x
-		plane.position.y = escena1.parts.screen.position.y + 0.7 
-		plane.position.z = escena1.parts.screen.position.z - 0.8
+		plane.position.x = 10 
+		plane.position.y = 10
+		plane.position.z = escena1.parts.screen.position.z - 0.8;
 		plane.rotateY(Math.PI)
 		plane.rotateX(Math.PI * -1/8)
 
@@ -174,7 +173,7 @@ const Terminal = {
 	},
 	fullContent:[['Loading tweets...']],
 	section: [],
-	lengthLimit: 55,
+	lengthLimit: 70,
 	offset: 0,
 	scroll: 0
 }

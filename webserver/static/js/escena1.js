@@ -173,7 +173,7 @@ const escena1 = {
 	addScreen: function(){
 		// draw floor
 		
-		let geom = new THREE.BoxBufferGeometry(20, 21, 1);
+		let geom = new THREE.BoxBufferGeometry(20, 42, 1);
 		
 		let mat = new THREE.MeshPhysicalMaterial( 
 			{
