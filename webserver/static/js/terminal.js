@@ -52,9 +52,9 @@ const Terminal = {
 		let arrow_up = new THREE.Mesh(geom, mat);
 		
 		arrow_up.rotateX(Math.PI * 1/8)
-		arrow_up.position.x = escena1.parts.screenText.position.x -= 2
-		arrow_up.position.y = escena1.parts.screenText.position.y * 1.5
-		arrow_up.position.z = 11.5;
+		arrow_up.position.x = 6
+		arrow_up.position.y = 0.9
+		arrow_up.position.z = 5
 		
 		let p4 = new THREE.Vector3(0, 0, 0)
 		let p5 = new THREE.Vector3(4, 0, 0)
@@ -69,7 +69,7 @@ const Terminal = {
 		
 		let arrow_down = new THREE.Mesh(geom2, mat2);
 		arrow_down.rotateX(Math.PI * -1/8)
-		arrow_down.position.x = 8
+		arrow_down.position.x = 10
 		arrow_down.position.y = 1.5
 		arrow_down.position.z = 5.1
 		
@@ -91,26 +91,26 @@ const Terminal = {
 		const ctx = canvas.getContext('2d');
 
 		canvas.width = 1000
-		canvas.height = 2050;
+		canvas.height = 2000;
 
-		ctx.font = "40px Courier New";
+		ctx.font = "50px Courier New";
 		ctx.fillStyle = "white";
 
 		let n = 0;
 		this.fullContent.forEach((content)=>{
 			content.forEach((linw)=>{
-				n+=40;
+				n+ = 50;
 			})
-				n+=40;
+				n+ = 50;
 		})
 		n = canvas.height - n
 		this.fullContent.forEach(function(content, i){
 			let starty = n
 			content.forEach((line, j)=>{
-				 ctx.fillText(line, 40, starty + (j*40) + Terminal.offset);
-				n +=40
+				 ctx.fillText(line, 50, starty + (j * 50) + Terminal.offset);
+				n += 50
 			})
-			n+=40
+			n += 50
 		})
 		
 

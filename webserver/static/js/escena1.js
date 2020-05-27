@@ -300,7 +300,7 @@ const escena1 = {
 						div.style.opacity = 0
 						div.style.top = x + 'px'
 						div.style.left = y + 'px'
-						div.style['line-height'] = '50px'
+						div.style['line-height'] = '48px'
 						
 						const fadeIn = function(){
 							const opacity = parseFloat(div.style.opacity);
@@ -328,7 +328,7 @@ const escena1 = {
 						markovText.appendChild(div)
 					})
 
-			}, 2000)
+			}, 5000)
 	},
 
 	animate: function(){
