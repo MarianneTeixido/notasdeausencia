@@ -46,7 +46,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        local: " /home/runner/work/NotasDeLaAusencia/NotasDeLaAusencia/textos"
+        local: " /home/runner/work/notasdeausencia/notasdeausencia/textos"
         remote: "/root/textos/"
 
     - name: train markov chain 
