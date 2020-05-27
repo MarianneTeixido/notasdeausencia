@@ -117,7 +117,7 @@ const Terminal = {
 		const texture = new THREE.Texture(canvas)
 
 		    texture.needsUpdate = true;
-		let geom = new THREE.PlaneBufferGeometry(17, 25, 80);
+		let geom = new THREE.PlaneBufferGeometry(20, 23, 80);
 		let mat = new THREE.MeshBasicMaterial(
 			{
 				map:texture,
