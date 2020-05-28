@@ -7,6 +7,7 @@ const escena2 = {
 	this.addLight();
 	this.addJsonText();
 	this.animate();
+	this.audio(); 
 	this.initControls();
 	this.initRaycaster(); 
 	this.render(); 
@@ -24,6 +25,7 @@ const escena2 = {
     // text: {}, 
     cube: [],
     text: [],
+    positions: [],
 
     initScene: function(){
 
@@ -40,7 +42,8 @@ const escena2 = {
 	this.raycaster = new THREE.Raycaster();
 
 	
-	this.renderer = new THREE.WebGLRenderer({antialias: true});
+	this.renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
+
 	this.renderer.setSize( window.innerWidth, window.innerHeight );
 	
 	 document.body.appendChild( this.renderer.domElement );
@@ -135,6 +138,38 @@ const escena2 = {
 	
     },
 
+    audio: function(){
+
+	const geometryCube = new THREE.BoxGeometry( 0.5, 0.5, 0.5 );
+	const materialCube = new THREE.MeshStandardMaterial( {color: 0xffffff} );
+	const audioCube = new THREE.Mesh( geometryCube, materialCube );
+
+	audioCube.position.x = 4;
+	audioCube.position.y = 4;
+	audioCube.position.z = 4;
+	
+	const listener = new THREE.AudioListener();
+	this.camera.add( listener );
+	console.log("AAA asdf")
+	// create the PositionalAudio object (passing in the listener)
+	const sound = new THREE.PositionalAudio( listener );
+	
+	// load a sound and set it as the PositionalAudio object's buffer
+	const audioLoader = new THREE.AudioLoader();
+	audioLoader.load( '/static/sounds/08monk.wav', function( buffer ) {
+	    sound.setBuffer( buffer );
+	    sound.setLoop(true);
+	    sound.setRefDistance( 1 );
+	    sound.play();
+	});
+
+	
+	escena2.scene.add( audioCube );
+	audioCube.add(sound);
+	escena2.scene.add(audioCube); 
+		
+    },
+
     addJsonText: function(){
 	
 	// pROBLEMO AQUI 
@@ -193,7 +228,7 @@ const escena2 = {
     addTextSpheres: function(){
 
 	var theta, radius = 100;
-
+	
 	var params = {
 	    envMap: 'HDR',
 	    roughness: 0.3,
@@ -201,8 +236,6 @@ const escena2 = {
 	    exposure: 1.0,
 	    debug: false
 	};
-
-
 
 	var loader = new THREE.FontLoader();      
 	
@@ -215,21 +248,20 @@ const escena2 = {
 		var material = new THREE.MeshStandardMaterial( {
 		    color: 0xffffff,
 		    metalness: params.metalness,
-		    roughness: params.roughness
+		    roughness: params.roughness,
+		    //transparent: true,
+		    //opacity: 0.75,
+		    
 		} );
 
-		// var material = new THREE.MeshLambertMaterial( { color: 0xffffff });
-
-					   // geometry.center();
+		// geometry.center();
 		//geometry.computeVertexNormals(); 
 		geometry.computeBoundingBox();
 		
 		escena2.cube[i] = new THREE.Mesh( geometry, material );
 		//escena2.cube = new THREE.Mesh( geometry, material );
-
-		escena2.scene.add(escena2.cube[i]);
 		
-		var shapes = font.generateShapes( escena2.tweets[i], escena2.tam[i]/80 );
+		var shapes = font.generateShapes( escena2.tweets[i], escena2.tam[i]/40 );
 		var geometry2 = new THREE.ShapeBufferGeometry( shapes );
 
 		// geometry.center(); 
@@ -237,44 +269,30 @@ const escena2 = {
 		
 		escena2.text[i] = new THREE.Mesh( geometry2, material );
 	
-
 		//var posX, posY, posZ;
 
 		if(escena2.aleatorias){
-
-		    /*
+		  
 		    var posX, posY, posZ;
 
 		    posX = Math.random() * 20 - 10;
 		    posY = Math.random() * 20 - 10;
 		    posZ = Math.random() * 20 - 10;
 
-		    escena2.cube[i].position.x = posX ;
-		    escena2.cube[i].position.y = posY ;
-		    escena2.cube[i].position.z = posZ ;
-		    
-		    escena2.cube[i].scale.x = escena2.tam[i]/1500;
-		    escena2.cube[i].scale.y = escena2.tam[i]/1500;
-		    escena2.cube[i].scale.z = escena2.tam[i]/1500;
-		    */
-
-		    var posX, posY, posZ;
-		    
-		    var theta1 = Math.random() * (Math.PI*2);
-		    var theta2 = Math.random() * (Math.PI*2); 
-		    
-		    posX = Math.cos(theta1) * Math.cos(theta2);
-		    posY = Math.sin(theta1);
-		    posZ = Math.cos(theta1) * Math.sin(theta2);
-		    
-		    escena2.cube[i].position.x = posX * (Math.random() * 100);
-		    escena2.cube[i].position.y = posY * (Math.random() * 100);
-		    escena2.cube[i].position.z = posZ * (Math.random() * 100);
+		    escena2.cube[i].position.x = posX*0.25;
+		    escena2.cube[i].position.y = posY*0.25;
+		    escena2.cube[i].position.z = posZ*0.25;		    
 		    
 		    escena2.cube[i].scale.x = escena2.tam[i]/2500;
 		    escena2.cube[i].scale.y = escena2.tam[i]/2500;
 		    escena2.cube[i].scale.z = escena2.tam[i]/2500;
-	
+		
+		    escena2.text[i].position.x = posX * 0.25;
+		    escena2.text[i].position.y = posY * 0.25;
+		    escena2.text[i].position.z = posZ * 0.25;
+
+		    escena2.positions.push( posX, posY, posZ );
+
 		    
 		}
 		
@@ -297,25 +315,37 @@ const escena2 = {
 		    escena2.cube[i].scale.y = escena2.tam[i]/2500;
 		    escena2.cube[i].scale.z = escena2.tam[i]/2500;
 		    
+		    escena2.text[i].position.x = posX * (0.5 * escena2.tam[i]);
+		    escena2.text[i].position.y = posY * (0.5 * escena2.tam[i]);
+		    escena2.text[i].position.z = posZ * (0.5 * escena2.tam[i]);
+
+		    escena2.positions.push( posX* (0.5*escena2.tam[i]), posY* (0.5*escena2.tam[i]), posZ* (0.5*escena2.tam[i]) );
+
 		}
+
 		
 		//cube.lookAt(0, 0, 0); 
 		
 		//cube[i].matrixAutoUpdate = false;
 		// cube[i].updateMatrix();
 		
-		
-		escena2.text[i].position.x = posX * (0.5 * escena2.tam[i]);
-		escena2.text[i].position.y = posY * (0.5 * escena2.tam[i]);
-		escena2.text[i].position.z = posZ * (0.5 * escena2.tam[i]);
-		
-		//escena2.text[i].lookAt(0, 0, 0); 
+		escena2.scene.add(escena2.cube[i]);
 
 		escena2.cube[i].text = escena2.text[i];
+
+
 		// pregunta, esto podría estar fuera del for sin los indices?
 		// escena2.scene.add(escena2.text[i]);
 		
 	    }
+
+	    //var materialLines = new THREE.LineBasicMaterial( { color: 0x0000ff } );
+
+	    // var geometryLines = new THREE.BufferGeometry().setFromPoints( escena2.positions );
+	    
+	    //var line = new THREE.Line( geometryLines, materialLines );
+	    // escena2.scene.add( line );
+	    
 	    
 	})
 
@@ -370,7 +400,10 @@ const escena2 = {
 
 	escena2.raycaster.setFromCamera( escena2.mouse, escena2.camera );
 	//let intersects = escena2.raycaster.intersectObjects( escena2.scene.children );
-	let intersects = escena2.raycaster.intersectObjects( escena2.scene.children );
+//	let intersects = escena2.raycaster.intersectObjects( escena2.scene.children );
+	
+	let intersects = escena2.raycaster.intersectObjects( escena2.cube );
+
 	
 	if ( intersects.length > 0 ) {
 
@@ -380,7 +413,7 @@ const escena2 = {
 		
 		INTERSECTED = intersects[ 0 ].object;
 		INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-		INTERSECTED.material.emissive.setHex( 0xffffff );
+		INTERSECTED.material.emissive.setHex( 0x50b732 );
 
 		if(INTERSECTED.text){
 		
