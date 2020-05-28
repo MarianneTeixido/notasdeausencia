@@ -6,6 +6,7 @@ const escena1 = {
 		this.addLight();
 		this.animate();
 		this.initControls()
+		this.initSound()
 		this.initRaycaster()
 
 		this.clock = new THREE.Clock();
@@ -119,7 +120,7 @@ const escena1 = {
 	initSound: function(){
 		// create an AudioListener and add it to the camera
 		const listener = new THREE.AudioListener();
-		camera.add( listener );
+		this.camera.add( listener );
 		console.log("AAA asdf")
 		// create the PositionalAudio object (passing in the listener)
 		const sound = new THREE.PositionalAudio( listener );
@@ -128,6 +129,7 @@ const escena1 = {
 		const audioLoader = new THREE.AudioLoader();
 		audioLoader.load( '/static/sounds/08monk.wav', function( buffer ) {
 			sound.setBuffer( buffer );
+			sound.setLoop(true);
 			sound.setRefDistance( 20 );
 			sound.play();
 		});
