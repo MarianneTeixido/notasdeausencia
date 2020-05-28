@@ -121,7 +121,6 @@ const escena1 = {
 		// create an AudioListener and add it to the camera
 		const listener = new THREE.AudioListener();
 		this.camera.add( listener );
-		console.log("AAA asdf")
 		// create the PositionalAudio object (passing in the listener)
 		const sound = new THREE.PositionalAudio( listener );
 
@@ -133,16 +132,58 @@ const escena1 = {
 			sound.setRefDistance( 20 );
 			sound.play();
 		});
+		
+		
+		const sound2 = new THREE.PositionalAudio( listener );
+		const audioLoader2 = new THREE.AudioLoader();
+		audioLoader2.load( '/static/sounds/gallinazo.wav', function( buffer ) {
+			sound2.setBuffer( buffer );
+			sound2.setLoop(true);
+			sound2.setRefDistance( 20 );
+			sound2.play();
+		});
+
 
 		// create an object for the sound to play from
-		const sphere = new THREE.SphereBufferGeometry( 20, 32, 16 );
+		const sphere = new THREE.SphereBufferGeometry( 2, 2, 16 );
 		const material = new THREE.MeshPhongMaterial( { color: 0xff2200 } );
 		const mesh = new THREE.Mesh( sphere, material );
-		scene.add( mesh );
+		const mesh2 = new THREE.Mesh( sphere, material );
 
+		mesh.position.y = 100
+		mesh.position.x = 10
+		
+		
 		// finally add the sound to the mesh
 		mesh.add( sound );
-		escena1.add(mesh)
+		mesh2.add( sound2 );
+
+		escena1.parts.ball1 = mesh
+		escena1.parts.ball2 = mesh2
+		escena1.scene.add( mesh );
+		escena1.scene.add( mesh2 );
+		
+		const move = setInterval(()=>{
+			mesh.position.x = Math.sin(escena1.clock.getElapsedTime()) * 150
+			mesh.position.z = Math.cos(escena1.clock.getElapsedTime()) * 150
+		})
+		
+		const move2 = setInterval(()=>{
+			mesh2.position.x = Math.sin(escena1.clock.getElapsedTime()) * 500 + 200
+			mesh2.position.z = Math.cos(escena1.clock.getElapsedTime()) * 500 + 200
+			if (Math.sin(escena1.clock.getElapsedTime())* 100 > 50 && (Math.sin(escena1.clock.getElapsedTime())* 100 < 55 )){
+				mesh2.children[0].setLoopStart(0.1)
+				mesh2.children[0].setLoopEnd(0.4)
+				mesh2.children[0].stop()
+				mesh2.children[0].play()
+			}
+			if (Math.sin(escena1.clock.getElapsedTime())* 100 > 0 && (Math.sin(escena1.clock.getElapsedTime())* 100 < 10 )){
+				mesh2.children[0].setLoopStart(0)
+				mesh2.children[0].setLoopEnd(0.05)
+				mesh2.children[0].stop()
+				mesh2.children[0].play()
+			}
+		})
 	},
 	addFloor: function(){
 
