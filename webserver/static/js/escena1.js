@@ -32,7 +32,7 @@ const escena1 = {
 		// this.renderer = new THREE.CSS3DRenderer({antialias:true})
 
 		this.renderer.setSize( window.innerWidth, window.innerHeight );
-		this.camera.position.set(0, 1, 0)
+		this.camera.position.set(10, 1, 10)
 		this.renderer.shadowMap.enabled = true;
 		this.renderer.shadowMap.type = THREE.PCFShadowmap // default THREE.PCFShadowMap
 
@@ -48,6 +48,7 @@ const escena1 = {
 		
 			// check if its a mobile
 
+			this.camera.position.y +=3
 			controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
 
 			controls.dampingFactor = 0.05;
@@ -143,6 +144,7 @@ const escena1 = {
 			sound2.play();
 		});
 
+		console.log("asdf", audioLoader2, sound2)
 
 		// create an object for the sound to play from
 		const sphere = new THREE.SphereBufferGeometry( 2, 2, 16 );
