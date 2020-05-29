@@ -18,6 +18,17 @@ const escena1 = {
 	initScene: function(){
 		// create scene, camera and renderer
 		this.scene = new THREE.Scene();
+
+		this.scene.background = new THREE.CubeTextureLoader().setPath( 'textures/cubeMaps/' ).load( [
+			'/static/images/px.png',
+			'/static/images/nx.png',
+			'/static/images/py.png',
+			'/static/images/ny.png',
+			'/static/images/pz.png',
+			'/static/images/nz.png'
+		]);
+
+		console.log("asdfsfd")
 	
 		let loader = new THREE.TextureLoader();
 		//this.scene.background = new THREE.Color(0x7a04eb)
