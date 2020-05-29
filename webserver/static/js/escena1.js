@@ -28,7 +28,6 @@ const escena1 = {
 			'/static/images/nz.png'
 		]);
 
-		console.log("asdfsfd")
 	
 		let loader = new THREE.TextureLoader();
 		//this.scene.background = new THREE.Color(0x7a04eb)
@@ -38,7 +37,6 @@ const escena1 = {
 		this.renderer = new THREE.WebGLRenderer(
 			{
 				antialias: true,
-				alpha: true
 			});
 		// this.renderer = new THREE.CSS3DRenderer({antialias:true})
 
