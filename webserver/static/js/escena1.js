@@ -30,7 +30,7 @@ const escena1 = {
 
 	
 		let loader = new THREE.TextureLoader();
-		//this.scene.background = new THREE.Color(0x7a04eb)
+		this.parts.background = this.scene.background
 		this.camera = new THREE.PerspectiveCamera(45,  window.innerWidth / window.innerHeight, 0.1, 1000);
 
 
@@ -38,10 +38,11 @@ const escena1 = {
 			{
 				antialias: true,
 			});
+		this.renderer.sortObjects= false
 		// this.renderer = new THREE.CSS3DRenderer({antialias:true})
 
 		this.renderer.setSize( window.innerWidth, window.innerHeight );
-		this.camera.position.set(20, 100, 20)
+		this.camera.position.set(20, 2, 20)
 		
 		this.renderer.shadowMap.enabled = true;
 		this.renderer.shadowMap.type = THREE.PCFShadowmap // default THREE.PCFShadowMap
@@ -262,10 +263,18 @@ const escena1 = {
 				clearcoat:1
 			});
 
+		let mat0 = new THREE.MeshPhysicalMaterial( 
+			{
+				color: 0xff000f,
+				side: THREE.DoubleSide,
+				reflectivity: 1,
+				refractionRatio: 1,
+				clearcoat:1
+			});
 		mat.opacity = 0.9
 		mat.transparent = true
 
-		let screen = new THREE.Mesh(geom, mat);
+		let screen = new THREE.Mesh(geom, mat0);
 		screen.rotateX(Math.PI * 1/8)
 		screen.position.x = 10
 		screen.position.y = 10.1
@@ -277,13 +286,16 @@ const escena1 = {
 		this.parts.screen = [screen];
 		this.scene.add(screen);
 
-		for(let k=0; k<10; k++){
+		for(let k=0; k<15; k++){
 			let screen = new THREE.Mesh(geom, mat);
-			screen.rotateX(Math.PI * 1/8)
 
 			screen.position.x = 5 + (Math.ceil(Math.random() * 40) * 5 - 100 )
 			screen.position.y = 10.1
 			screen.position.z = 5 + (Math.ceil(Math.random() * 40) * 5 - 100 )
+
+			screen.rotateX(Math.random() * Math.PI/8)
+			screen.rotateY(Math.random() * Math.PI)
+			screen.rotateZ(Math.random() * Math.PI/8 - Math.PI * 3/16)
 
 			screen.receiveShadow = false
 			screen.castShadow = true

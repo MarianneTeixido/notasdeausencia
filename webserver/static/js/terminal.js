@@ -1,4 +1,4 @@
-/// Memorial
+// Memorial
 // reescritura
 // Espejos
 // Creditos
@@ -81,10 +81,14 @@ const Terminal = {
 	},
 	generateTexture: function(){
 
-		if (escena1.parts.screenText){
-			escena1.parts.screenText.geometry.dispose();
-			escena1.parts.screenText.material.dispose();
-			escena1.scene.remove(escena1.parts.screenText)
+		if (escena1.parts.screenText && escena1.parts.screenText.length > 0){
+			
+			escena1.parts.screenText.forEach((scr)=>{
+				scr.geometry.dispose();
+				scr.material.dispose();
+				escena1.scene.remove(scr)
+			})
+
 			escena1.renderer.renderLists.dispose()
 		}
 		const canvas =  document.createElement('canvas');
@@ -93,8 +97,8 @@ const Terminal = {
 
 		canvas.width = 2500
 		canvas.height = 3200;
-
-		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		
+		//ctx.fillRect(0, 0, canvas.width, canvas.height);
 		ctx.font = "50px Courier New";
 		ctx.fillStyle = "white";
 
@@ -118,30 +122,39 @@ const Terminal = {
 
 		const texture = new THREE.Texture(canvas)
 
-		    texture.needsUpdate = true;
-		let geom = new THREE.PlaneBufferGeometry(17, 25);
+		texture.needsUpdate = true;
+		let geom = new THREE.BoxBufferGeometry(17, 25, 0.01);
 		let mat = new THREE.MeshBasicMaterial(
 			{
 				map:texture,
 				side:THREE.DoubleSide,
-				transparent: true
+				transparent: true,
 			});
 
-		let plane = new THREE.Mesh(geom, mat);
-		plane.position.x = 10 
-		plane.position.y = 13
-		plane.position.z = escena1.parts.screen.position.z - 0.8;
-		plane.rotateY(Math.PI)
-		plane.rotateX(Math.PI * -1/8)
+		geom.scale(1, -1, -1)
+		escena1.parts.screenText = [];
 
-		escena1.scene.add(plane)
-		escena1.parts.screenText = plane
+		escena1.parts.screen.forEach( function(scr){
+			const pos = scr.position
+			const rot = scr.rotation
+			let plane = new THREE.Mesh(geom, mat);
+
+			plane.rotateX(  rot.x)
+			plane.rotateY(rot.y - Math.PI)
+			plane.rotateZ( Math.PI - rot.z)
+			
+			plane.position.x = pos.x
+			plane.position.y = pos.y + 2.9
+			plane.position.z = pos.z - 0.8
+
+			escena1.scene.add(plane)
+			escena1.parts.screenText.push(plane)
+		})
 
 	},
 	generate: function(){
 
 		Terminal.getTweets()
-
 	},
 	getTweets(){
 
