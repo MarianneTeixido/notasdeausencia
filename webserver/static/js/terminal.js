@@ -98,7 +98,7 @@ const Terminal = {
 		canvas.width = 2500
 		canvas.height = 3200;
 		
-		//ctx.fillRect(0, 0, canvas.width, canvas.height);
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
 		ctx.font = "50px Courier New";
 		ctx.fillStyle = "white";
 
@@ -130,8 +130,8 @@ const Terminal = {
 				side:THREE.DoubleSide,
 				transparent: true,
 			});
-
-		geom.scale(1, -1, -1)
+		
+		//geom.scale(1, -1, -1)
 		escena1.parts.screenText = [];
 
 		escena1.parts.screen.forEach( function(scr){
@@ -143,6 +143,8 @@ const Terminal = {
 			plane.rotateY(rot.y - Math.PI)
 			plane.rotateZ( Math.PI - rot.z)
 			
+			
+			plane.rotateX( Math.PI)
 			plane.position.x = pos.x
 			plane.position.y = pos.y + 2.9
 			plane.position.z = pos.z - 0.8
@@ -194,6 +196,6 @@ const Terminal = {
 	scroll: 0
 }
 
-
+console.log("asdfasdf")
 Terminal.generate()
 Terminal.generateScroll()

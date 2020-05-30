@@ -211,8 +211,8 @@ const escena1 = {
 		}, 100)
 
 		var texture = new THREE.TextureLoader().load( '/static/images/water.jpg' );
-		texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-		texture.repeat.set( 5, 5 );
+		//texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+		//texture.repeat.set( 5, 5 );
 
 
 		let mat = new THREE.MeshStandardMaterial( { 
@@ -238,15 +238,36 @@ const escena1 = {
 		this.scene.add( light );
 
 		//Set up shadow properties for the light
-		light.shadow.mapSize.width = 2048;  // default
-		light.shadow.mapSize.height = 2048; // default
+		light.shadow.mapSize.width = 2048*4;  // default
+		light.shadow.mapSize.height = 2048*4; // default
 		light.shadow.camera.near = 0.5;       // default
 		light.shadow.camera.far = 500      // default
 
 		light.intensity = 0.5
 		light.position.y = 100
 		light.penumbra = 1
+		light.decay = 2
+
 		this.parts.Light = light
+
+		this.parts.pointLight = []
+
+		for(let k=0; k<5; k++){
+			let pointLight = new THREE.PointLight( 0xff00ff, 0.25 );
+			pointLight.position.y = Math.random() * 20 + 50
+			pointLight.castShadow = true
+			pointLight.decay = 2
+			this.scene.add( pointLight );
+			this.parts.pointLight.push(pointLight)
+
+			const t = Math.random() + 0.1
+			const move = setInterval(()=>{
+				pointLight.position.x = Math.sin(t *  escena1.clock.getElapsedTime()) * 150
+				pointLight.position.z = Math.cos(t * escena1.clock.getElapsedTime()) * 150
+			}, 50)
+		
+		}
+
 
 	},
 	addScreen: function(){
@@ -448,7 +469,7 @@ const escena1 = {
 							}
 						}
 						
-						setTimeout(fadeIn, 100)
+						setTimeout(fadeIn, 5000)
 						
 						
 						markovText.appendChild(div)
