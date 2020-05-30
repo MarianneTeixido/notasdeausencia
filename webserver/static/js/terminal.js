@@ -98,7 +98,7 @@ const Terminal = {
 		canvas.width = 2500
 		canvas.height = 3200;
 		
-		//ctx.fillRect(0, 0, canvas.width, canvas.height);
+//		ctx.fillRect(0, 0, canvas.width, canvas.height);
 		ctx.font = "50px Courier New";
 		ctx.fillStyle = "white";
 
@@ -127,7 +127,6 @@ const Terminal = {
 		let mat = new THREE.MeshBasicMaterial(
 			{
 				map:texture,
-				side:THREE.DoubleSide,
 				transparent: true,
 			});
 		
@@ -135,6 +134,7 @@ const Terminal = {
 		escena1.parts.screenText = [];
 
 		escena1.parts.screen.forEach( function(scr){
+			let geom = new THREE.BoxBufferGeometry(17, 25, 0.01);
 			const pos = scr.position
 			const rot = scr.rotation
 			let plane = new THREE.Mesh(geom, mat);
