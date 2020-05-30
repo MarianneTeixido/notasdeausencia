@@ -1,3 +1,9 @@
+/*
+
+
+
+*/
+
 const escena2 = {
 
     init: function(){
@@ -8,12 +14,15 @@ const escena2 = {
 	this.addJsonText();
 	this.animate();
 	this.audio(); 
-	this.initControls();
-	this.initRaycaster(); 
+	this.initControls(); 
 	this.render(); 
-	
+
+	this.clock = new THREE.Clock();
 	// this.clock = new THREE.Clock();
 	window.addEventListener('resize', this.handleResize); 
+	document.querySelector("#help").addEventListener( 'click', this.handleHelp);
+	document.querySelector("#help").addEventListener( 'mouseover', ()=> escena2.overHelp = true);
+	document.querySelector("#help").addEventListener( 'mouseout', ()=> escena2.overHelp = false);
 	
     },
 
@@ -26,7 +35,9 @@ const escena2 = {
     cube: [],
     text: [],
     positions: [],
-
+    audioCube: {},
+    audioCube2: {},
+    
     initScene: function(){
 
 	//this.container = document.createElement( 'div' );
@@ -41,7 +52,6 @@ const escena2 = {
 
 	this.raycaster = new THREE.Raycaster();
 
-	
 	this.renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
 
 	this.renderer.setSize( window.innerWidth, window.innerHeight );
@@ -50,7 +60,6 @@ const escena2 = {
 	//this.container.appendChild( this.renderer.domElement );
 
 	window.document.addEventListener( 'mousemove', this.handleMouseMove, false);
-
 	
 	//document.body.addEventListener( 'mousemove', this.onDocumentMouseMove, false );
 
@@ -69,11 +78,69 @@ const escena2 = {
 
     },
 
-   
-    initRaycaster: function(){
 
-	//this.raycaster = new THREE.Raycaster();
+    audio: function(){
 
+
+	var geometryCube = new THREE.BoxGeometry( 0.5, 0.5, 0.5 );
+	var materialCube = new THREE.MeshStandardMaterial( {color: 0xffffff} );
+
+	this.audioCube = new THREE.Mesh( geometryCube, materialCube );
+	this.audioCube2 = new THREE.Mesh( geometryCube, materialCube );
+
+	const move = setInterval(()=>{
+	    this.audioCube.position.x = Math.sin((this.clock.getElapsedTime())*0.4) * 10
+	    this.audioCube.position.y = Math.sin((this.clock.getElapsedTime())*0.1) * 15
+	    this.audioCube.position.z = Math.sin((this.clock.getElapsedTime())*0.7) * 10
+	    this.audioCube2.position.x = Math.sin((this.clock.getElapsedTime())*0.1) * 10
+	    this.audioCube2.position.y = Math.sin((this.clock.getElapsedTime())*0.7) * 10
+	    this.audioCube2.position.z = Math.sin((this.clock.getElapsedTime())*0.4) * 15
+
+
+	})
+
+	
+	this.audioCube2.position.x = -4;
+	this.audioCube2.position.y = -4;
+	this.audioCube2.position.z = -4;
+
+	const listener = new THREE.AudioListener();
+	this.camera.add( listener );
+
+	// create the PositionalAudio object (passing in the listener)
+	const sound = new THREE.PositionalAudio( listener );
+	
+	// load a sound and set it as the PositionalAudio object's buffer
+	const audioLoader = new THREE.AudioLoader();
+	audioLoader.load( '/static/sounds/08monk.wav', function( buffer ) {
+	    sound.setBuffer( buffer );
+	    sound.setLoop(true);
+	    sound.setRefDistance( 1 );
+	    sound.play();
+	});
+
+	// create the PositionalAudio object (passing in the listener)
+	const sound2 = new THREE.PositionalAudio( listener );
+	
+	// load a sound and set it as the PositionalAudio object's buffer
+	const audioLoader2 = new THREE.AudioLoader();
+	audioLoader2.load( '/static/sounds/uraba.wav', function( buffer ) {
+	    sound2.setBuffer( buffer );
+	    sound2.setLoop(true);
+	    sound2.setRefDistance( 1 );
+	    sound2.play();
+	});
+
+	escena2.scene.add( this.audioCube );	
+	escena2.scene.add( this.audioCube2 );
+
+	this.audioCube.add(sound);
+	this.scene.add( this.audioCube);
+	
+	this.audioCube2.add(sound2);
+	this.scene.add(this.audioCube2); 
+
+		
     },
 
 
@@ -107,6 +174,7 @@ const escena2 = {
 	    escena2.addTextSpheres();
 
 	    break;
+	    
 	case 50:
 	    escena2.esfericas = false;
 	    escena2.aleatorias = true;
@@ -120,6 +188,11 @@ const escena2 = {
 
 
 	    break;
+
+	case 77:
+	    escena2.showMenu()
+	    
+	    
 	}
 
 	// escena2.addTextSpheres();
@@ -136,38 +209,6 @@ const escena2 = {
         escena2.mouse.y = -(event.clientY / window.innerHeight) * 2 +1;
 	
 	
-    },
-
-    audio: function(){
-
-	const geometryCube = new THREE.BoxGeometry( 0.5, 0.5, 0.5 );
-	const materialCube = new THREE.MeshStandardMaterial( {color: 0xffffff} );
-	const audioCube = new THREE.Mesh( geometryCube, materialCube );
-
-	audioCube.position.x = 4;
-	audioCube.position.y = 4;
-	audioCube.position.z = 4;
-	
-	const listener = new THREE.AudioListener();
-	this.camera.add( listener );
-	console.log("AAA asdf")
-	// create the PositionalAudio object (passing in the listener)
-	const sound = new THREE.PositionalAudio( listener );
-	
-	// load a sound and set it as the PositionalAudio object's buffer
-	const audioLoader = new THREE.AudioLoader();
-	audioLoader.load( '/static/sounds/08monk.wav', function( buffer ) {
-	    sound.setBuffer( buffer );
-	    sound.setLoop(true);
-	    sound.setRefDistance( 1 );
-	    sound.play();
-	});
-
-	
-	escena2.scene.add( audioCube );
-	audioCube.add(sound);
-	escena2.scene.add(audioCube); 
-		
     },
 
     addJsonText: function(){
@@ -292,7 +333,6 @@ const escena2 = {
 		    escena2.text[i].position.z = posZ * 0.25;
 
 		    escena2.positions.push( posX, posY, posZ );
-
 		    
 		}
 		
@@ -352,6 +392,41 @@ const escena2 = {
 	
     },
 
+    showMenu: function(){
+	const menu = document.querySelector("#menu");
+	
+	if (escena2.controls.isLocked){
+	    escena2.controls.unlock();
+		}
+	if(menu.style.display == 'block'){
+	    menu.style.display = 'none';
+			return
+	}
+	
+	menu.style.display = 'block';
+	menu.style.top = escena2.mouse.clientY + 'px'
+	menu.style.left = escena2.mouse.clientX + 'px'
+	},
+    handleHelp: function(){
+	
+	
+	const description = document.querySelector("#description");
+	const help = document.querySelector("#help");
+		
+	if(description.style.display == "none"){
+	    help.style['background-color'] = "grey";
+	    help.style.border = "2px black solid";
+			description.style.display = "block"
+	}else{
+	    help.style['background-color'] = "";
+			help.style.border = "";
+	    description.style.display = "none"
+	    
+	}
+	
+    },
+
+
     handleResize: function(event){
 
 	escena2.camera.aspect = window.innerWidth / window.innerHeight;
@@ -390,6 +465,11 @@ const escena2 = {
 	escena2.light4.position.x = Math.sin( time * 0.3 ) * 30;
 	escena2.light4.position.y = Math.cos( time * 0.7 ) * 40;
 	escena2.light4.position.z = Math.sin( time * 0.5 ) * 30;
+	;	
+	// escena2.audioCube.position.x = Math.sin( time * 0.3 ) * 30;
+	// audioCube.position.y = 4;
+	// audioCube.position.z = 4;
+
 
 	
 	escena2.camera.updateMatrixWorld(); 

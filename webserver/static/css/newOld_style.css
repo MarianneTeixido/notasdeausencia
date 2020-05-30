@@ -13,23 +13,71 @@
 }
 
 #menu{
+      	user-select:none;
 	position: fixed;
-	background-color: white;
 	padding: 10px;
 	display:none;
+	background-color: grey;
+	color: white;
+	opacity: 70%;
+	border: 2px black solid;
+	font-size:2em;
+	line-height:1.5em;
 }
+
 #menu ul{
 	list-style-type: none;
 	padding:0px;
+	margin:0px;
 }
+
+#help{
+	position: fixed;
+	display:block;
+	padding:2em;
+	font-size:1em;
+	color:white;
+	float:left;
+	margin:1em;
+	opacity:70%;
+	padding:1em;
+	bottom:0;
+}
+
+#help #icon{
+	width:40%;
+	font-size:2em;
+	border: 2px black solid;
+	border-radius: 50%;
+	text-align:center;
+	width:1em;
+	height:1em;
+	background-color:black;
+	float:left;
+}
+
+#help ul{
+	list-style-type:none;
+}
+
+#description{
+	display:none;
+}
+
 body {
 	margin: 0;
-	background-color: #fff;
+	background-color: #fff
 	color: #fff;
 	font-family: Monospace;
 	font-size: 13px;
 	line-height: 24px;
 	overscroll-behavior: none;
+
+	background: #000; /* Old browsers */
+      	background: -moz-linear-gradient(top,  #7c2ae2 0%, #000 100%); /* FF3.6-15 */
+      	background: -webkit-linear-gradient(top,  #7c2ae2 0%,#000 100%); /* Chrome10-25,Safari5.1-6 */
+      	background: linear-gradient(to bottom,  #000 0%,#31105a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#11e8bb', endColorstr='#8200c9',GradientType=0 ); 
 }
 
 a {
@@ -63,6 +111,7 @@ canvas {
 	user-select: none;
 	pointer-events: none;
 	z-index: 1; /* TODO Solve this in HTML */
+	color: white;
 }
 
 a, button, input, select {
@@ -108,8 +157,4 @@ a, button, input, select {
 #overlay > div > p {
 	color: #ffffff;
 	font-size: 12px;
-<<<<<<< Updated upstream
-=======
->>>>>>> 25aee0dff7c318277e237b81474bf9e380be9633
->>>>>>> Stashed changes
 }
