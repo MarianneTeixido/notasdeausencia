@@ -6,7 +6,7 @@ const escena1 = {
 		this.addLight();
 		this.animate();
 		this.initControls()
-		this.initSound()
+		//this.initSound()
 		this.initRaycaster()
 
 		this.clock = new THREE.Clock();
@@ -19,13 +19,13 @@ const escena1 = {
 		// create scene, camera and renderer
 		this.scene = new THREE.Scene();
 
-		this.scene.background = new THREE.CubeTextureLoader().setPath( 'textures/cubeMaps/' ).load( [
-			'/static/images/px.png',
-			'/static/images/nx.png',
-			'/static/images/py.png',
-			'/static/images/ny.png',
-			'/static/images/pz.png',
-			'/static/images/nz.png'
+		this.scene.background = new THREE.CubeTextureLoader().setPath( '/static/images/' ).load( [
+			'px.png',
+			'nx.png',
+			'py.png',
+			'ny.png',
+			'pz.png',
+			'nz.png'
 		]);
 
 	
@@ -41,13 +41,13 @@ const escena1 = {
 		// this.renderer = new THREE.CSS3DRenderer({antialias:true})
 
 		this.renderer.setSize( window.innerWidth, window.innerHeight );
-		this.camera.position.set(10, 1, 10)
+		this.camera.position.set(20, 100, 20)
+		
 		this.renderer.shadowMap.enabled = true;
 		this.renderer.shadowMap.type = THREE.PCFShadowmap // default THREE.PCFShadowMap
 
 
-		this.camera.position.set(10,1, 0)
-		this.camera.lookAt(10, 1, 10)
+		this.camera.lookAt(10, 1.75, 10)
 		document.body.appendChild( this.renderer.domElement );
 		document.body.margin = "0px";
 	},
@@ -67,15 +67,6 @@ const escena1 = {
 			this.controls = controls
 			return
 		}
-/*
-		controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
-
-		controls.dampingFactor = 0.05;
-		controls.enableDamping = true;
-		controls.screenSpacePanning = false;
-
-		this.controls = controls
-		*/
 		
 		
 		this.controls = new THREE.PointerLockControls( this.camera, document.body );
@@ -271,7 +262,7 @@ const escena1 = {
 				clearcoat:1
 			});
 
-		mat.opacity = 0.5
+		mat.opacity = 0.9
 		mat.transparent = true
 
 		let screen = new THREE.Mesh(geom, mat);
@@ -283,8 +274,24 @@ const escena1 = {
 		screen.receiveShadow = false
 		screen.castShadow = true
 
-		this.parts.screen = screen;
+		this.parts.screen = [screen];
 		this.scene.add(screen);
+
+		for(let k=0; k<10; k++){
+			let screen = new THREE.Mesh(geom, mat);
+			screen.rotateX(Math.PI * 1/8)
+
+			screen.position.x = 5 + (Math.ceil(Math.random() * 40) * 5 - 100 )
+			screen.position.y = 10.1
+			screen.position.z = 5 + (Math.ceil(Math.random() * 40) * 5 - 100 )
+
+			screen.receiveShadow = false
+			screen.castShadow = true
+
+			this.parts.screen.push(screen);
+			this.scene.add(screen);
+
+		}
 		
 	},
 	showMenu: function(){
