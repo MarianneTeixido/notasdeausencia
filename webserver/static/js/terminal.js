@@ -98,7 +98,7 @@ const Terminal = {
 		canvas.width = 2500
 		canvas.height = 3200;
 		
-		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		//ctx.fillRect(0, 0, canvas.width, canvas.height);
 		ctx.font = "50px Courier New";
 		ctx.fillStyle = "white";
 

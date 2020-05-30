@@ -229,7 +229,7 @@ const escena1 = {
 	},
 
 	addLight: function(){
-		var AmbientLight = new THREE.AmbientLight( 0x404040 ); // soft white light
+		var AmbientLight = new THREE.AmbientLight( 0x404040, 0.25 ); // soft white light
 		this.scene.add( AmbientLight );
 		this.parts.AmbientLight = AmbientLight
 
@@ -257,6 +257,8 @@ const escena1 = {
 			pointLight.position.y = Math.random() * 20 + 50
 			pointLight.castShadow = true
 			pointLight.decay = 2
+
+			pointLight.shadow.radius = 4
 			this.scene.add( pointLight );
 			this.parts.pointLight.push(pointLight)
 
@@ -286,13 +288,16 @@ const escena1 = {
 
 		let mat0 = new THREE.MeshPhysicalMaterial( 
 			{
-				color: 0xff000f,
+				color: 0x1f04f8,
 				side: THREE.DoubleSide,
 				reflectivity: 1,
 				refractionRatio: 1,
 				clearcoat:1
 			});
-		mat.opacity = 0.9
+		mat0.opacity = 0.9
+		mat0.transparent = true
+		
+		mat.opacity = 0.75
 		mat.transparent = true
 
 		let screen = new THREE.Mesh(geom, mat0);
@@ -475,7 +480,7 @@ const escena1 = {
 						markovText.appendChild(div)
 					})
 
-			}, 5000)
+			}, 10000)
 	},
 
 	animate: function(){
