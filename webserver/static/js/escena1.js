@@ -157,6 +157,9 @@ const escena1 = {
 				sound.setBuffer( buffer );
 				sound.setLoop(true);
 				sound.setRefDistance( 50 );
+				if (sound_file == 'voz1.wav'){
+					sound.setVolume(3)
+				}
 				sound.play();
 			});
 
@@ -208,7 +211,7 @@ const escena1 = {
 			position.needsUpdate = true;
 		}, 100)
 
-		var texture = new THREE.TextureLoader().load( '/static/images/water.jpg' );
+		var texture = new THREE.TextureLoader().load( '/static/images/grey-texture.jpg' );
 		//texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 		//texture.repeat.set( 5, 5 );
 
