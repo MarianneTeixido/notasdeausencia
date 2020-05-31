@@ -158,7 +158,7 @@ const escena1 = {
 				sound.setLoop(true);
 				sound.setRefDistance( 50 );
 				if (sound_file == 'voz1.wav'){
-					sound.setVolume(3)
+					sound.setVolume(8)
 				}
 				sound.play();
 			});
@@ -180,14 +180,69 @@ const escena1 = {
 			const tx = Math.random() * 1/4 + 1e-8
 			const ty = Math.random() + 0.001
 			const tz = Math.random() * 1/4 + 1e-8
+			
+			const x0 = Math.random() * 10
+			const y0 = Math.random() * 2
+			const z0 = Math.random() * 10
 			const move = setInterval(()=>{
-				mesh.position.x = Math.sin(escena1.clock.getElapsedTime() * tx ) * 400 + 210
-				mesh.position.y = Math.sin(escena1.clock.getElapsedTime() * ty ) * 50 + 110
-				mesh.position.z = Math.cos(escena1.clock.getElapsedTime() * tz ) * 400 + 210
+
+				mesh.position.x = 20 + x0 + Math.abs(Math.sin(escena1.clock.getElapsedTime() * tx )) *  200
+				mesh.position.y = 25 + y0 + Math.abs(Math.sin(escena1.clock.getElapsedTime() * ty )) * 50
+				mesh.position.z = -50 + z0 + Math.abs(Math.sin(escena1.clock.getElapsedTime() * tz )) *  200
 			}, 10)
 			return mesh
 		})
+
+
+		this.parts.soundMesh.push( ...sounds.map((sound_file)=>{
+			const sound = new THREE.PositionalAudio( listener );
+			const audioLoader = new THREE.AudioLoader();
+
+			audioLoader.load( `/static/sounds/memorial/${sound_file}`, function( buffer ) {
+				sound.setBuffer( buffer );
+				sound.setLoop(true);
+				sound.setRefDistance( 50 );
+				if (sound_file == 'voz1.wav'){
+					sound.setVolume(8)
+				}
+				sound.play();
+			});
+
+			// create an object for the sound to play from
+			const sphere = new THREE.SphereBufferGeometry( 50, 55, 100 ,100);
+			const material = new THREE.MeshBasicMaterial({ 
+				envMap: escena1.scene.background,
+				refractionRatio: 0.5
+			});
+			const mesh = new THREE.Mesh( sphere, material );
+			mesh.position.x  = Math.random() * 200 + 50 
+			mesh.position.y  = Math.random() * 30 + 3
+			mesh.position.z  = Math.random() * 200 + 50 
+			mesh.add( sound );
+			escena1.scene.add(mesh)
+
+
+			const tx = Math.random() * 1/4 + 1e-8
+			const ty = Math.random() + 0.001
+			const tz = Math.random() * 1/4 + 1e-8
+
+			const x0 = Math.random() * 10
+			const y0 = Math.random() * 2
+			const z0 = Math.random() * 10
+
+			const move = setInterval(()=>{
+				mesh.position.x = 20 + x0 + Math.abs(Math.sin(escena1.clock.getElapsedTime() * tx )) *  200
+				mesh.position.y = 25 + y0 + Math.abs(Math.sin(escena1.clock.getElapsedTime() * ty )) * 50
+				mesh.position.z = -50 + z0 + Math.abs(Math.sin(escena1.clock.getElapsedTime() * tz )) *  200
+			}, 10)
+			return mesh
+		}))
 		
+		const logMov = setInterval(()=>{
+			escena1.parts.soundMesh.forEach( (meh)=>{
+				console.log(meh.position)
+			})
+		}, 2000)
 	},
 	addFloor: function(){
 
