@@ -6,7 +6,7 @@ const escena1 = {
 		this.addLight();
 		this.animate();
 		this.initControls()
-		//this.initSound()
+		this.initSound()
 		this.initRaycaster()
 
 		this.clock = new THREE.Clock();
@@ -42,7 +42,7 @@ const escena1 = {
 		// this.renderer = new THREE.CSS3DRenderer({antialias:true})
 
 		this.renderer.setSize( window.innerWidth, window.innerHeight );
-		this.camera.position.set(20, 2, 20)
+		this.camera.position.set(-50, 2, 100)
 		
 		this.renderer.shadowMap.enabled = true;
 		this.renderer.shadowMap.type = THREE.PCFShadowmap // default THREE.PCFShadowMap
@@ -119,74 +119,72 @@ const escena1 = {
 
 		window.document.addEventListener( 'mousemove', this.handleMouseMove);
 	},
+
 	initSound: function(){
 		// create an AudioListener and add it to the camera
 		const listener = new THREE.AudioListener();
 		this.camera.add( listener );
-		// create the PositionalAudio object (passing in the listener)
-		const sound = new THREE.PositionalAudio( listener );
-
-		// load a sound and set it as the PositionalAudio object's buffer
-		const audioLoader = new THREE.AudioLoader();
-		audioLoader.load( '/static/sounds/08monk.wav', function( buffer ) {
-			sound.setBuffer( buffer );
-			sound.setLoop(true);
-			sound.setRefDistance( 20 );
-			sound.play();
-		});
 		
-		
-		const sound2 = new THREE.PositionalAudio( listener );
-		const audioLoader2 = new THREE.AudioLoader();
-		audioLoader2.load( '/static/sounds/gallinazo.wav', function( buffer ) {
-			sound2.setBuffer( buffer );
-			sound2.setLoop(true);
-			sound2.setRefDistance( 20 );
-			sound2.play();
-		});
+		let sounds = ['1.wav', '2.wav', 'voz1.wav']
 
-		console.log("asdf", audioLoader2, sound2)
-
-		// create an object for the sound to play from
-		const sphere = new THREE.SphereBufferGeometry( 2, 2, 16 );
-		const material = new THREE.MeshPhongMaterial( { color: 0xff2200 } );
-		const mesh = new THREE.Mesh( sphere, material );
-		const mesh2 = new THREE.Mesh( sphere, material );
-
-		mesh.position.y = 100
-		mesh.position.x = 10
+		for (let k=0;k<7; k++){
+			const sphere = new THREE.SphereBufferGeometry( 50, 55, 100 ,100);
+			const material = new THREE.MeshBasicMaterial({ 
+				envMap: escena1.scene.background,
+				refractionRatio: 0.95
+			});
+			const mesh = new THREE.Mesh( sphere, material );
+			mesh.position.x  = Math.random() * 200 + 50 
+			mesh.position.y  = Math.random() * 30 + 3
+			mesh.position.z  = Math.random() * 200 + 50 
+			escena1.scene.add(mesh)
 		
-		
-		// finally add the sound to the mesh
-		mesh.add( sound );
-		mesh2.add( sound2 );
+			const tx = Math.random() * 1/4 + 1e-8
+			const ty = Math.random() + 0.001
+			const tz = Math.random() * 1/4 + 1e-8
+			const move = setInterval(()=>{
+				mesh.position.x = Math.sin(escena1.clock.getElapsedTime() * tx ) * 400 + 210
+				mesh.position.y = Math.sin(escena1.clock.getElapsedTime() * ty ) * 50 + 1100
+				mesh.position.z = Math.cos(escena1.clock.getElapsedTime() * tz ) * 400 + 210
+			}, 10)
+		}
 
-		escena1.parts.ball1 = mesh
-		escena1.parts.ball2 = mesh2
-		escena1.scene.add( mesh );
-		escena1.scene.add( mesh2 );
-		
-		const move = setInterval(()=>{
-			mesh.position.x = Math.sin(escena1.clock.getElapsedTime()) * 150
-			mesh.position.z = Math.cos(escena1.clock.getElapsedTime()) * 150
+		this.parts.soundMesh = sounds.map((sound_file)=>{
+			const sound = new THREE.PositionalAudio( listener );
+			const audioLoader = new THREE.AudioLoader();
+
+			audioLoader.load( `/static/sounds/memorial/${sound_file}`, function( buffer ) {
+				sound.setBuffer( buffer );
+				sound.setLoop(true);
+				sound.setRefDistance( 50 );
+				sound.play();
+			});
+
+			// create an object for the sound to play from
+			const sphere = new THREE.SphereBufferGeometry( 50, 55, 100 ,100);
+			const material = new THREE.MeshBasicMaterial({ 
+				envMap: escena1.scene.background,
+				refractionRatio: 0.95
+			});
+			const mesh = new THREE.Mesh( sphere, material );
+			mesh.position.x  = Math.random() * 200 + 50 
+			mesh.position.y  = Math.random() * 30 + 3
+			mesh.position.z  = Math.random() * 200 + 50 
+			mesh.add( sound );
+			escena1.scene.add(mesh)
+
+
+			const tx = Math.random() * 1/4 + 1e-8
+			const ty = Math.random() + 0.001
+			const tz = Math.random() * 1/4 + 1e-8
+			const move = setInterval(()=>{
+				mesh.position.x = Math.sin(escena1.clock.getElapsedTime() * tx ) * 400 + 210
+				mesh.position.y = Math.sin(escena1.clock.getElapsedTime() * ty ) * 50 + 110
+				mesh.position.z = Math.cos(escena1.clock.getElapsedTime() * tz ) * 400 + 210
+			}, 10)
+			return mesh
 		})
 		
-		const move2 = setInterval(()=>{
-			mesh2.position.x = Math.sin(escena1.clock.getElapsedTime()) * 500 + 200
-			mesh2.position.z = Math.cos(escena1.clock.getElapsedTime()) * 500 + 200
-			if (Math.sin(escena1.clock.getElapsedTime())* 100 > 50 && (Math.sin(escena1.clock.getElapsedTime())* 100 < 55 )){
-				mesh2.children[0].setLoopStart(0.1)
-				mesh2.children[0].setLoopEnd(0.4)
-				mesh2.children[0].stop()
-				mesh2.children[0].play()
-			}
-			if (Math.sin(escena1.clock.getElapsedTime())* 100 > 0 && (Math.sin(escena1.clock.getElapsedTime())* 100 < 10 )){
-				mesh2.children[0].setLoopStart(0)
-				mesh2.children[0].setLoopEnd(0.05)
-				mesh2.children[0].stop()
-				mesh2.children[0].play()
-			}
-		})
 	},
 	addFloor: function(){
 
@@ -338,6 +336,7 @@ const escena1 = {
 		if (escena1.controls.isLocked){
 			escena1.controls.unlock();
 		}
+
 		if(menu.style.display == 'block'){
 			menu.style.display = 'none';
 			return
