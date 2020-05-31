@@ -253,13 +253,24 @@ const escena3 = {
 
 	},
 	addCubes: function(){
-		// draw floor
 		const xgrid = this.xgrid;
 		const ygrid = this.ygrid;
 		const size = this.size
 
 		const xoffset = this.xoffset
 		const yoffset = this.yoffset
+
+		const getCaras = function(){
+			return fetch('https://notasdeausencia.cc/caras',{
+				method: 'GET',
+			}).then(async (response)=>{
+				return response.json()
+			})
+		}
+
+		getCaras().then((data)=>{
+			console.log("asdfsdf",data)
+		})
 		
 		escena3.parts.cubes = []
 
