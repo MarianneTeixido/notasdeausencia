@@ -269,14 +269,18 @@ const escena3 = {
 		}
 
 		
-		escena3.parts.cubes = []
+		escena3.parts.cubesMatrix = []
 
 		for(let yi=0; yi<ygrid; yi++){
+			escena3.parts.cubesMatrix.push([])
+
 			for(let xi=0; xi<xgrid; xi++){
 				let grey = Math.random()/4 + 0.1
-				let parameters = { color: new THREE.Color(grey, grey, grey) };
+				let parameters = {
+					uniforms:{}
+				}
 				let geom = new THREE.BoxBufferGeometry( size, size, size );
-				let mat = new THREE.MeshLambertMaterial( parameters );
+				let mat = new THREE.ShaderMaterial( parameters );
 
 				let mesh = new THREE.Mesh(geom, mat)
 
@@ -288,7 +292,7 @@ const escena3 = {
 				mesh.dx = 0.001 * ( 0.5 - Math.random() );
 				mesh.dy = 0.001 * ( 0.5 - Math.random() );
 				escena3.scene.add(mesh)
-				escena3.parts.cubes.push(mesh)
+				escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length-1].push(mesh)
 			}
 		}
 		
@@ -305,8 +309,8 @@ const escena3 = {
 						let textureLoader = new THREE.TextureLoader();
 						textureLoader.load(`/caras/${face}`,
 							function(texture){
-								escena3.parts.cubes[i].material.map = texture
-								escena3.parts.cubes[i].material.needsUpdate = true
+								escena3.parts.cubesMatrix[i][j].material.uniforms.tOne = {type: 't', value:texture}
+								escena3.parts.cubesMatrix[i][j].faceTexture = texture
 								resolve()
 							})
 
@@ -314,45 +318,44 @@ const escena3 = {
 
 				})
 			).then(()=>{
-			
 				setTimeout(()=>{
-					escena3.cubeInterval = setInterval(this.cubesExpand, 100)
+					escena3.cubeInterval = setInterval(this.cubesExpand, 110)
+					setTimeout(()=>{
+						clearInterval(escena3.cubeInterval)
+						setTimeout(()=>{
+							escena3.cubeInterval = setInterval(this.cubesCompress(escena3.nCount), 110)
+						},5000)
+					}, 25000)
 				}, 5000)
 			})
 		})
 
 	},
 	cubesExpand: function(){
-		let n = 0;
-		escena3.parts.cubes.forEach((mesh)=>{
-			n ++;
-			if(n>=1e6){
-				clearInterval(escena3.cubeInterval)
-				setTimeout(()=>{
-					escena3.cubeInterval = setInterval(escena3.cubesCompress(n), 100)
-				}, 1000)
+		escena3.nCount++;
+		escena3.parts.cubesMatrix.forEach((cubes_row)=>{
+			cubes_row.forEach((mesh)=>{
+				
+				mesh.rotation.x += 10 * mesh.dx;
+				mesh.rotation.y += 10 * mesh.dy;
 
-				return
-
-			}
-			mesh.rotation.x += 10 * mesh.dx;
-			mesh.rotation.y += 10 * mesh.dy;
-
-			mesh.position.x -= 150 * mesh.dx;
-			mesh.position.y += 150 * mesh.dy;
-			mesh.position.z += 300 * mesh.dx;
-		
-		})
+				mesh.position.x -= 150 * mesh.dx;
+				mesh.position.y += 150 * mesh.dy;
+				mesh.position.z += 300 * mesh.dx;
 			
+			})
+		})
 	},
 	cubesCompress: function(n){
+		console.log("compressing",n)
 		return function(){
-			escena3.parts.cubes.forEach((mesh)=>{
-				n--;
-				if(n<1){
+				escena3.nCount--;
+				if(escena3.nCount < 1){
 					clearInterval(escena3.cubeInterval)
 					return
 				}
+		escena3.parts.cubesMatrix.forEach((cubes_row)=>{
+			cubes_row.forEach((mesh)=>{
 				mesh.rotation.x -= 10 * mesh.dx;
 				mesh.rotation.y -= 10 * mesh.dy;
 
@@ -361,8 +364,131 @@ const escena3 = {
 				mesh.position.z -= 300 * mesh.dx;
 			})
 		}
-	
-	}
+	},
+	webcamShow: function(){
+
+		if ( navigator.mediaDevices && navigator.mediaDevices.getUserMedia ) {
+			let video;
+			if( document.querySelector('#webcam')){
+				video = document.querySelector("#webcam")
+			}else{
+				video = document.createElement("video")
+				video.id = "webcam"
+				document.body.appendChild(video)
+			}
+
+
+			let constraints = { video: { width: 1280, height: 720, facingMode: 'user' } };
+			navigator.mediaDevices.getUserMedia( constraints ).then( function ( stream ) {
+				// apply the stream to the video element used in the texture
+
+				video.srcObject = stream;
+				video.play();
+
+				console.log(video)
+
+				video.oncanplay = ()=>{
+					let canvas = []
+
+
+					for(let yi=0; yi<escena3.ygrid; yi++){
+						canvas.push([])
+						for(let xi=0; xi<escena3.xgrid; xi++){
+							let c = document.createElement('canvas')
+							c.width = video.videoWidth/escena3.xgrid
+							c.height = video.videoHeight/escena3.ygrid
+
+							canvas[canvas.length -1 ].push(c)
+							document.body.append(c)
+
+						}
+					}
+					canvas.forEach((row_canvas, i)=>{
+						row_canvas.forEach((c, j)=>{
+							let texture = new THREE.CanvasTexture(c)
+							escena3.parts.cubesMatrix[i][j].material.uniforms.tOne = {type: 't', value: texture}
+
+						})
+					})
+					function loop() {
+						canvas.forEach((row_canvas, i)=>{
+							row_canvas.forEach((c, j)=>{
+								var ctx = c.getContext('2d');
+
+								ctx.rotate(Math.PI/2)
+								ctx.drawImage(video, -i * c.width, -j * c.height);
+								ctx.rotate(-Math.PI/2)
+
+								let texture = new THREE.CanvasTexture(c)
+								escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j].material.uniforms.tOne = {type:'t', value:texture}
+								
+							})	
+						})
+						requestAnimationFrame(loop)
+					}
+					requestAnimationFrame(loop)
+				
+				}
+				
+				/*
+
+				var texture = new THREE.VideoTexture( video );
+				var material = new THREE.MeshBasicMaterial(
+					{ map: texture,
+						side:THREE.DoubleSide
+					} );
+				var geometry1 = new THREE.PlaneGeometry( 10, 10 , 4,4);
+				var geometry2 = new THREE.PlaneGeometry( 10, 10 , 4,4);
+
+
+				console.debug(geometry1)
+				geometry1.faceVertexUvs[ 0 ][ 0 ][ 0 ].set( 0.0, 1.0 ); // upper left quarter
+				geometry1.faceVertexUvs[ 0 ][ 0 ][ 1 ].set( 0.0, 0 );
+				geometry1.faceVertexUvs[ 0 ][ 0 ][ 2 ].set( 1, 1 );
+
+				geometry2.faceVertexUvs[ 0 ][ 0 ][ 0 ].set( 0.5, 0.5 ); // lower right quarter
+				geometry2.faceVertexUvs[ 0 ][ 0 ][ 1 ].set( 0.5, 0.0 );
+				geometry2.faceVertexUvs[ 0 ][ 0 ][ 2 ].set( 1.0, 0.0 );
+
+
+				mesh1 = new THREE.Mesh( geometry1, material );
+				mesh2 = new THREE.Mesh( geometry2, material );
+
+
+				mesh1.position.z -=10
+				mesh1.position.x -= 2
+				escena3.scene.add(mesh1)
+				escena3.scene.add(mesh2)
+				*/
+
+					} ).catch( function ( error ) {
+
+						console.error( 'Unable to access the camera/webcam.', error );
+
+					} );
+
+				} 
+
+	},
+	blendTextures: function(){
+		let li = [...Array(escena3.xgrid -1 )]
+		let lj = [...Array(escena3.ygrid -1 )]
+		li.sort(() => Math.random() - 0.5);
+		lj.sort(() => Math.random() - 0.5);
+
+		let draw = function(li, lj){
+			if(li.length>1 && lj.length >1){
+				let i = li.shift()
+				let j = lj.shift()
+				escena3.parts.cubesMatrix[i][j].material.texture.uniforms.tSec = {type:'t', value:  escena3.parts.cubesMatrix[i][j].faceTexture}
+				setTimeout(draw, 500)
+			}else{
+				return
+			}
+		}
+		draw(li, lj)
+
+	},
 	showMenu: function(){
 		const menu = document.querySelector("#menu");
 
@@ -446,75 +572,6 @@ const escena3 = {
 
 
 	},
-	addMarkovText: function(){
-		let markovText = document.querySelector('#markovText');
-		if(!markovText){
-			markovText = document.createElement('div')
-
-			markovText.id = 'markovText';
-			markovText.style.width = window.innerWidth ;
-			markovText.style.height = window.innerHeight ;
-
-			markovText.style.position = "fixed";
-			markovText.style.display = "block";
-			markovText.style.top = 0;
-			markovText.style.left = 0;
-
-			document.body.appendChild(markovText);
-		}
-
-		const getMarkov = function(callback){
-			return fetch('/markov/16',{
-				method: 'GET',
-			}).then(async (response)=>{
-				return response.text()
-			}).then(callback)
-		}
-
-		const move = setInterval(
-			function(){
-				getMarkov(
-					function(markovData){
-						const x = Math.ceil(Math.random() * window.innerHeight % 10 * 50 ); 
-						const y = Math.ceil(Math.random() * window.innerWidth  % 30 * 50 );
-						const div = document.createElement('div')
-						div.textContent = markovData
-						
-						div.classList.add('markov');
-						div.style.opacity = 0
-						div.style.top = x + 'px'
-						div.style.left = y + 'px'
-						div.style['line-height'] = '48px'
-						
-						const fadeIn = function(){
-							const opacity = parseFloat(div.style.opacity);
-							if(opacity < 1){
-								div.style.opacity = opacity+0.1
-								setTimeout(fadeIn, 100)
-							}else{
-								setTimeout(fadeOut, 5000)
-							}
-						}
-						
-						const fadeOut = function(){
-							const opacity = parseFloat(div.style.opacity);
-							if(opacity > 0){
-								div.style.opacity = opacity - 0.1;
-								setTimeout(fadeOut, 100)
-							}else{
-								div.remove()
-							}
-						}
-						
-						setTimeout(fadeIn, 5000)
-						
-						
-						markovText.appendChild(div)
-					})
-
-			}, 10000)
-	},
-
 	animate: function(){
 		requestAnimationFrame( escena3.animate );
 		escena3.renderer.render( escena3.scene, escena3.camera );
@@ -528,10 +585,12 @@ const escena3 = {
 	size: 2,
 	xoffset: -20,
 	yoffset: -20,
+	nCount : 0
 }
 
 
 escena3.init()
+escena3.webcamShow()
 
 
 
