@@ -591,11 +591,11 @@ const escena3 = {
 	mouse: new THREE.Vector2(),
 	overHelp: false,
 	clock: new THREE.Clock(),
-	xgrid: 10,
-	ygrid: 10,
+	xgrid: 20,
+	ygrid: 20,
 	size: 2,
-	xoffset: -20,
-	yoffset: -20,
+	xoffset: -this.xgrid,
+	yoffset: -this.ygrid,
 	nCount : 0,
 	webcamReplaceMatrix : []
 }
