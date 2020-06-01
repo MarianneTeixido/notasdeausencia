@@ -1,7 +1,7 @@
 const escena3 = {
 	init: function(){
-		this.xoffset = - (this.xgrid / 2) * this.size,
-		this.yoffset = -(this.ygrid / 2) * this.size,
+		this.xoffset = - (this.xgrid / 2) * this.size
+		this.yoffset = -(this.ygrid / 2) * this.size
 		this.initScene();
 		this.addLight();
 		this.addCubes();
