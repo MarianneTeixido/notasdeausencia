@@ -128,7 +128,8 @@ const escena1 = {
 		let sounds = ['1.wav', '2.wav', 'voz1.wav']
 
 		for (let k=0;k<7; k++){
-			const sphere = new THREE.SphereBufferGeometry( 50, 55, 100 ,100);
+		    const sphere = new THREE.SphereBufferGeometry( 50/2, 55, 100 ,100);
+		    //const sphere = new THREE.SphereBufferGeometry( 25/2, 25/2, 50/2 
 			const material = new THREE.MeshBasicMaterial({ 
 				color: 0xffffff,
 				envMap: escena1.scene.background,
@@ -136,11 +137,12 @@ const escena1 = {
 			});
 			material.envMap.mapping = THREE.CubeRefractionMapping;
 		
-			const mesh = new THREE.Mesh( sphere, material );
-			mesh.position.x  = Math.random() * 200 + 50 
-			mesh.position.y  = Math.random() * 30 + 3
-			mesh.position.z  = Math.random() * 200 + 50 
-			escena1.scene.add(mesh)
+		    const mesh = new THREE.Mesh( sphere, material );
+		    mesh.position.x  = Math.random() * 200 + 50 
+		    mesh.position.y  = Math.random() * 30 + 3
+		    mesh.position.z  = Math.random() * 200 + 50
+		    
+		    escena1.scene.add(mesh)
 		
 			const tx = Math.random() * 1/4 + 1e-8
 			const ty = Math.random() + 0.001
@@ -167,7 +169,7 @@ const escena1 = {
 			});
 
 			// create an object for the sound to play from
-			const sphere = new THREE.SphereBufferGeometry( 50, 55, 100 ,100);
+			const sphere = new THREE.SphereBufferGeometry( 50/2, 55, 100,100 );
 			const material = new THREE.MeshBasicMaterial({ 
 				envMap: escena1.scene.background,
 				refractionRatio: 0.95
@@ -212,7 +214,7 @@ const escena1 = {
 			});
 
 			// create an object for the sound to play from
-			const sphere = new THREE.SphereBufferGeometry( 50, 55, 100 ,100);
+		    const sphere = new THREE.SphereBufferGeometry( 50/2, 55, 100 ,100);
 			const material = new THREE.MeshBasicMaterial({ 
 				envMap: escena1.scene.background,
 				refractionRatio: 0.5

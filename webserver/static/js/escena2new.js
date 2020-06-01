@@ -86,27 +86,57 @@ const escena2 = {
     audio: function(){
 
 
-	var geometryCube = new THREE.BoxGeometry( 0.5, 0.5, 0.5 );
-	var materialCube = new THREE.MeshStandardMaterial( {color: 0xffffff} );
+	var geometryCube = new THREE.SphereBufferGeometry( 1, 55, 100, 100 );
+	var materialCube = new THREE.MeshBasicMaterial( {
+	    color: 0xffffff,
+	    envMap: escena2.scene.background,
+	    refractionRatio: 0.75
+	} );
+
+	materialCube.envMap.mapping = THREE.CubeRefractionMapping;
+		
 
 	this.audioCube = new THREE.Mesh( geometryCube, materialCube );
 	this.audioCube2 = new THREE.Mesh( geometryCube, materialCube );
+	this.audioCube3 = new THREE.Mesh( geometryCube, materialCube );
+	this.audioCube4 = new THREE.Mesh( geometryCube, materialCube );
+	this.audioCube5 = new THREE.Mesh( geometryCube, materialCube );
+	this.audioCube6 = new THREE.Mesh( geometryCube, materialCube );
 
 	const move = setInterval(()=>{
-	    this.audioCube.position.x = Math.sin((this.clock.getElapsedTime())*0.4) * 10
-	    this.audioCube.position.y = Math.sin((this.clock.getElapsedTime())*0.1) * 15
-	    this.audioCube.position.z = Math.sin((this.clock.getElapsedTime())*0.7) * 10
-	    this.audioCube2.position.x = Math.sin((this.clock.getElapsedTime())*0.1) * 10
-	    this.audioCube2.position.y = Math.sin((this.clock.getElapsedTime())*0.7) * 10
-	    this.audioCube2.position.z = Math.sin((this.clock.getElapsedTime())*0.4) * 15
 
+	    this.audioCube.position.x = Math.sin((this.clock.getElapsedTime())*0.331) * 8
+	    this.audioCube.position.y = Math.sin((this.clock.getElapsedTime())*0.145) * 14
+	    this.audioCube.position.z = Math.sin((this.clock.getElapsedTime())*0.76) * 6
+	    
+	    this.audioCube2.position.x = Math.sin((this.clock.getElapsedTime())*0.122) * 9
+	    this.audioCube2.position.y = Math.sin((this.clock.getElapsedTime())*0.793) * 8
+	    this.audioCube2.position.z = Math.sin((this.clock.getElapsedTime())*0.4123) * 14
+
+	    this.audioCube3.position.x = Math.sin((this.clock.getElapsedTime())*0.176) * -14
+	    this.audioCube3.position.y = Math.sin((this.clock.getElapsedTime())*0.723) * 8
+	    this.audioCube3.position.z = Math.sin((this.clock.getElapsedTime())*0.444) * 5
+
+	    this.audioCube4.position.x = Math.sin((this.clock.getElapsedTime())*0.576) * -4
+	    this.audioCube4.position.y = Math.sin((this.clock.getElapsedTime())*0.723) * 10
+	    this.audioCube4.position.z = Math.sin((this.clock.getElapsedTime())*0.144) * -5
+
+	    this.audioCube5.position.x = Math.sin((this.clock.getElapsedTime())*0.66) * -7
+	    this.audioCube5.position.y = Math.sin((this.clock.getElapsedTime())*0.2323) * 9
+	    this.audioCube5.position.z = Math.sin((this.clock.getElapsedTime())*0.51) * 6
+
+	    this.audioCube6.position.x = Math.sin((this.clock.getElapsedTime())*0.96) * 4
+	    this.audioCube6.position.y = Math.sin((this.clock.getElapsedTime())*0.6323) *-8
+	    this.audioCube6.position.z = Math.sin((this.clock.getElapsedTime())*0.221) * 4
+	    
+	    
 
 	})
 
 	
-	this.audioCube2.position.x = -4;
-	this.audioCube2.position.y = -4;
-	this.audioCube2.position.z = -4;
+	//this.audioCube2.position.x = -4;
+	//this.audioCube2.position.y = -4;
+	//this.audioCube2.position.z = -4;
 
 	const listener = new THREE.AudioListener();
 	this.camera.add( listener );
@@ -116,7 +146,7 @@ const escena2 = {
 	
 	// load a sound and set it as the PositionalAudio object's buffer
 	const audioLoader = new THREE.AudioLoader();
-	audioLoader.load( '/static/sounds/08monk.wav', function( buffer ) {
+	audioLoader.load( '/static/sounds/reescritura/1.wav', function( buffer ) {
 	    sound.setBuffer( buffer );
 	    sound.setLoop(true);
 	    sound.setRefDistance( 1 );
@@ -128,15 +158,72 @@ const escena2 = {
 	
 	// load a sound and set it as the PositionalAudio object's buffer
 	const audioLoader2 = new THREE.AudioLoader();
-	audioLoader2.load( '/static/sounds/uraba.wav', function( buffer ) {
+	audioLoader2.load( '/static/sounds/reescritura/2.wav', function( buffer ) {
 	    sound2.setBuffer( buffer );
 	    sound2.setLoop(true);
 	    sound2.setRefDistance( 1 );
 	    sound2.play();
 	});
 
+	
+	// create the PositionalAudio object (passing in the listener)
+	const sound3 = new THREE.PositionalAudio( listener );
+	
+	// load a sound and set it as the PositionalAudio object's buffer
+	const audioLoader3 = new THREE.AudioLoader();
+	audioLoader3.load( '/static/sounds/reescritura/3.wav', function( buffer ) {
+	    sound3.setBuffer( buffer );
+	    sound3.setLoop(true);
+	    sound3.setRefDistance( 1 );
+	    sound3.play();
+	});
+
+	
+	// create the PositionalAudio object (passing in the listener)
+	const sound4 = new THREE.PositionalAudio( listener );
+	
+	// load a sound and set it as the PositionalAudio object's buffer
+	const audioLoader4 = new THREE.AudioLoader();
+	audioLoader4.load( '/static/sounds/reescritura/4.wav', function( buffer ) {
+	    sound4.setBuffer( buffer );
+	    sound4.setLoop(true);
+	    sound4.setRefDistance( 1 );
+	    sound4.play();
+	});
+
+	
+	// create the PositionalAudio object (passing in the listener)
+	const sound5 = new THREE.PositionalAudio( listener );
+	
+	// load a sound and set it as the PositionalAudio object's buffer
+	const audioLoader5 = new THREE.AudioLoader();
+	audioLoader5.load( '/static/sounds/reescritura/5.wav', function( buffer ) {
+	    sound5.setBuffer( buffer );
+	    sound5.setLoop(true);
+	    sound5.setRefDistance( 1 );
+	    sound5.play();
+	});
+
+	
+	// create the PositionalAudio object (passing in the listener)
+	const sound6 = new THREE.PositionalAudio( listener );
+	
+	// load a sound and set it as the PositionalAudio object's buffer
+	const audioLoader6 = new THREE.AudioLoader();
+	audioLoader6.load( '/static/sounds/reescritura/6.wav', function( buffer ) {
+	    sound6.setBuffer( buffer );
+	    sound6.setLoop(true);
+	    sound6.setRefDistance( 1 );
+	    sound6.play();
+	});
+
 	escena2.scene.add( this.audioCube );	
 	escena2.scene.add( this.audioCube2 );
+	escena2.scene.add( this.audioCube3 );
+	escena2.scene.add( this.audioCube4 );
+	escena2.scene.add( this.audioCube5 );
+	escena2.scene.add( this.audioCube6 );
+
 
 	this.audioCube.add(sound);
 	this.scene.add( this.audioCube);
@@ -144,6 +231,18 @@ const escena2 = {
 	this.audioCube2.add(sound2);
 	this.scene.add(this.audioCube2); 
 
+	this.audioCube3.add(sound3);
+	this.scene.add(this.audioCube3);
+	
+	this.audioCube4.add(sound4);
+	this.scene.add(this.audioCube4);
+
+	this.audioCube5.add(sound5);
+	this.scene.add(this.audioCube5); 
+
+	this.audioCube6.add(sound6);
+	this.scene.add(this.audioCube6); 
+				
 		
     },
 
@@ -290,6 +389,7 @@ const escena2 = {
 		
 		var geometry = new THREE.SphereGeometry(20, 20, 20);
 
+
 		var material = new THREE.MeshStandardMaterial( {
 		    color: 0xffffff,
 		    metalness: params.metalness,
@@ -298,6 +398,8 @@ const escena2 = {
 		    //opacity: 0.75,
 		    
 		} );
+	
+
 
 		// geometry.center();
 		//geometry.computeVertexNormals(); 
