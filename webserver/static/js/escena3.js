@@ -446,8 +446,8 @@ const escena3 = {
 									}else{
 									
 										var ctx = c.getContext('2d');
-
-										ctx.rotate(Math.PI/2)
+										
+										//ctx.rotate(Math.PI/2)
 										ctx.drawImage(video, -i * c.width, -j * c.height);
 										ctx.rotate(-Math.PI/2)
 										let texture = new THREE.CanvasTexture(c)
@@ -595,8 +595,8 @@ const escena3 = {
 	mouse: new THREE.Vector2(),
 	overHelp: false,
 	clock: new THREE.Clock(),
-	xgrid: 20,
-	ygrid: 20,
+	xgrid: 10,
+	ygrid: 10,
 	size: 2,
 	xoffset:0,
 	yoffset:0,
