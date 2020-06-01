@@ -171,45 +171,6 @@ const escena3 = {
 		}))
 		
 	},
-	addFloor: function(){
-
-		// draw floor
-		
-		let geom = new THREE.PlaneBufferGeometry(200, 200, 200, 200);
-		geom.rotateX(-Math.PI/2);
-		let position = geom.attributes.position;
-		for ( var i = 0; i < position.count; i ++ ) {
-			var y = 0.5 * Math.sin( i / 2 );
-			position.setY( i, y );
-		}
-		
-		const wave = setInterval(function(){
-			let position = escena3.parts.floor.geometry.attributes.position;
-			let time = escena3.clock.getElapsedTime() * 10;
-			for ( var i = 0; i < position.count; i ++ ) {
-				let y = 0.5 * Math.sin( i / 5 + ( time + i ) / 7 );
-				position.setY( i, y );
-			}
-			position.needsUpdate = true;
-		}, 100)
-
-		var texture = new THREE.TextureLoader().load( '/static/images/grey-texture.jpg' );
-		//texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-		//texture.repeat.set( 5, 5 );
-
-
-		let mat = new THREE.MeshStandardMaterial( { 
-			color: 0x0044ff, 
-			side:THREE.DoubleSide,
-			map: texture
-		});
-
-		let plane = new THREE.Mesh(geom, mat)
-		plane.receiveShadow = true
-		this.parts.floor = plane;
-		this.scene.add(plane);
-		
-	},
 
 	addLight: function(){
 		var AmbientLight = new THREE.AmbientLight( 0x404040, 0.75 ); // soft white light
@@ -326,6 +287,7 @@ const escena3 = {
 
 				})
 			).then(()=>{
+				/*
 				setTimeout(()=>{
 					escena3.cubeInterval = setInterval(this.cubesExpand, 110)
 					setTimeout(()=>{
@@ -335,6 +297,7 @@ const escena3 = {
 						},5000)
 					}, 25000)
 				}, 5000)
+				*/
 			})
 		})
 
@@ -383,15 +346,14 @@ const escena3 = {
 				video = document.querySelector("#webcam")
 			}else{
 				video = document.createElement("video")
-				video.style.transform = "rotate(-90deg)";
-
+/*
 				        deg = 90
 
     video.style.webkitTransform = 'rotate('+deg+'deg)';
     video.style.mozTransform    = 'rotate('+deg+'deg)';
     video.style.msTransform     = 'rotate('+deg+'deg)';
     video.style.oTransform      = 'rotate('+deg+'deg)';
-    video.style.transform       = 'rotate('+deg+'deg)';
+    video.style.transform       = 'rotate('+deg+'deg)';*/
 
 				video.autoplay = true
 				video.id = "webcam"
@@ -450,8 +412,8 @@ const escena3 = {
 									if(test) {
 										//escena3.parts.cubesMatrix[i][j].material.map = escena3.parts.cubesMatrix[i][j].faceTexture
 										//escena3.parts.cubesMatrix[i][j].material.needsUpdate = true
-										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j].material.map =  escena3.parts.cubesMatrix[i][j].faceTexture
-										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j].material.needsUpdate = true
+										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ escena3.parts.cubesMatrix[0].length - j -1].material.map =  escena3.parts.cubesMatrix[i][j].faceTexture
+										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ escena3.parts.cubesMatrix[0].length - j -1].material.needsUpdate = true
 										return
 									}else{
 									
