@@ -233,8 +233,8 @@ const escena3 = {
 		this.parts.pointLight = []
 
 		for(let k=0; k<5; k++){
-			let pointLight = new THREE.PointLight( 0xff00ff, 0.25 );
-			pointLight.position.y = Math.random() * 20 + 50
+			let pointLight = new THREE.PointLight( 0xffffff, 0.75 );
+			pointLight.position.y = Math.random() * 20 
 			pointLight.castShadow = true
 			pointLight.decay = 2
 
@@ -244,8 +244,8 @@ const escena3 = {
 
 			const t = Math.random() + 0.1
 			const move = setInterval(()=>{
-				pointLight.position.x = Math.sin(t *  escena3.clock.getElapsedTime()) * 15
-				pointLight.position.z = Math.cos(t * escena3.clock.getElapsedTime()) * 15
+				pointLight.position.x = Math.sin(t *  escena3.clock.getElapsedTime()) * 150
+				pointLight.position.z = Math.cos(t * escena3.clock.getElapsedTime()) * 150
 			}, 50)
 		
 		}
@@ -273,7 +273,8 @@ const escena3 = {
 
 		for(let yi=0; yi<ygrid; yi++){
 			for(let xi=0; xi<xgrid; xi++){
-				let parameters = { color: new THREE.Color(Math.random(), Math.random(), Math.random()) };
+				let grey = Math.random()/4 + 0.1
+				let parameters = { color: new THREE.Color(grey, grey, grey) };
 				let geom = new THREE.BoxBufferGeometry( size, size, size );
 				let mat = new THREE.MeshLambertMaterial( parameters );
 
