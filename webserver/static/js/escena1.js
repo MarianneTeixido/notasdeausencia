@@ -130,9 +130,12 @@ const escena1 = {
 		for (let k=0;k<7; k++){
 			const sphere = new THREE.SphereBufferGeometry( 50, 55, 100 ,100);
 			const material = new THREE.MeshBasicMaterial({ 
+				color: 0xffffff,
 				envMap: escena1.scene.background,
-				refractionRatio: 0.95
+				refractionRatio: 0.75,
 			});
+			material.envMap.mapping = THREE.CubeRefractionMapping;
+		
 			const mesh = new THREE.Mesh( sphere, material );
 			mesh.position.x  = Math.random() * 200 + 50 
 			mesh.position.y  = Math.random() * 30 + 3

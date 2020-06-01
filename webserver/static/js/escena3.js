@@ -6,7 +6,10 @@ const escena3 = {
 		this.initControls()
 		this.animate();
 
-		console.log(this.clock)
+
+		setTimeout(()=>{
+			escena3.cubeInterval = setInterval(this.cubesMove, 100)
+		}, 5000)
 		window.addEventListener( 'resize', this.handleResize);
 		document.querySelector("#help").addEventListener( 'click', this.handleHelp);
 		document.querySelector("#help").addEventListener( 'mouseover', ()=> escena3.overHelp = true);
@@ -268,9 +271,6 @@ const escena3 = {
 			})
 		}
 
-		getCaras().then((data)=>{
-			console.log("asdfsdf",data)
-		})
 		
 		escena3.parts.cubes = []
 
@@ -285,11 +285,45 @@ const escena3 = {
 				mesh.position.x = xi * size + 1 + xoffset
 				mesh.position.y = yi * size + 1 + yoffset
 				mesh.position.z = 4
+
+
+				mesh.dx = 0.001 * ( 0.5 - Math.random() );
+				mesh.dy = 0.001 * ( 0.5 - Math.random() );
 				escena3.scene.add(mesh)
 				escena3.parts.cubes.push(mesh)
 			}
 		}
+		
+		getCaras().then((data)=>{
+			let faces = data.caras;
+			faces = faces.slice(0, xgrid*ygrid)
+			faces.forEach((face,i)=>{
+				console.log("asdf",face,i)
+				let texture = new THREE.TextureLoader().load(`/caras/${face}`)
+				escena3.parts.cubes[i].material.map = texture
+				escena3.parts.cubes[i].material.needsUpdate = true
+			})
+		})
 
+	},
+	cubesMove: function(){
+		let n = 0;
+		escena3.parts.cubes.forEach((mesh)=>{
+			n ++;
+			if(n>=1e6){
+				clearInterval(escena3.cubeInterval)
+				return
+
+			}
+			mesh.rotation.x += 10 * mesh.dx;
+			mesh.rotation.y += 10 * mesh.dy;
+
+			mesh.position.x -= 150 * mesh.dx;
+			mesh.position.y += 150 * mesh.dy;
+			mesh.position.z += 300 * mesh.dx;
+		
+		})
+			
 	},
 	showMenu: function(){
 		const menu = document.querySelector("#menu");
@@ -453,9 +487,9 @@ const escena3 = {
 	clock: new THREE.Clock(),
 	xgrid: 20,
 	ygrid: 20,
-	size: 1,
-	xoffset: -10,
-	yoffset: -10,
+	size: 2,
+	xoffset: -20,
+	yoffset: -20,
 }
 
 
