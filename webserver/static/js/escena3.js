@@ -383,6 +383,7 @@ const escena3 = {
 				video = document.querySelector("#webcam")
 			}else{
 				video = document.createElement("video")
+				video.style.transform = "rotate(90deg)";
 				video.autoplay = true
 				video.id = "webcam"
 			}

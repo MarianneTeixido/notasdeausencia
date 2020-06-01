@@ -169,6 +169,7 @@ const Terminal = {
 			},
 		}).then(async (response) => {
 			let data = await response.json();
+			console.log(data.tweets.length)
 			const fetching_tweets =  data.tweets.map( (tweet_url)=>{
 				 return fetch(`/tweets/${tweet_url}`,{
 					method: 'GET',
@@ -178,6 +179,7 @@ const Terminal = {
 					}
 				}).then(async (tweet_data) => {
 					let data = await tweet_data.json()
+					Terminal.created_at.push(tweet_data.created_at)
 					Terminal.processText(data.full_text)
 				})
 			})
@@ -189,13 +191,13 @@ const Terminal = {
 		})
 
 	},
-	fullContent:[['Loading tweets...']],
+	fullContent:[['Cargando tweets...']],
 	section: [],
 	lengthLimit: 70,
 	offset: 0,
-	scroll: 0
+	scroll: 0,
+	created_at: []
 }
 
-console.log("asdfasdf")
 Terminal.generate()
 Terminal.generateScroll()
