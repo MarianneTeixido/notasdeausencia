@@ -1,9 +1,3 @@
-/*
-
-
-
-*/
-
 const escena2 = {
 
     init: function(){
@@ -44,9 +38,19 @@ const escena2 = {
 	//document.body.appendChild( this.container );
 
 	this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 10000 );
-	this.camera.position.z = 10;
+	this.camera.position.z = 1;
 	
 	this.scene = new THREE.Scene();
+
+	this.scene.background = new THREE.CubeTextureLoader().setPath( '/static/images/' ).load( [
+	    'px2.png',
+	    'nx2.png',
+	    'py2.png',
+	    'ny2.png',
+	    'pz2.png',
+	    'nz2.png'
+	]);
+
 
 	this.mouse = new THREE.Vector2(),
 
@@ -493,7 +497,7 @@ const escena2 = {
 		
 		INTERSECTED = intersects[ 0 ].object;
 		INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-		INTERSECTED.material.emissive.setHex( 0x50b732 );
+		INTERSECTED.material.emissive.setHex( 0xffffff );
 
 		if(INTERSECTED.text){
 		
