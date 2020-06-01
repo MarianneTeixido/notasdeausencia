@@ -594,8 +594,8 @@ const escena3 = {
 	xgrid: 20,
 	ygrid: 20,
 	size: 2,
-	xoffset: -this.xgrid,
-	yoffset: -this.ygrid,
+	xoffset: -(this.xgrid / 2) * this.size,
+	yoffset: -(this.ygrid / 2) * this.size,
 	nCount : 0,
 	webcamReplaceMatrix : []
 }
