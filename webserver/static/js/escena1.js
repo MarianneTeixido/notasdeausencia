@@ -283,7 +283,7 @@ const escena1 = {
 	},
 
 	addLight: function(){
-		var AmbientLight = new THREE.AmbientLight( 0x404040, 0.25 ); // soft white light
+		var AmbientLight = new THREE.AmbientLight( 0xfafbfd, 0.25 ); // soft white light
 		this.scene.add( AmbientLight );
 		this.parts.AmbientLight = AmbientLight
 
@@ -307,7 +307,7 @@ const escena1 = {
 		this.parts.pointLight = []
 
 		for(let k=0; k<5; k++){
-			let pointLight = new THREE.PointLight( 0xff00ff, 0.25 );
+			let pointLight = new THREE.PointLight(  0xfafbfd, 0.25 );
 			pointLight.position.y = Math.random() * 20 + 50
 			pointLight.castShadow = true
 			pointLight.decay = 2
