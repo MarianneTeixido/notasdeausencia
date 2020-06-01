@@ -419,7 +419,7 @@ const escena3 = {
 									
 										var ctx = c.getContext('2d');
 										
-										ctx.rotate(Math.PI/2)
+										//ctx.rotate(Math.PI/2)
 										ctx.drawImage(video, -i * c.width, -j * c.height);
 										ctx.rotate(-Math.PI/2)
 										let texture = new THREE.CanvasTexture(c)
