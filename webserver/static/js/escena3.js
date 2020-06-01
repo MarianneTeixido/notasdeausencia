@@ -385,7 +385,6 @@ const escena3 = {
 				video = document.createElement("video")
 				video.autoplay = true
 				video.id = "webcam"
-				document.body.appendChild(video)
 			}
 
 
