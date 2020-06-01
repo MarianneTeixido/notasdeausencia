@@ -423,8 +423,12 @@ const escena3 = {
 										ctx.drawImage(video, -i * c.width, -j * c.height);
 										ctx.rotate(-Math.PI/2)
 										let texture = new THREE.CanvasTexture(c)
+										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ escena3.parts.cubesMatrix[0].length - j -1].material.map =  texture
+										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ escena3.parts.cubesMatrix[0].length - j -1].material.needsUpdate = true
+										/*
 										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j].material.map = texture
 										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j].material.needsUpdate = true
+										*/
 										requestAnimationFrame(loopPixel)
 									}
 								}
