@@ -1,5 +1,7 @@
 const escena3 = {
 	init: function(){
+		this.xoffset = - (this.xgrid / 2) * this.size,
+		this.yoffset = -(this.ygrid / 2) * this.size,
 		this.initScene();
 		this.addLight();
 		this.addCubes();
@@ -594,8 +596,6 @@ const escena3 = {
 	xgrid: 20,
 	ygrid: 20,
 	size: 2,
-	xoffset: -(this.xgrid / 2) * this.size,
-	yoffset: -(this.ygrid / 2) * this.size,
 	nCount : 0,
 	webcamReplaceMatrix : []
 }
