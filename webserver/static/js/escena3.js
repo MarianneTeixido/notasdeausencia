@@ -316,18 +316,22 @@ const escena3 = {
 			).then(()=>{
 			
 				setTimeout(()=>{
-					escena3.cubeInterval = setInterval(this.cubesMove, 100)
+					escena3.cubeInterval = setInterval(this.cubesExpand, 100)
 				}, 5000)
 			})
 		})
 
 	},
-	cubesMove: function(){
+	cubesExpand: function(){
 		let n = 0;
 		escena3.parts.cubes.forEach((mesh)=>{
 			n ++;
 			if(n>=1e6){
 				clearInterval(escena3.cubeInterval)
+				setTimeout(()=>{
+					escena3.cubeInterval = setInterval(escena3.cubesCompress(n), 100)
+				}, 1000)
+
 				return
 
 			}
@@ -341,6 +345,24 @@ const escena3 = {
 		})
 			
 	},
+	cubesCompress: function(n){
+		return function(){
+			escena3.parts.cubes.forEach((mesh)=>{
+				n--;
+				if(n<1){
+					clearInterval(escena3.cubeInterval)
+					return
+				}
+				mesh.rotation.x -= 10 * mesh.dx;
+				mesh.rotation.y -= 10 * mesh.dy;
+
+				mesh.position.x += 150 * mesh.dx;
+				mesh.position.y -= 150 * mesh.dy;
+				mesh.position.z -= 300 * mesh.dx;
+			})
+		}
+	
+	}
 	showMenu: function(){
 		const menu = document.querySelector("#menu");
 
