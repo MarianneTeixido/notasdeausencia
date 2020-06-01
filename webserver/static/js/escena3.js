@@ -7,9 +7,6 @@ const escena3 = {
 		this.animate();
 
 
-		setTimeout(()=>{
-			escena3.cubeInterval = setInterval(this.cubesMove, 100)
-		}, 5000)
 		window.addEventListener( 'resize', this.handleResize);
 		document.querySelector("#help").addEventListener( 'click', this.handleHelp);
 		document.querySelector("#help").addEventListener( 'mouseover', ()=> escena3.overHelp = true);
@@ -295,13 +292,31 @@ const escena3 = {
 		}
 		
 		getCaras().then((data)=>{
+
 			let faces = data.caras;
 			faces = faces.slice(0, xgrid*ygrid)
-			faces.forEach((face,i)=>{
-				console.log("asdf",face,i)
-				let texture = new THREE.TextureLoader().load(`/caras/${face}`)
-				escena3.parts.cubes[i].material.map = texture
-				escena3.parts.cubes[i].material.needsUpdate = true
+			
+			let carasPromises = Promise.all(
+				faces.map((face,i)=>{
+
+					return new Promise( (resolve, reject)=>{
+
+						let textureLoader = new THREE.TextureLoader();
+						textureLoader.load(`/caras/${face}`,
+							function(texture){
+								escena3.parts.cubes[i].material.map = texture
+								escena3.parts.cubes[i].material.needsUpdate = true
+								resolve()
+							})
+
+					})
+
+				})
+			).then(()=>{
+			
+				setTimeout(()=>{
+					escena3.cubeInterval = setInterval(this.cubesMove, 100)
+				}, 5000)
 			})
 		})
 
