@@ -270,29 +270,34 @@ const escena3 = {
 
 		
 		escena3.parts.cubesMatrix = []
+		escena3.parts.cubes = []
 
 		for(let yi=0; yi<ygrid; yi++){
 			escena3.parts.cubesMatrix.push([])
 
 			for(let xi=0; xi<xgrid; xi++){
 				let grey = Math.random()/4 + 0.1
+				let shader = THREE.ShaderLib["basic"];
+				
 				let parameters = {
-					uniforms:{}
 				}
 				let geom = new THREE.BoxBufferGeometry( size, size, size );
-				let mat = new THREE.ShaderMaterial( parameters );
+				let mat = new THREE.MeshBasicMaterial(parameters)
+
 
 				let mesh = new THREE.Mesh(geom, mat)
 
 				mesh.position.x = xi * size + 1 + xoffset
 				mesh.position.y = yi * size + 1 + yoffset
 				mesh.position.z = 4
+				mesh.faceTexture = 0
 
 
 				mesh.dx = 0.001 * ( 0.5 - Math.random() );
 				mesh.dy = 0.001 * ( 0.5 - Math.random() );
 				escena3.scene.add(mesh)
 				escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length-1].push(mesh)
+				escena3.parts.cubes.push(mesh)
 			}
 		}
 		
@@ -303,17 +308,16 @@ const escena3 = {
 			
 			let carasPromises = Promise.all(
 				faces.map((face,i)=>{
-
 					return new Promise( (resolve, reject)=>{
-
 						let textureLoader = new THREE.TextureLoader();
 						textureLoader.load(`/caras/${face}`,
 							function(texture){
-								escena3.parts.cubesMatrix[i][j].material.uniforms.tOne = {type: 't', value:texture}
-								escena3.parts.cubesMatrix[i][j].faceTexture = texture
+								//escena3.parts.cubesMatrix[i][j].material = new THREE.MeshStandardMaterial({envMap: texture})
+								escena3.parts.cubes[i].material.map =  texture
+								escena3.parts.cubes[i].material.needsUpdate = true
+								escena3.parts.cubes[i].faceTexture = texture
 								resolve()
 							})
-
 					})
 
 				})
@@ -352,6 +356,7 @@ const escena3 = {
 				escena3.nCount--;
 				if(escena3.nCount < 1){
 					clearInterval(escena3.cubeInterval)
+					setTimeout(escena3.webcamShow, 3000)
 					return
 				}
 		escena3.parts.cubesMatrix.forEach((cubes_row)=>{
@@ -363,6 +368,7 @@ const escena3 = {
 				mesh.position.y -= 150 * mesh.dy;
 				mesh.position.z -= 300 * mesh.dx;
 			})
+		})
 		}
 	},
 	webcamShow: function(){
@@ -373,6 +379,7 @@ const escena3 = {
 				video = document.querySelector("#webcam")
 			}else{
 				video = document.createElement("video")
+				video.autoplay = true
 				video.id = "webcam"
 				document.body.appendChild(video)
 			}
@@ -406,59 +413,55 @@ const escena3 = {
 					canvas.forEach((row_canvas, i)=>{
 						row_canvas.forEach((c, j)=>{
 							let texture = new THREE.CanvasTexture(c)
-							escena3.parts.cubesMatrix[i][j].material.uniforms.tOne = {type: 't', value: texture}
+							escena3.parts.cubesMatrix[i][j].material.map = texture
+							escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j].material.map = texture
 
 						})
 					})
 					function loop() {
 						canvas.forEach((row_canvas, i)=>{
 							row_canvas.forEach((c, j)=>{
-								var ctx = c.getContext('2d');
 
-								ctx.rotate(Math.PI/2)
-								ctx.drawImage(video, -i * c.width, -j * c.height);
-								ctx.rotate(-Math.PI/2)
+								const loopPixel = function(){
 
-								let texture = new THREE.CanvasTexture(c)
-								escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j].material.uniforms.tOne = {type:'t', value:texture}
-								
+
+									const test = escena3.webcamReplaceMatrix.map((wcam)=>{
+										if(wcam[0] == i  && wcam[1] == j){
+											return true
+										}else{
+											return false
+										}
+									}).some((e)=>e)
+
+									if(test) {
+										//escena3.parts.cubesMatrix[i][j].material.map = escena3.parts.cubesMatrix[i][j].faceTexture
+										//escena3.parts.cubesMatrix[i][j].material.needsUpdate = true
+										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j].material.map =  escena3.parts.cubesMatrix[i][j].faceTexture
+										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j].material.needsUpdate = true
+										return
+									}else{
+									
+										var ctx = c.getContext('2d');
+
+										ctx.rotate(Math.PI/2)
+										ctx.drawImage(video, -i * c.width, -j * c.height);
+										ctx.rotate(-Math.PI/2)
+										let texture = new THREE.CanvasTexture(c)
+										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j].material.map = texture
+										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j].material.needsUpdate = true
+										requestAnimationFrame(loopPixel)
+									}
+								}
+								requestAnimationFrame(loopPixel)
 							})	
 						})
-						requestAnimationFrame(loop)
 					}
-					requestAnimationFrame(loop)
-				
+					loop()
+					setTimeout(escena3.blendTextures, 5000)
 				}
 				
 				/*
 
-				var texture = new THREE.VideoTexture( video );
-				var material = new THREE.MeshBasicMaterial(
-					{ map: texture,
-						side:THREE.DoubleSide
-					} );
-				var geometry1 = new THREE.PlaneGeometry( 10, 10 , 4,4);
-				var geometry2 = new THREE.PlaneGeometry( 10, 10 , 4,4);
-
-
-				console.debug(geometry1)
-				geometry1.faceVertexUvs[ 0 ][ 0 ][ 0 ].set( 0.0, 1.0 ); // upper left quarter
-				geometry1.faceVertexUvs[ 0 ][ 0 ][ 1 ].set( 0.0, 0 );
-				geometry1.faceVertexUvs[ 0 ][ 0 ][ 2 ].set( 1, 1 );
-
-				geometry2.faceVertexUvs[ 0 ][ 0 ][ 0 ].set( 0.5, 0.5 ); // lower right quarter
-				geometry2.faceVertexUvs[ 0 ][ 0 ][ 1 ].set( 0.5, 0.0 );
-				geometry2.faceVertexUvs[ 0 ][ 0 ][ 2 ].set( 1.0, 0.0 );
-
-
-				mesh1 = new THREE.Mesh( geometry1, material );
-				mesh2 = new THREE.Mesh( geometry2, material );
-
-
-				mesh1.position.z -=10
-				mesh1.position.x -= 2
-				escena3.scene.add(mesh1)
-				escena3.scene.add(mesh2)
 				*/
 
 					} ).catch( function ( error ) {
@@ -471,22 +474,30 @@ const escena3 = {
 
 	},
 	blendTextures: function(){
-		let li = [...Array(escena3.xgrid -1 )]
-		let lj = [...Array(escena3.ygrid -1 )]
-		li.sort(() => Math.random() - 0.5);
-		lj.sort(() => Math.random() - 0.5);
-
-		let draw = function(li, lj){
-			if(li.length>1 && lj.length >1){
-				let i = li.shift()
-				let j = lj.shift()
-				escena3.parts.cubesMatrix[i][j].material.texture.uniforms.tSec = {type:'t', value:  escena3.parts.cubesMatrix[i][j].faceTexture}
-				setTimeout(draw, 500)
+		let lij = []
+		for(let i=0;i<escena3.xgrid;i++){
+			for(let j=0;j<escena3.ygrid;j++){
+				lij.push([i,j])
+			}
+		}
+		
+		lij = lij.sort(() => Math.random() - 0.5);
+		let draw = function(lij){
+			if(lij.length>0){
+				indx = lij.shift()
+				escena3.webcamReplaceMatrix.push(indx)
+				/*
+				let i = indx[0]
+				let j = indx[1]
+				escena3.parts.cubesMatrix[i][j].material.map = escena3.parts.cubesMatrix[i][j].faceTexture
+				escena3.parts.cubesMatrix[i][j].material.needsUpdate = true
+*/
+				setTimeout(()=>draw(lij), 500)
 			}else{
 				return
 			}
 		}
-		draw(li, lj)
+		draw(lij)
 
 	},
 	showMenu: function(){
@@ -580,17 +591,17 @@ const escena3 = {
 	mouse: new THREE.Vector2(),
 	overHelp: false,
 	clock: new THREE.Clock(),
-	xgrid: 20,
-	ygrid: 20,
+	xgrid: 10,
+	ygrid: 10,
 	size: 2,
 	xoffset: -20,
 	yoffset: -20,
-	nCount : 0
+	nCount : 0,
+	webcamReplaceMatrix : []
 }
 
 
 escena3.init()
-escena3.webcamShow()
 
 
 
