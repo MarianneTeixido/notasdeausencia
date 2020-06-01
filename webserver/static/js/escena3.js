@@ -383,9 +383,19 @@ const escena3 = {
 				video = document.querySelector("#webcam")
 			}else{
 				video = document.createElement("video")
-				video.style.transform = "rotate(90deg)";
+				video.style.transform = "rotate(-90deg)";
+
+				        deg = 90
+
+    video.style.webkitTransform = 'rotate('+deg+'deg)';
+    video.style.mozTransform    = 'rotate('+deg+'deg)';
+    video.style.msTransform     = 'rotate('+deg+'deg)';
+    video.style.oTransform      = 'rotate('+deg+'deg)';
+    video.style.transform       = 'rotate('+deg+'deg)';
+
 				video.autoplay = true
 				video.id = "webcam"
+				document.body.appendChild(video)
 			}
 
 
@@ -447,7 +457,7 @@ const escena3 = {
 									
 										var ctx = c.getContext('2d');
 										
-										ctx.rotate(-Math.PI/2)
+										ctx.rotate(Math.PI/2)
 										ctx.drawImage(video, -i * c.width, -j * c.height);
 										ctx.rotate(-Math.PI/2)
 										let texture = new THREE.CanvasTexture(c)
@@ -606,6 +616,4 @@ const escena3 = {
 
 
 escena3.init()
-
-
-
+escena3.webcamShow()
