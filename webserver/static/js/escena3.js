@@ -271,6 +271,7 @@ const escena3 = {
 		getCaras().then((data)=>{
 
 			let faces = data.caras;
+			console.log(faces,"faces")
 			faces = faces.slice(0, xgrid*ygrid)
 			
 			let carasPromises = Promise.all(
@@ -297,7 +298,7 @@ const escena3 = {
 
 							const ctx = canvas.getContext('2d')
 							ctx.rotate(-Math.PI/2)
-							ctx.drawImage(img)
+							ctx.drawImage(img,0,0)
 
 							let texture = new THREE.CanvasTexture(canvas)
 							escena3.parts.cubes[i].material.map =  texture
