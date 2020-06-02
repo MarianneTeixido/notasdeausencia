@@ -297,14 +297,16 @@ const escena3 = {
 							canvas.height = 800
 
 							const ctx = canvas.getContext('2d')
+
+							ctx.translate(canvas.width/2, canvas.height/2)
 							ctx.rotate(Math.PI/2)
-							ctx.drawImage(img,0,0, 800, 800)
+
+							ctx.drawImage(img, -400, -400)
 
 							let texture = new THREE.CanvasTexture(canvas)
 							escena3.parts.cubes[i].material.map =  texture
 							escena3.parts.cubes[i].material.needsUpdate = true
 							escena3.parts.cubes[i].faceTexture = texture
-							document.body.appendChild(canvas)
 							resolve()
 						}
 						img.src = `/caras/${face}`
@@ -312,7 +314,7 @@ const escena3 = {
 
 				})
 			).then(()=>{
-				/*
+				
 				setTimeout(()=>{
 					escena3.cubeInterval = setInterval(this.cubesExpand, 110)
 					setTimeout(()=>{
@@ -322,7 +324,7 @@ const escena3 = {
 						},5000)
 					}, 25000)
 				}, 5000)
-				*/
+				
 			})
 		})
 
@@ -472,12 +474,9 @@ const escena3 = {
 						})
 					}
 					loop()
-					//setTimeout(escena3.blendTextures, 5000)
+					setTimeout(escena3.blendTextures, 5000)
 				}
 				
-				/*
-
-				*/
 
 					} ).catch( function ( error ) {
 
@@ -617,4 +616,3 @@ const escena3 = {
 
 
 escena3.init()
-escena3.webcamShow()
