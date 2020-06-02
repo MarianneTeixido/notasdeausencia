@@ -125,8 +125,8 @@ const escena1 = {
 		const listener = new THREE.AudioListener();
 		this.camera.add( listener );
 		
-		let sounds = ['1.wav', '2.wav', '3.wav', 'voz1.wav', 'voz2.wav', 'voz3.wav', 'voz4.wav']
-		let soundsVolume = [1, 1, 1 ,0.1 , 0.1, 0.1, 0.1]
+		let sounds = ['1.wav', '2.wav', '3.wav', '3.wav', 'voz1.wav', 'voz2.wav', 'voz3.wav', 'voz4.wav']
+		let soundsVolume = [0.4, 0.75, 1,1 ,0.1 , 0.1, 0.1, 0.1]
 
 		for (let k=0;k<7; k++){
 		    const sphere = new THREE.SphereBufferGeometry( 50/2, 55, 100 ,100);
@@ -194,6 +194,7 @@ const escena1 = {
 				mesh.position.z =  z0 + Math.sin(escena1.clock.getElapsedTime() * tz ) *  100
 				
 			}, 10)
+
 			return mesh
 		})
 
