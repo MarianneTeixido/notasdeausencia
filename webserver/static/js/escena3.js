@@ -247,9 +247,9 @@ const escena3 = {
 						clearInterval(escena3.cubeInterval)
 						setTimeout(()=>{
 							escena3.cubeInterval = setInterval(this.cubesCompress(escena3.nCount), 110)
-						},5000)
-					}, 25000)
-				}, 5000)
+						},1000)
+					}, 2000)
+				}, 1000)
 				
 			})
 		})
@@ -328,8 +328,6 @@ const escena3 = {
 				video.oncanplay = ()=>{
 					let canvas = []
 										
-					console.log(video, "asdfasdfsdf")
-
 
 					test_ = []
 					for(let yi=0; yi<escena3.ygrid; yi++){
@@ -374,10 +372,6 @@ const escena3 = {
 									}).some((e)=>e)
 									
 									var ctx = c.getContext('2d');
-									ctx.rotate(Math.PI/2)
-									ctx.drawImage(video, -i * c.width, -j * c.height)
-									let texture = new THREE.CanvasTexture(c)
-									ctx.rotate(-Math.PI/2)
 									
 									if(test) {
 										//escena3.parts.cubesMatrix[i][j].material.map = escena3.parts.cubesMatrix[i][j].faceTexture
@@ -387,15 +381,28 @@ const escena3 = {
 										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][  j].material.map =  escena3.parts.cubesMatrix[i][j].faceTexture
 										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j ].material.needsUpdate = true
 										*/
+										
 										img = escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][  j].faceImage
-										ctx.globalAlpha =  0.5
-										ctx.translate(canvas.width/2, canvas.height/2)
-										ctx.rotate(Math.PI/2)
-										ctx.drawImage(img, -400, -400, c.width, c.height)
-										ctx.rotate(-Math.PI/2)
-										ctx.globalAlpha =  1
+										img.width = c.width
+										img.height = c.height
 
+										ctx.fillStyle = 'white'
+										ctx.fillRect(0, 0, c.width, c.height)
+										ctx.globalAlpha =  0.5
+										ctx.rotate(Math.PI/2)
+										ctx.drawImage(img, 0 , -c.height, c.width, c.height)
+
+										ctx.drawImage(video, -i * c.width, -j * c.height)
+										ctx.rotate(-Math.PI/2)
+										
+
+									}else{
+										ctx.rotate(Math.PI/2)
+										ctx.drawImage(video, -i * c.width, -j * c.height)
+										ctx.rotate(-Math.PI/2)
+									
 									}
+									let texture = new THREE.CanvasTexture(c)
 									escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][  j].material.map =  texture
 									escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j ].material.needsUpdate = true
 									
@@ -413,7 +420,7 @@ const escena3 = {
 						})
 					}
 					loop()
-					setTimeout(escena3.blendTextures, 5000)
+					setTimeout(escena3.blendTextures, 1000)
 				}
 				
 
@@ -544,8 +551,8 @@ const escena3 = {
 	mouse: new THREE.Vector2(),
 	overHelp: false,
 	clock: new THREE.Clock(),
-	xgrid: 10,
-	ygrid: 10,
+	xgrid: 20,
+	ygrid: 20,
 	size: 2,
 	xoffset:0,
 	yoffset:0,
