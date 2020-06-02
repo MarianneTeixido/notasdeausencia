@@ -86,7 +86,7 @@ const escena2 = {
     audio: function(){
 
 
-	var geometryCube = new THREE.SphereBufferGeometry( 1, 55, 100, 100 );
+	var geometryCube = new THREE.SphereBufferGeometry( 1.5, 55, 100, 100 );
 	var materialCube = new THREE.MeshBasicMaterial( {
 	    color: 0xffffff,
 	    envMap: escena2.scene.background,
@@ -105,29 +105,29 @@ const escena2 = {
 
 	const move = setInterval(()=>{
 
-	    this.audioCube.position.x = Math.sin((this.clock.getElapsedTime())*0.331) * 8
-	    this.audioCube.position.y = Math.sin((this.clock.getElapsedTime())*0.145) * 14
-	    this.audioCube.position.z = Math.sin((this.clock.getElapsedTime())*0.76) * 6
+	    this.audioCube.position.x = Math.sin((this.clock.getElapsedTime())*0.331/4) * 8
+	    this.audioCube.position.y = Math.sin((this.clock.getElapsedTime())*0.145/4) * 14
+	    this.audioCube.position.z = Math.sin((this.clock.getElapsedTime())*0.76/4) * 6
 	    
-	    this.audioCube2.position.x = Math.sin((this.clock.getElapsedTime())*0.122) * 9
-	    this.audioCube2.position.y = Math.sin((this.clock.getElapsedTime())*0.793) * 8
-	    this.audioCube2.position.z = Math.sin((this.clock.getElapsedTime())*0.4123) * 14
+	    this.audioCube2.position.x = Math.sin((this.clock.getElapsedTime())*0.122/4) * 9
+	    this.audioCube2.position.y = Math.sin((this.clock.getElapsedTime())*0.793/4) * 8
+	    this.audioCube2.position.z = Math.sin((this.clock.getElapsedTime())*0.4123/4) * 14
 
-	    this.audioCube3.position.x = Math.sin((this.clock.getElapsedTime())*0.176) * -14
-	    this.audioCube3.position.y = Math.sin((this.clock.getElapsedTime())*0.723) * 8
-	    this.audioCube3.position.z = Math.sin((this.clock.getElapsedTime())*0.444) * 5
+	    this.audioCube3.position.x = Math.sin((this.clock.getElapsedTime())*0.176/4) * -14
+	    this.audioCube3.position.y = Math.sin((this.clock.getElapsedTime())*0.723/4) * 8
+	    this.audioCube3.position.z = Math.sin((this.clock.getElapsedTime())*0.444/4) * 5
 
-	    this.audioCube4.position.x = Math.sin((this.clock.getElapsedTime())*0.576) * -4
-	    this.audioCube4.position.y = Math.sin((this.clock.getElapsedTime())*0.723) * 10
-	    this.audioCube4.position.z = Math.sin((this.clock.getElapsedTime())*0.144) * -5
+	    this.audioCube4.position.x = Math.sin((this.clock.getElapsedTime())*0.576/4) * -4
+	    this.audioCube4.position.y = Math.sin((this.clock.getElapsedTime())*0.723/4) * 10
+	    this.audioCube4.position.z = Math.sin((this.clock.getElapsedTime())*0.144/4) * -5
 
-	    this.audioCube5.position.x = Math.sin((this.clock.getElapsedTime())*0.66) * -7
-	    this.audioCube5.position.y = Math.sin((this.clock.getElapsedTime())*0.2323) * 9
-	    this.audioCube5.position.z = Math.sin((this.clock.getElapsedTime())*0.51) * 6
+	    this.audioCube5.position.x = Math.sin((this.clock.getElapsedTime())*0.66/4) * -7
+	    this.audioCube5.position.y = Math.sin((this.clock.getElapsedTime())*0.2323/4) * 9
+	    this.audioCube5.position.z = Math.sin((this.clock.getElapsedTime())*0.51/4) * 6
 
-	    this.audioCube6.position.x = Math.sin((this.clock.getElapsedTime())*0.96) * 4
-	    this.audioCube6.position.y = Math.sin((this.clock.getElapsedTime())*0.6323) *-8
-	    this.audioCube6.position.z = Math.sin((this.clock.getElapsedTime())*0.221) * 4
+	    this.audioCube6.position.x = Math.sin((this.clock.getElapsedTime())*0.96/4) * 4
+	    this.audioCube6.position.y = Math.sin((this.clock.getElapsedTime())*0.6323/4) *-8
+	    this.audioCube6.position.z = Math.sin((this.clock.getElapsedTime())*0.221/4) * 4
 	    
 	    
 
@@ -151,6 +151,7 @@ const escena2 = {
 	    sound.setLoop(true);
 	    sound.setRefDistance( 1 );
 	    sound.play();
+	    sound.setVolume(2);
 	});
 
 	// create the PositionalAudio object (passing in the listener)
@@ -163,6 +164,7 @@ const escena2 = {
 	    sound2.setLoop(true);
 	    sound2.setRefDistance( 1 );
 	    sound2.play();
+	    sound2.setVolume(2);
 	});
 
 	
@@ -176,6 +178,7 @@ const escena2 = {
 	    sound3.setLoop(true);
 	    sound3.setRefDistance( 1 );
 	    sound3.play();
+	    sound3.setVolume(2);
 	});
 
 	
@@ -189,6 +192,7 @@ const escena2 = {
 	    sound4.setLoop(true);
 	    sound4.setRefDistance( 1 );
 	    sound4.play();
+	    sound4.setVolume(2);
 	});
 
 	
@@ -202,6 +206,7 @@ const escena2 = {
 	    sound5.setLoop(true);
 	    sound5.setRefDistance( 1 );
 	    sound5.play();
+	    sound5.setVolume(2);
 	});
 
 	
@@ -215,6 +220,7 @@ const escena2 = {
 	    sound6.setLoop(true);
 	    sound6.setRefDistance( 1 );
 	    sound6.play();
+	    sound6.setVolume(2);
 	});
 
 	escena2.scene.add( this.audioCube );	
@@ -408,7 +414,7 @@ const escena2 = {
 		escena2.cube[i] = new THREE.Mesh( geometry, material );
 		//escena2.cube = new THREE.Mesh( geometry, material );
 		
-		var shapes = font.generateShapes( escena2.tweets[i], escena2.tam[i]/40 );
+		var shapes = font.generateShapes( escena2.tweets[i], escena2.tam[i]/30 );
 		var geometry2 = new THREE.ShapeBufferGeometry( shapes );
 
 		// geometry.center(); 
@@ -430,9 +436,9 @@ const escena2 = {
 		    escena2.cube[i].position.y = posY*0.25;
 		    escena2.cube[i].position.z = posZ*0.25;		    
 		    
-		    escena2.cube[i].scale.x = escena2.tam[i]/2500;
-		    escena2.cube[i].scale.y = escena2.tam[i]/2500;
-		    escena2.cube[i].scale.z = escena2.tam[i]/2500;
+		    escena2.cube[i].scale.x = escena2.tam[i]/2000;
+		    escena2.cube[i].scale.y = escena2.tam[i]/2000;
+		    escena2.cube[i].scale.z = escena2.tam[i]/2000;
 		
 		    escena2.text[i].position.x = posX * 0.25;
 		    escena2.text[i].position.y = posY * 0.25;
