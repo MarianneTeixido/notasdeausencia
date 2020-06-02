@@ -247,9 +247,9 @@ const escena3 = {
 						clearInterval(escena3.cubeInterval)
 						setTimeout(()=>{
 							escena3.cubeInterval = setInterval(this.cubesCompress(escena3.nCount), 110)
-						},1000)
-					}, 2000)
-				}, 1000)
+						}, escena3.timing.sleep_compress)
+					}, escena3.timing.expand)
+				}, escena3.timing.sleep_expand)
 				
 			})
 		})
@@ -276,7 +276,7 @@ const escena3 = {
 				escena3.nCount--;
 				if(escena3.nCount < 1){
 					clearInterval(escena3.cubeInterval)
-					setTimeout(escena3.webcamShow, 3000)
+					setTimeout(escena3.webcamShow, escena3.timing.sleep_webcam)
 					return
 				}
 		escena3.parts.cubesMatrix.forEach((cubes_row)=>{
@@ -420,7 +420,7 @@ const escena3 = {
 						})
 					}
 					loop()
-					setTimeout(escena3.blendTextures, 1000)
+					setTimeout(escena3.blendTextures, escena3.timing.sleep_blend)
 				}
 				
 
@@ -557,7 +557,14 @@ const escena3 = {
 	xoffset:0,
 	yoffset:0,
 	nCount : 0,
-	webcamReplaceMatrix : []
+	webcamReplaceMatrix : [],
+	timing: {
+		sleep_expand: 5000,
+		expand: 5000,
+		sleep_compress: 2000,
+		sleep_webcam: 2000,
+		sleep_blend: 5000,
+	}
 }
 
 
