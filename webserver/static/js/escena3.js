@@ -287,21 +287,25 @@ const escena3 = {
 								resolve()
 							})
 							*/
-						const img = document.createElement('img')
-						const canvas = document.createElement('canvas')
+						const img = new Image()
+
+						img.onload = function(){
+							const canvas = document.createElement('canvas')
+
+							canvas.width = 800
+							canvas.height = 800
+
+							const ctx = canvas.getContext('2d')
+							ctx.rotate(-Math.PI/2)
+							ctx.drawImage(img)
+
+							let texture = new THREE.CanvasTexture(canvas)
+							escena3.parts.cubes[i].material.map =  texture
+							escena3.parts.cubes[i].material.needsUpdate = true
+							escena3.parts.cubes[i].faceTexture = texture
+							resolve()
+						}
 						img.src = `/caras/${face}`
-						canvas.width = 800
-						canvas.height = 800
-
-						const ctx = canvas.getContext('2d')
-						ctx.rotate(-Math.PI/2)
-						ctx.drawImage(img)
-
-						let texture = new THREE.CanvasTexture(canvas)
-						escena3.parts.cubes[i].material.map =  texture
-						escena3.parts.cubes[i].material.needsUpdate = true
-						escena3.parts.cubes[i].faceTexture = texture
-						resolve()
 					})
 
 				})
