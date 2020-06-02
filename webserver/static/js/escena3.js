@@ -232,6 +232,7 @@ const escena3 = {
 							escena3.parts.cubes[i].material.map =  texture
 							escena3.parts.cubes[i].material.needsUpdate = true
 							escena3.parts.cubes[i].faceTexture = texture
+							escena3.parts.cubes[i].faceImage = img
 							resolve()
 						}
 						img.src = `/caras/${face}`
@@ -319,6 +320,7 @@ const escena3 = {
 				video.srcObject = stream;
 				video.style.width = 640
 				video.style.height = 480
+
 				video.play();
 
 				console.log(video)
@@ -345,7 +347,6 @@ const escena3 = {
 
 						}
 					}
-					console.log(test_,"assdf")
 							
 					canvas.forEach((row_canvas, i)=>{
 						row_canvas.forEach((c, j)=>{
@@ -371,30 +372,39 @@ const escena3 = {
 											return false
 										}
 									}).some((e)=>e)
-
+									
+									var ctx = c.getContext('2d');
+									ctx.rotate(Math.PI/2)
+									ctx.drawImage(video, -i * c.width, -j * c.height)
+									let texture = new THREE.CanvasTexture(c)
+									ctx.rotate(-Math.PI/2)
+									
 									if(test) {
 										//escena3.parts.cubesMatrix[i][j].material.map = escena3.parts.cubesMatrix[i][j].faceTexture
 										//escena3.parts.cubesMatrix[i][j].material.needsUpdate = true
-										
+										//
+										/*
 										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][  j].material.map =  escena3.parts.cubesMatrix[i][j].faceTexture
 										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j ].material.needsUpdate = true
-										return
-									}else{
-									
-										var ctx = c.getContext('2d');
+										*/
+										img = escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][  j].faceImage
+										ctx.globalAlpha =  0.5
+										ctx.translate(canvas.width/2, canvas.height/2)
 										ctx.rotate(Math.PI/2)
-										ctx.drawImage(video, -i * c.width, -j * c.height)
-										let texture = new THREE.CanvasTexture(c)
-										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][  j].material.map =  texture
-										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j ].material.needsUpdate = true
-										ctx.rotate(-Math.PI/2)
-										
+										ctx.drawImage(img, -400, -400)
+
+									}
+									escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][  j].material.map =  texture
+									escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j ].material.needsUpdate = true
+									
 										/*
+									else{
+										
 										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j].material.map = texture
 										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j].material.needsUpdate = true
-										*/
-										requestAnimationFrame(loopPixel)
 									}
+										*/
+									requestAnimationFrame(loopPixel)
 								}
 								requestAnimationFrame(loopPixel)
 							})	
