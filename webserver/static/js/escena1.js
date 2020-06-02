@@ -126,6 +126,7 @@ const escena1 = {
 		this.camera.add( listener );
 		
 		let sounds = ['1.wav', '2.wav', '3.wav', 'voz1.wav', 'voz2.wav', 'voz3.wav', 'voz4.wav']
+		let soundsVolume = [1, 1, 1 ,0.5 , 0.5, 0.5, 0.5]
 
 		for (let k=0;k<7; k++){
 		    const sphere = new THREE.SphereBufferGeometry( 50/2, 55, 100 ,100);
@@ -154,7 +155,7 @@ const escena1 = {
 			}, 10)
 		}
 
-		this.parts.soundMesh = sounds.map((sound_file)=>{
+		this.parts.soundMesh = sounds.map((sound_file, i)=>{
 			const sound = new THREE.PositionalAudio( listener );
 			const audioLoader = new THREE.AudioLoader();
 
@@ -162,6 +163,7 @@ const escena1 = {
 				sound.setBuffer( buffer );
 				sound.setLoop(true);
 				sound.setRefDistance( 50 );
+				sound.setVolume( soundsVolume[i] );
 				sound.play();
 			});
 
