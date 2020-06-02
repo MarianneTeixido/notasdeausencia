@@ -94,8 +94,7 @@ const escena2 = {
 	} );
 
 	materialCube.envMap.mapping = THREE.CubeRefractionMapping;
-		
-
+	
 	this.audioCube = new THREE.Mesh( geometryCube, materialCube );
 	this.audioCube2 = new THREE.Mesh( geometryCube, materialCube );
 	this.audioCube3 = new THREE.Mesh( geometryCube, materialCube );
@@ -103,8 +102,15 @@ const escena2 = {
 	this.audioCube5 = new THREE.Mesh( geometryCube, materialCube );
 	this.audioCube6 = new THREE.Mesh( geometryCube, materialCube );
 
-	const move = setInterval(()=>{
+	this.audioCube7 = new THREE.Mesh( geometryCube, materialCube );
+	this.audioCube8 = new THREE.Mesh( geometryCube, materialCube );
+	this.audioCube9 = new THREE.Mesh( geometryCube, materialCube );
+	this.audioCube10 = new THREE.Mesh( geometryCube, materialCube );
 
+
+	  
+	const move = setInterval(()=>{
+	    
 	    this.audioCube.position.x = Math.sin((this.clock.getElapsedTime())*0.331/4) * 8
 	    this.audioCube.position.y = Math.sin((this.clock.getElapsedTime())*0.145/4) * 14
 	    this.audioCube.position.z = Math.sin((this.clock.getElapsedTime())*0.76/4) * 6
@@ -112,34 +118,47 @@ const escena2 = {
 	    this.audioCube2.position.x = Math.sin((this.clock.getElapsedTime())*0.122/4) * 9
 	    this.audioCube2.position.y = Math.sin((this.clock.getElapsedTime())*0.793/4) * 8
 	    this.audioCube2.position.z = Math.sin((this.clock.getElapsedTime())*0.4123/4) * 14
-
+	    
 	    this.audioCube3.position.x = Math.sin((this.clock.getElapsedTime())*0.176/4) * -14
 	    this.audioCube3.position.y = Math.sin((this.clock.getElapsedTime())*0.723/4) * 8
 	    this.audioCube3.position.z = Math.sin((this.clock.getElapsedTime())*0.444/4) * 5
-
+	      
 	    this.audioCube4.position.x = Math.sin((this.clock.getElapsedTime())*0.576/4) * -4
 	    this.audioCube4.position.y = Math.sin((this.clock.getElapsedTime())*0.723/4) * 10
 	    this.audioCube4.position.z = Math.sin((this.clock.getElapsedTime())*0.144/4) * -5
-
+	    
 	    this.audioCube5.position.x = Math.sin((this.clock.getElapsedTime())*0.66/4) * -7
 	    this.audioCube5.position.y = Math.sin((this.clock.getElapsedTime())*0.2323/4) * 9
 	    this.audioCube5.position.z = Math.sin((this.clock.getElapsedTime())*0.51/4) * 6
-
+	      
 	    this.audioCube6.position.x = Math.sin((this.clock.getElapsedTime())*0.96/4) * 4
 	    this.audioCube6.position.y = Math.sin((this.clock.getElapsedTime())*0.6323/4) *-8
 	    this.audioCube6.position.z = Math.sin((this.clock.getElapsedTime())*0.221/4) * 4
-	    
-	    
 
+	    this.audioCube7.position.x = Math.sin((this.clock.getElapsedTime())*0.36/4) * 3
+	    this.audioCube7.position.y = Math.sin((this.clock.getElapsedTime())*0.2323/4) *-8
+	    this.audioCube7.position.z = Math.sin((this.clock.getElapsedTime())*0.721/4) * 14
+
+	    this.audioCube8.position.x = Math.sin((this.clock.getElapsedTime())*0.16/4) * 7
+	    this.audioCube8.position.y = Math.sin((this.clock.getElapsedTime())*0.3323/4) *8
+	    this.audioCube8.position.z = Math.sin((this.clock.getElapsedTime())*0.721/4) * -5
+	    
+	    this.audioCube9.position.x = Math.sin((this.clock.getElapsedTime())*0.66/4) * 6
+	    this.audioCube9.position.y = Math.sin((this.clock.getElapsedTime())*0.3323/4) *-3
+	    this.audioCube9.position.z = Math.sin((this.clock.getElapsedTime())*0.77/4) * 2
+
+	    
+	    this.audioCube10.position.x = Math.sin((this.clock.getElapsedTime())*0.06/4) * 6
+	    this.audioCube10.position.y = Math.sin((this.clock.getElapsedTime())*0.3773/4) * 6
+	    this.audioCube10.position.z = Math.sin((this.clock.getElapsedTime())*0.887/4) * -6
+	    
+	    
+	    
+	    
 	})
 
-	
-	//this.audioCube2.position.x = -4;
-	//this.audioCube2.position.y = -4;
-	//this.audioCube2.position.z = -4;
-
 	const listener = new THREE.AudioListener();
-	this.camera.add( listener );
+	this.camera.add( listener );	
 
 	// create the PositionalAudio object (passing in the listener)
 	const sound = new THREE.PositionalAudio( listener );
@@ -151,9 +170,9 @@ const escena2 = {
 	    sound.setLoop(true);
 	    sound.setRefDistance( 1 );
 	    sound.play();
-	    sound.setVolume(2);
+	    sound.setVolume(1);
 	});
-
+	
 	// create the PositionalAudio object (passing in the listener)
 	const sound2 = new THREE.PositionalAudio( listener );
 	
@@ -178,7 +197,7 @@ const escena2 = {
 	    sound3.setLoop(true);
 	    sound3.setRefDistance( 1 );
 	    sound3.play();
-	    sound3.setVolume(2);
+	    sound3.setVolume(1);
 	});
 
 	
@@ -192,7 +211,7 @@ const escena2 = {
 	    sound4.setLoop(true);
 	    sound4.setRefDistance( 1 );
 	    sound4.play();
-	    sound4.setVolume(2);
+	    sound4.setVolume(1);
 	});
 
 	
@@ -206,7 +225,7 @@ const escena2 = {
 	    sound5.setLoop(true);
 	    sound5.setRefDistance( 1 );
 	    sound5.play();
-	    sound5.setVolume(2);
+	    sound5.setVolume(1);
 	});
 
 	
@@ -220,17 +239,80 @@ const escena2 = {
 	    sound6.setLoop(true);
 	    sound6.setRefDistance( 1 );
 	    sound6.play();
-	    sound6.setVolume(2);
+	    sound6.setVolume(1);
 	});
 
+
+	// create the PositionalAudio object (passing in the listener)
+	const sound7 = new THREE.PositionalAudio( listener );
+	
+	// load a sound and set it as the PositionalAudio object's buffer
+	const audioLoader7 = new THREE.AudioLoader();
+	audioLoader7.load( '/static/sounds/reescritura/7.wav', function( buffer ) {
+	    sound7.setBuffer( buffer );
+	    sound7.setLoop(true);
+	    sound7.setRefDistance( 1 );
+	    sound7.play();
+	    sound7.setVolume(0.2);
+	});
+
+	
+	// create the PositionalAudio object (passing in the listener)
+	const sound8 = new THREE.PositionalAudio( listener );
+	
+	// load a sound and set it as the PositionalAudio object's buffer
+	const audioLoader8 = new THREE.AudioLoader();
+	audioLoader8.load( '/static/sounds/reescritura/8.wav', function( buffer ) {
+	    sound8.setBuffer( buffer );
+	    sound8.setLoop(true);
+	    sound8.setRefDistance( 1 );
+	    sound8.play();
+	    sound8.setVolume(0.2);
+	});
+
+	
+	// create the PositionalAudio object (passing in the listener)
+	const sound9 = new THREE.PositionalAudio( listener );
+	
+	// load a sound and set it as the PositionalAudio object's buffer
+	const audioLoader9 = new THREE.AudioLoader();
+	audioLoader9.load( '/static/sounds/reescritura/9.wav', function( buffer ) {
+	    sound9.setBuffer( buffer );
+	    sound9.setLoop(true);
+	    sound9.setRefDistance( 1 );
+	    sound9.play();
+	    sound9.setVolume(0.2);
+	});
+
+	
+	// create the PositionalAudio object (passing in the listener)
+	const sound10 = new THREE.PositionalAudio( listener );
+	
+	// load a sound and set it as the PositionalAudio object's buffer
+	const audioLoader10 = new THREE.AudioLoader();
+	audioLoader10.load( '/static/sounds/reescritura/10.wav', function( buffer ) {
+	    sound10.setBuffer( buffer );
+	    sound10.setLoop(true);
+	    sound10.setRefDistance( 1 );
+	    sound10.play();
+	    sound10.setVolume(0.2);
+	});
+
+	   
+
+	
 	escena2.scene.add( this.audioCube );	
 	escena2.scene.add( this.audioCube2 );
 	escena2.scene.add( this.audioCube3 );
 	escena2.scene.add( this.audioCube4 );
 	escena2.scene.add( this.audioCube5 );
 	escena2.scene.add( this.audioCube6 );
+	escena2.scene.add( this.audioCube7 );
+	escena2.scene.add( this.audioCube8 );
+	escena2.scene.add( this.audioCube9 );
+	escena2.scene.add( this.audioCube10 );
 
-
+	
 	this.audioCube.add(sound);
 	this.scene.add( this.audioCube);
 	
@@ -248,6 +330,21 @@ const escena2 = {
 
 	this.audioCube6.add(sound6);
 	this.scene.add(this.audioCube6); 
+
+	
+	this.audioCube7.add(sound7);
+	this.scene.add(this.audioCube7); 
+				
+	this.audioCube8.add(sound8);
+	this.scene.add(this.audioCube8); 
+				
+	this.audioCube9.add(sound9);
+	this.scene.add(this.audioCube9);
+
+	
+	this.audioCube10.add(sound10);
+	this.scene.add(this.audioCube10); 
+				
 				
 		
     },
