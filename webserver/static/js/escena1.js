@@ -125,7 +125,7 @@ const escena1 = {
 		const listener = new THREE.AudioListener();
 		this.camera.add( listener );
 		
-		let sounds = ['1.wav', '2.wav', 'voz1.wav']
+		let sounds = ['1.wav', '2.wav', '3.wav', 'voz1.wav', 'voz2.wav', 'voz3.wav', 'voz4.wav']
 
 		for (let k=0;k<7; k++){
 		    const sphere = new THREE.SphereBufferGeometry( 50/2, 55, 100 ,100);
@@ -162,9 +162,6 @@ const escena1 = {
 				sound.setBuffer( buffer );
 				sound.setLoop(true);
 				sound.setRefDistance( 50 );
-				if (sound_file == 'voz1.wav'){
-					sound.setVolume(8)
-				}
 				sound.play();
 			});
 
