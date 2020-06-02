@@ -20,6 +20,8 @@ const escena3 = {
 		// create scene, camera and renderer
 		this.scene = new THREE.Scene();
 
+		this.scene.rotateZ(-Math.PI/2)
+
 		this.camera = new THREE.PerspectiveCamera(45,  window.innerWidth / window.innerHeight, 0.1, 1000);
 
 
@@ -372,10 +374,14 @@ const escena3 = {
 
 				video.oncanplay = ()=>{
 					let canvas = []
+										
+					console.log(video, "asdfasdfsdf")
 
 
+					test_ = []
 					for(let yi=0; yi<escena3.ygrid; yi++){
 						canvas.push([])
+						test_.push([])
 						for(let xi=0; xi<escena3.xgrid; xi++){
 							let c = document.createElement('canvas')
 							c.width = video.videoWidth/escena3.xgrid
@@ -383,9 +389,14 @@ const escena3 = {
 
 							canvas[canvas.length -1 ].push(c)
 							document.body.append(c)
+							let sx = video.videoWidth - (yi * c.width)
+							let sy = video.videoHeight - (xi * c.height)
+							test_[test_.length -1 ].push([sy,sx])
 
 						}
 					}
+					console.log(test_,"assdf")
+							
 					canvas.forEach((row_canvas, i)=>{
 						row_canvas.forEach((c, j)=>{
 							let texture = new THREE.CanvasTexture(c)
@@ -394,6 +405,8 @@ const escena3 = {
 
 						})
 					})
+
+
 					function loop() {
 						canvas.forEach((row_canvas, i)=>{
 							row_canvas.forEach((c, j)=>{
@@ -412,19 +425,20 @@ const escena3 = {
 									if(test) {
 										//escena3.parts.cubesMatrix[i][j].material.map = escena3.parts.cubesMatrix[i][j].faceTexture
 										//escena3.parts.cubesMatrix[i][j].material.needsUpdate = true
-										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ escena3.parts.cubesMatrix[0].length - j -1].material.map =  escena3.parts.cubesMatrix[i][j].faceTexture
-										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ escena3.parts.cubesMatrix[0].length - j -1].material.needsUpdate = true
+										
+										escena3.parts.cubesMatrix[i][j].material.map =  escena3.parts.cubesMatrix[i][j].faceTexture
+										escena3.parts.cubesMatrix[i][j].material.needsUpdate = true
 										return
 									}else{
 									
 										var ctx = c.getContext('2d');
-										
-										//ctx.rotate(Math.PI/2)
-										ctx.drawImage(video, -i * c.width, -j * c.height);
-										ctx.rotate(-Math.PI/2)
+										ctx.rotate(Math.PI/2)
+										ctx.drawImage(video, -i * c.width, -j * c.height)
 										let texture = new THREE.CanvasTexture(c)
-										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ escena3.parts.cubesMatrix[0].length - j -1].material.map =  texture
-										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ escena3.parts.cubesMatrix[0].length - j -1].material.needsUpdate = true
+										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][  j].material.map =  texture
+										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j ].material.needsUpdate = true
+										ctx.rotate(-Math.PI/2)
+										
 										/*
 										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j].material.map = texture
 										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j].material.needsUpdate = true
@@ -437,7 +451,7 @@ const escena3 = {
 						})
 					}
 					loop()
-					setTimeout(escena3.blendTextures, 5000)
+					//setTimeout(escena3.blendTextures, 5000)
 				}
 				
 				/*
