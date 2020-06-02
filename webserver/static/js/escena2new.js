@@ -348,13 +348,13 @@ const escena2 = {
 	    datos.forEach( function(dato){
 		let word = dato[0]
 		
-		word = word.replace('á','\u00E1')
-		word = word.replace('é','\u00E9')
-		word = word.replace('í','\u00ED')
-		word = word.replace('ó','\u00F3')
-		word = word.replace('ú','\u00FA')
-		word = word.replace('ú','\u00FA')
-		word = word.replace('ñ','\u00F1')
+		//word = word.replace('á','\u00E1')
+		//word = word.replace('é','\u00E9')
+		//word = word.replace('í','\u00ED')
+		//word = word.replace('ó','\u00F3')
+		//ord = word.replace('ú','\u00FA')
+		//word = word.replace('ú','\u00FA')
+		//word = word.replace('ñ','\u00F1')
 		
 		let ocurrences = dato[1]	      
 		//console.log(word, ocurrences)
@@ -383,7 +383,7 @@ const escena2 = {
 
 	var loader = new THREE.FontLoader();      
 	
-	loader.load( '/static/fonts/helvetiker_bold.typeface.json', function ( font ) {
+	loader.load( '/static/fonts/Montserrat_Bold.json', function ( font ) {
 	    
 	    for(var i = 0; i < escena2.tam.length ; i ++){   	       
 		

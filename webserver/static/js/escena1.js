@@ -342,6 +342,7 @@ const escena1 = {
 				clearcoat:1
 			});
 
+	    /*
 		let mat0 = new THREE.MeshPhysicalMaterial( 
 			{
 				color: 0x1f04f8,
@@ -350,8 +351,15 @@ const escena1 = {
 				refractionRatio: 1,
 				clearcoat:1
 			});
-		mat0.opacity = 0.9
-		mat0.transparent = true
+*/
+	    
+	    const mat0 = new THREE.MeshBasicMaterial({ 
+		envMap: escena1.scene.background,
+		refractionRatio: 0.5
+	    });
+
+//		mat0.opacity = 0.9
+// 		mat0.transparent = true
 		
 		mat.opacity = 0.75
 		mat.transparent = true
