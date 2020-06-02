@@ -312,11 +312,13 @@ const escena3 = {
 			}
 
 
-			let constraints = { video: { width: 1280, height: 720, facingMode: 'user' } };
+			let constraints = { video: { width: 640, height: 480, facingMode: 'user' } };
 			navigator.mediaDevices.getUserMedia( constraints ).then( function ( stream ) {
 				// apply the stream to the video element used in the texture
 
 				video.srcObject = stream;
+				video.style.width = 640
+				video.style.height = 480
 				video.play();
 
 				console.log(video)
