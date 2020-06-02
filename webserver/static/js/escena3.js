@@ -297,13 +297,14 @@ const escena3 = {
 							canvas.height = 800
 
 							const ctx = canvas.getContext('2d')
-							ctx.rotate(-Math.PI/2)
-							ctx.drawImage(img,0,0)
+							ctx.rotate(Math.PI/2)
+							ctx.drawImage(img,0,0, 800, 800)
 
 							let texture = new THREE.CanvasTexture(canvas)
 							escena3.parts.cubes[i].material.map =  texture
 							escena3.parts.cubes[i].material.needsUpdate = true
 							escena3.parts.cubes[i].faceTexture = texture
+							document.body.appendChild(canvas)
 							resolve()
 						}
 						img.src = `/caras/${face}`
@@ -381,7 +382,6 @@ const escena3 = {
 
 				video.autoplay = true
 				video.id = "webcam"
-				document.body.appendChild(video)
 			}
 
 
@@ -410,7 +410,6 @@ const escena3 = {
 							c.height = video.videoHeight/escena3.ygrid
 
 							canvas[canvas.length -1 ].push(c)
-							document.body.append(c)
 							let sx = video.videoWidth - (yi * c.width)
 							let sy = video.videoHeight - (xi * c.height)
 							test_[test_.length -1 ].push([sy,sx])
