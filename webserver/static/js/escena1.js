@@ -126,7 +126,7 @@ const escena1 = {
 		this.camera.add( listener );
 		
 		let sounds = ['1.wav', '2.wav', '3.wav', 'voz1.wav', 'voz2.wav', 'voz3.wav', 'voz4.wav']
-		let soundsVolume = [1, 1, 1 ,0.5 , 0.5, 0.5, 0.5]
+		let soundsVolume = [1, 1, 1 ,0.1 , 0.1, 0.1, 0.1]
 
 		for (let k=0;k<7; k++){
 		    const sphere = new THREE.SphereBufferGeometry( 50/2, 55, 100 ,100);
@@ -181,18 +181,18 @@ const escena1 = {
 			escena1.scene.add(mesh)
 
 
-			const tx = Math.random() * 1/4 + 1e-8
+			const tx = Math.random() * 1/2 + 1e-8
 			const ty = Math.random() + 0.001
-			const tz = Math.random() * 1/4 + 1e-8
+			const tz = Math.random() * 1/2 + 1e-8
 			
-			const x0 = Math.random() * 10
+			const x0 = Math.random() * -100
 			const y0 = Math.random() * 2
-			const z0 = Math.random() * 10
+			const z0 = Math.random() * -100
 			const move = setInterval(()=>{
-
-				mesh.position.x = 20 + x0 + Math.abs(Math.sin(escena1.clock.getElapsedTime() * tx )) *  200
+				mesh.position.x = x0 + Math.sin(escena1.clock.getElapsedTime() * tx ) *  100
 				mesh.position.y = 25 + y0 + Math.abs(Math.sin(escena1.clock.getElapsedTime() * ty )) * 50
-				mesh.position.z = -50 + z0 + Math.abs(Math.sin(escena1.clock.getElapsedTime() * tz )) *  200
+				mesh.position.z =  z0 + Math.sin(escena1.clock.getElapsedTime() * tz ) *  100
+				
 			}, 10)
 			return mesh
 		})
