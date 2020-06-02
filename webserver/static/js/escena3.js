@@ -276,6 +276,7 @@ const escena3 = {
 			let carasPromises = Promise.all(
 				faces.map((face,i)=>{
 					return new Promise( (resolve, reject)=>{
+						/*
 						let textureLoader = new THREE.TextureLoader();
 						textureLoader.load(`/caras/${face}`,
 							function(texture){
@@ -285,6 +286,22 @@ const escena3 = {
 								escena3.parts.cubes[i].faceTexture = texture
 								resolve()
 							})
+							*/
+						const img = document.createElement('img')
+						const canvas = document.createElement('canvas')
+						img.src = `/caras/${face}`
+						canvas.width = 800
+						canvas.height = 800
+
+						const ctx = canvas.getContext('2d')
+						ctx.rotate(-Math.PI/2)
+						ctx.drawImage(img)
+
+						let texture = new THREE.CanvasTexture(canvas)
+						escena3.parts.cubes[i].material.map =  texture
+						escena3.parts.cubes[i].material.needsUpdate = true
+						escena3.parts.cubes[i].faceTexture = texture
+						resolve()
 					})
 
 				})
