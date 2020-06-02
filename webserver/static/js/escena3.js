@@ -391,7 +391,9 @@ const escena3 = {
 										ctx.globalAlpha =  0.5
 										ctx.translate(canvas.width/2, canvas.height/2)
 										ctx.rotate(Math.PI/2)
-										ctx.drawImage(img, -400, -400)
+										ctx.drawImage(img, -400, -400, c.width, c.height)
+										ctx.rotate(-Math.PI/2)
+										ctx.globalAlpha =  1
 
 									}
 									escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][  j].material.map =  texture
