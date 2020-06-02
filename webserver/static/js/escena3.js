@@ -449,8 +449,8 @@ const escena3 = {
 										//escena3.parts.cubesMatrix[i][j].material.map = escena3.parts.cubesMatrix[i][j].faceTexture
 										//escena3.parts.cubesMatrix[i][j].material.needsUpdate = true
 										
-										escena3.parts.cubesMatrix[i][j].material.map =  escena3.parts.cubesMatrix[i][j].faceTexture
-										escena3.parts.cubesMatrix[i][j].material.needsUpdate = true
+										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][  j].material.map =  escena3.parts.cubesMatrix[i][j].faceTexture
+										escena3.parts.cubesMatrix[escena3.parts.cubesMatrix.length - i -1][ j ].material.needsUpdate = true
 										return
 									}else{
 									
