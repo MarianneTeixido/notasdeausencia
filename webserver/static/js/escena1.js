@@ -208,16 +208,16 @@ const escena1 = {
 				sound.setLoop(true);
 				sound.setRefDistance( 50 );
 				if (sound_file == 'voz1.wav'){
-					sound.setVolume(4)
+					sound.setVolume(1)
 				}
 				if (sound_file == 'voz2.wav'){
-					sound.setVolume(2)
+					sound.setVolume(1.5)
 				}
 				if (sound_file == 'voz3.wav'){
-					sound.setVolume(3)
+					sound.setVolume(1.2)
 				}
 				if (sound_file == 'voz4.wav'){
-					sound.setVolume(4)
+					sound.setVolume(0.9)
 				}
 				sound.play();
 			});
