@@ -20,12 +20,12 @@ const escena1 = {
 		this.scene = new THREE.Scene();
 
 		this.scene.background = new THREE.CubeTextureLoader().setPath( '/static/images/' ).load( [
-			'px.png',
-			'nx.png',
-			'py.png',
-			'ny.png',
-			'pz.png',
-			'nz.png'
+			'px.jpg',
+			'nx.jpg',
+			'py.jpg',
+			'ny.jpg',
+			'pz.jpg',
+			'nz.jpg'
 		]);
 
 	
@@ -208,7 +208,16 @@ const escena1 = {
 				sound.setLoop(true);
 				sound.setRefDistance( 50 );
 				if (sound_file == 'voz1.wav'){
-					sound.setVolume(8)
+					sound.setVolume(4)
+				}
+				if (sound_file == 'voz2.wav'){
+					sound.setVolume(2)
+				}
+				if (sound_file == 'voz3.wav'){
+					sound.setVolume(3)
+				}
+				if (sound_file == 'voz4.wav'){
+					sound.setVolume(4)
 				}
 				sound.play();
 			});
@@ -274,7 +283,9 @@ const escena1 = {
 		let mat = new THREE.MeshStandardMaterial( { 
 			color: 0x0044ff, 
 			side:THREE.DoubleSide,
-			map: texture
+			map: texture,
+			metalness: 0.4,
+			roughness: 1.0 
 		});
 
 		let plane = new THREE.Mesh(geom, mat)
@@ -440,18 +451,27 @@ const escena1 = {
 	handleKeydown: function(event){
 		switch(event.key){
 			case 'w':
+			case 'W':
+			case 'ArrowUp':
 				escena1.controls.moveForward(0.5)
 				break;
 			case 's':
+			case 'S':
+			case 'ArrowDown':
 				escena1.controls.moveForward(-0.5);
 				break;
 			case 'a':
+			case 'A':
+			case 'ArrowRight':
 				escena1.controls.moveRight(-0.5)
 				break;
 			case 'd':
+			case 'D':
+			case 'ArrowLeft':
 				escena1.controls.moveRight(0.5)
 				break;
 			case 'm':
+			case 'M':		
 				escena1.showMenu()
 		}
 	},

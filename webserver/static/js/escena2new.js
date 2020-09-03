@@ -43,12 +43,12 @@ const escena2 = {
 	this.scene = new THREE.Scene();
 
 	this.scene.background = new THREE.CubeTextureLoader().setPath( '/static/images/' ).load( [
-	    'px2.png',
-	    'nx2.png',
-	    'py2.png',
-	    'ny2.png',
-	    'pz2.png',
-	    'nz2.png'
+	    'px2.jpg',
+	    'nx2.jpg',
+	    'py2.jpg',
+	    'ny2.jpg',
+	    'pz2.jpg',
+	    'nz2.jpg'
 	]);
 
 
