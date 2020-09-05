@@ -462,12 +462,12 @@ const escena1 = {
 				break;
 			case 'a':
 			case 'A':
-			case 'ArrowRight':
+			case 'ArrowLeft':
 				escena1.controls.moveRight(-0.5)
 				break;
 			case 'd':
 			case 'D':
-			case 'ArrowLeft':
+			case 'ArrowRight':
 				escena1.controls.moveRight(0.5)
 				break;
 			case 'm':
