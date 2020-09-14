@@ -1,5 +1,7 @@
 # NotasDeLaAusencia
 
+[Link de la pieza](https://notasdeausencia.cc/memorial/)
+
 ## Narraciones ciberfeministas como forma de denuncia.  
 
 Este ensayo algorítmico intersecta en lo artístico y lo
@@ -15,8 +17,6 @@ La máquina, al leer, genera nodos que articulan las palabras que con mayor frec
 Estas fuentes son recopiladas de notas periodísticas, detectadas con RSS y publicaciones de Twitter, que contienen la palabra, etiqueta o hashtag #desaparecidas, más una serie de coorelaciones linguísticas. Cuando la máquina escribe toma una base de datos de textos que van desde la teória feminsta, del software libre y ciencia ficción. Estas se atomizan y reformulan con la intervención de la computadora. Esta base está citada dentro de este repositorio como la bibliografía que articula el ensayo. 
 
 [Robota Markov](http://167.172.217.175/markov/16)
-
-Próximamente link del proyecto. 
 
 Proyecto de [Marianne Teixido](https://marianneteixido.github.io/)
 
