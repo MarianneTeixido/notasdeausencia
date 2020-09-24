@@ -18,7 +18,8 @@ while True:
         "#MéxicoFeminicida OR #MexicoFeminicida",
         "#MadresEnBusqueda OR #MadresenBúsqueda",
         "#ViolenciadeGénero OR #ViolenciadeGenero",
-        "#Niunamenos OR #Niunamas"
+        "#Niunamenos OR #Niunamas OR #Niunamás OR #NiUnaMás OR #niunamenos OR #niunamas OR #niunamás",
+        "#Antigrita AND #cndh OR #CNDH" 
     ]:
         cursor = tweepy.Cursor(api.search,
                                q=query,
