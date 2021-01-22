@@ -1,6 +1,6 @@
 # NotasDeLaAusencia
 
-![portada](https://github.com/MarianneTeixido/ABCDigital2021/blob/main/img/portada.png)
+![portada](https://github.com/MarianneTeixido/notasdeausencia/blob/master/img/notas02.png)
 
 [Link de la pieza](https://notasdeausencia.cc/memorial/)
 
