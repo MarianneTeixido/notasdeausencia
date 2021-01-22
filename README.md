@@ -2,13 +2,18 @@
 ![portada](https://github.com/MarianneTeixido/notasdeausencia/blob/master/img/notas02.png)
 
 
-Link de la pieza: [Notas de Ausencia](https://notasdeausencia.cc)
+[Link de la pieza](https://notasdeausencia.cc)
 
+
+Notas de ausencia. Narrativa algorítmica de denuncia.  
 Autora: Marianne Teixido  
-Nombre de la pieza: Notas de ausencia  
-Ficha técnica: Página web: HTML, CSS, JavaScript, Python.   
+Página web interactiva; HTML, CSS, Three.js, Python.   
 Lugar de creación: Ciudad de México.   
 Año: 2020 
+
+- _Exposición Creación con Algoritmos_. Centro de Cultura Digital. Julio, 2020. 
+- _EmMeio #12 Exhibition_. MedialLab BR. Octubre, 2020.
+
 
 Notas de ausencia es un ensayo generativo en la web. Utiliza el texto dato que por medio de la computadora como agente resignificante, deconstruye estructuras discursivas para resemantizar la narrativa sobre las desapariciones de mujeres en México y América Latina. 
 
