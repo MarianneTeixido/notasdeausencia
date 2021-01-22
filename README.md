@@ -66,19 +66,18 @@ Estas fuentes son recopiladas de notas periodísticas, detectadas con RSS y publ
 
 ## Recursos
 
-![n4](https://github.com/MarianneTeixido/notasdeausencia/blob/master/img/twitter.png)
-
 [Robota de Twitter ](https://twitter.com/notasausencia)  
 
-[Textos](https://github.com/MarianneTeixido/notasdeausencia/tree/master/textos)  
+![n4](https://github.com/MarianneTeixido/notasdeausencia/blob/master/img/twitter.png)
+
+[Textos feministas](https://github.com/MarianneTeixido/notasdeausencia/tree/master/textos)  
 
 Resumen sonoro  
-[RV](https://snumusic.bandcamp.com/track/rv) EP-SNU Music. 
+Teixido.[RV](https://snumusic.bandcamp.com/track/rv)-SNU Music. 11:03 min. 
 
-## Extras
-
-Inpiraciones.   
-[Las máquinas también sueñan, robotas feministas para Twitter](https://github.com/stepaola/La-robota-feminista/blob/master/Taller.md) de [stepaola](https://github.com/stepaola)   
+## Referencia
+  
+[Las máquinas también sueñan, robotas feministas para Twitter](https://github.com/stepaola/La-robota-feminista/blob/master/Taller.md). Proyecto de [stepaola](https://github.com/stepaola).   
 
 ## Créditos 
 
