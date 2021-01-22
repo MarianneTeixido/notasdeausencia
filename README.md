@@ -72,8 +72,8 @@ Estas fuentes son recopiladas de notas periodísticas, detectadas con RSS y publ
 
 [Textos feministas](https://github.com/MarianneTeixido/notasdeausencia/tree/master/textos)  
 
-Resumen sonoro  
-Teixido.[RV](https://snumusic.bandcamp.com/track/rv)-SNU Music. 11:03 min. 
+[RV | Teixido](https://soundcloud.com/marianne_teixido)
+[SNU Music. 11:03 min.](https://snumusic.bandcamp.com/track/rv) 
 
 ## Referencia
   
