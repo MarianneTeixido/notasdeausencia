@@ -75,6 +75,9 @@ Estas fuentes son recopiladas de notas periodísticas, detectadas con RSS y publ
 [RV | Teixido](https://soundcloud.com/marianne_teixido)
 [SNU Music. 11:03 min.](https://snumusic.bandcamp.com/track/rv) 
 
+[SUBVERSIÓN (CIBER) FEMINISTA. UTOPÍAS TECNOLÓGICAS, PALABRA – MÚSICA – CÓDIGO](https://www.tierraadentro.cultura.gob.mx/subversion-ciber-feminista-utopias-tecnologicas-palabra-musica-codigo/)
+
+
 ## Referencia
   
 [Las máquinas también sueñan, robotas feministas para Twitter](https://github.com/stepaola/La-robota-feminista/blob/master/Taller.md). Proyecto de [stepaola](https://github.com/stepaola).   
