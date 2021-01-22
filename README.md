@@ -1,4 +1,5 @@
 # Notas de Ausencia
+
 ![portada](https://github.com/MarianneTeixido/notasdeausencia/blob/master/img/notas02.png)
 
 
@@ -27,7 +28,7 @@ La narrativa de la pieza está articulada mediante la intervención de dos bots.
 
 Notas de ausencia es una pieza que mezcla la literatura electrónica que se ejecuta en la web. Se divide en tres momentos; Memorial, Reescritura y Espejo. 
 
-Intrucciones.
+### Intrucciones
 
 1.- Al ingresar a la página de la pieza esperar entre 3 a 10 segundo para que los tweets del Memorial cargen. 
 
@@ -65,8 +66,19 @@ Estas fuentes son recopiladas de notas periodísticas, detectadas con RSS y publ
 
 ## Recursos
 
-[Robota de Twitter ](https://twitter.com/notasausencia)
-[Textos](https://github.com/MarianneTeixido/notasdeausencia/tree/master/textos)
+![n4](https://github.com/MarianneTeixido/notasdeausencia/blob/master/img/twitter.png)
+
+[Robota de Twitter ](https://twitter.com/notasausencia)  
+
+[Textos](https://github.com/MarianneTeixido/notasdeausencia/tree/master/textos)  
+
+Resumen sonoro  
+[RV](https://snumusic.bandcamp.com/track/rv) EP-SNU Music. 
+
+## Extras
+
+Inpiraciones.   
+[Las máquinas también sueñan, robotas feministas para Twitter](https://github.com/stepaola/La-robota-feminista/blob/master/Taller.md) de [stepaola](https://github.com/stepaola)   
 
 ## Créditos 
 
