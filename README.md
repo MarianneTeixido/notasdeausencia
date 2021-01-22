@@ -1,5 +1,7 @@
 # NotasDeLaAusencia
 
+![portada](https://github.com/MarianneTeixido/ABCDigital2021/blob/main/img/portada.png)
+
 [Link de la pieza](https://notasdeausencia.cc/memorial/)
 
 ## Narraciones ciberfeministas como forma de denuncia.  
