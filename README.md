@@ -28,7 +28,7 @@ La narrativa de la pieza está articulada mediante la intervención de dos bots.
 
 Notas de ausencia es una pieza que mezcla la literatura electrónica que se ejecuta en la web. Se divide en tres momentos; Memorial, Reescritura y Espejo. 
 
-### Intrucciones
+### Instrucciones
 
 1.- Al ingresar a la página de la pieza esperar entre 3 a 10 segundo para que los tweets del Memorial cargen. 
 
